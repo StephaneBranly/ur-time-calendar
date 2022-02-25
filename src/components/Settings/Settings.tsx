@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 11:54:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/25 21:33:32 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -33,7 +33,9 @@ const Settings = (props: SettingsProps) => {
                 onClick={() => setOpen(false)}
             ></div>
             <div className="settings-modal-content">
-                <PasteMail setClasses={setClasses} defaultContent={''} />
+                <div className="settings-section">
+                    <PasteMail setClasses={setClasses} defaultContent={''} />
+                </div>
             </div>
         </div>
     ) : (
