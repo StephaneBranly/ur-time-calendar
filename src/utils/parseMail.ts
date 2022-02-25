@@ -1,4 +1,4 @@
-import { Class, parseLine } from "utils";
+import { Class, parseLine } from 'utils'
 
 const parseMail = (content: string): Class[] => {
     const lines = content.split('\n')

@@ -1,18 +1,18 @@
 .App {
-  text-align: center;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+    text-align: center;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
 .calendar-container {
-  display: grid;
-  align-items: center;
-  vertical-align: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+    display: grid;
+    align-items: center;
+    vertical-align: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

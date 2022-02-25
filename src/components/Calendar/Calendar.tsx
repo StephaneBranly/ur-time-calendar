@@ -15,7 +15,18 @@ const Calendar = (props: CalendarProps) => {
             case 'day':
                 return defaultActiveDay ? <>Today</> : <></>
             case 'compact':
-                return ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'].map((day, index) => <div key={index} className={`day col-start-${index * 2 + 1} col-end-${index * 2 + 3}`}>{day}</div>)
+                return ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'].map(
+                    (day, index) => (
+                        <div
+                            key={index}
+                            className={`day col-start-${
+                                index * 2 + 1
+                            } col-end-${index * 2 + 3}`}
+                        >
+                            {day}
+                        </div>
+                    )
+                )
             case 'complete':
                 return <></>
         }
@@ -30,18 +41,26 @@ const Calendar = (props: CalendarProps) => {
             var colStartIndex = daysIndex[unit.day] * 2 + 1
             var colEndIndex = daysIndex[unit.day] * 2 + 3
 
-            switch(unit.week) {
+            switch (unit.week) {
                 case 'A':
                     colEndIndex = colStartIndex + 1
-                    break;
+                    break
                 case 'B':
                     colStartIndex = colEndIndex - 1
-                    break;
+                    break
             }
 
             const rowStartIndex = timeToRowIndex(unit.startHour, unit.startMin)
             const rowEndIndex = timeToRowIndex(unit.endHour, unit.endMin)
-            return <div key={index} className={`class col-start-${colStartIndex} col-end-${colEndIndex} row-start-${rowStartIndex} row-end-${rowEndIndex}`}>{unit.UVname} - {unit.prettyClassType} {unit.classReference} - {unit.place}</div>
+            return (
+                <div
+                    key={index}
+                    className={`class col-start-${colStartIndex} col-end-${colEndIndex} row-start-${rowStartIndex} row-end-${rowEndIndex}`}
+                >
+                    {unit.UVname} - {unit.prettyClassType} {unit.classReference}{' '}
+                    - {unit.place}
+                </div>
+            )
         })
     }
     return (

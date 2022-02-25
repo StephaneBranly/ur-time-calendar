@@ -14,8 +14,8 @@ const PasteMail = (props: PasteMailProps) => {
     const ref = createRef<HTMLTextAreaElement>()
 
     const handlerLoadData = () => {
-        if(!ref.current) return
-        const data =  parseMail(ref.current.value)
+        if (!ref.current) return
+        const data = parseMail(ref.current.value)
         setClasses(data)
     }
 
