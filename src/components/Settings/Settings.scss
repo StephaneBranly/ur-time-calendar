@@ -1,22 +1,68 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     PasteMail.scss                                     ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     Settings.scss                                      ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 12:00:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/25 12:00:00 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-.pastemail {
+.settings-button {
     display: flex;
-    align-items: stretch;
-    align-content: stretch;
-    flex-direction: column;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(255, 255, 255, 0.5);
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 20px;
+    z-index: 100;
+    transition: linear 100ms;
 }
-.pastemail-textarea {
+
+.settings-button:hover {
+    transform: rotate(90deg);
+    cursor: pointer;
+}
+
+.settings-modal-fragment {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.settings-modal-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    filter: blur(100px);
+    position: absolute;
+}
+
+.settings-modal-content {
+    background-color: rgb(255, 255, 255, 0.8);
+    width: 70vw;
+    height: 70vh;
+    border-radius: 40px;
+    filter: blur(0px);
+    padding: 10px;
+    position: relative;
+    align-content: stretch;
+    align-items: stretch;
 }

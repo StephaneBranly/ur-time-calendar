@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 01:10:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/25 11:29:09 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -34,8 +34,8 @@ const Calendar = (props: CalendarProps) => {
                         <div
                             key={index}
                             className={`day col-start-${
-                                index * 2 + 1
-                            } col-end-${index * 2 + 3}`}
+                                index * 2 + 2
+                            } col-end-${index * 2 + 4}`}
                         >
                             {day}
                         </div>
@@ -46,14 +46,36 @@ const Calendar = (props: CalendarProps) => {
         }
     }
 
-    const timeToRowIndex = (hour: number, min: number) => {
-        return (hour - 7 + 2) * 4 + min / 15
+    const renderSlot = (hour: number, min: number) => {
+        const rowStartIndex = timeToRowIndex(hour, min)
+        const rowEndIndex = timeToRowIndex(hour, min)
+        const position = `col-start-0 col-end-1 row-start-${rowStartIndex} row-end-${rowEndIndex}}`
+        return (
+            <>
+                <div
+                    className={`slot ${position}  ${
+                        min === 0 ? 'solid' : 'dashed'
+                    }`}
+                ></div>
+            </>
+        )
+    }
+    const renderSlots = () => {
+        const slots: JSX.Element[] = []
+        for (var h = 7; h < 21; h++)
+            [0, 15, 30, 45].forEach((m) => slots.push(renderSlot(h, m)))
+        return slots
+    }
+
+    const timeToRowIndex = (hour: number, min: number, end = false) => {
+        const index = (hour - 7) * 4 + min / 15 + 2
+        return end ? index + 1 : index
     }
 
     const renderClasses = () => {
         return classes.map((unit: Class, index) => {
-            var colStartIndex = daysIndex[unit.day] * 2 + 1
-            var colEndIndex = daysIndex[unit.day] * 2 + 3
+            var colStartIndex = daysIndex[unit.day] * 2 + 2
+            var colEndIndex = daysIndex[unit.day] * 2 + 4
 
             switch (unit.week) {
                 case 'A':
@@ -65,7 +87,7 @@ const Calendar = (props: CalendarProps) => {
             }
 
             const rowStartIndex = timeToRowIndex(unit.startHour, unit.startMin)
-            const rowEndIndex = timeToRowIndex(unit.endHour, unit.endMin)
+            const rowEndIndex = timeToRowIndex(unit.endHour, unit.endMin, true)
             return (
                 <div
                     key={index}
@@ -86,6 +108,7 @@ const Calendar = (props: CalendarProps) => {
             </div> */}
             <div className="calendar-content compact">
                 {renderDays()}
+                {renderSlots()}
                 {renderClasses()}
             </div>
         </div>

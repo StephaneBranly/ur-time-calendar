@@ -1,22 +1,46 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     PasteMail.scss                                     ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     Settings.tsx                                       ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 12:00:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/25 11:54:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-.pastemail {
-    display: flex;
-    align-items: stretch;
-    align-content: stretch;
-    flex-direction: column;
+import './Settings.scss'
+
+import { FiSettings } from 'react-icons/fi'
+import { useState } from 'react'
+import { PasteMail } from 'components'
+import { Class } from 'utils'
+
+export interface SettingsProps {
+    setClasses: React.Dispatch<React.SetStateAction<Class[]>>
 }
-.pastemail-textarea {
+
+const Settings = (props: SettingsProps) => {
+    const { setClasses } = props
+    const [open, setOpen] = useState<boolean>(false)
+    return open ? (
+        <div className="settings-modal-fragment">
+            <div
+                className="settings-modal-background"
+                onClick={() => setOpen(false)}
+            ></div>
+            <div className="settings-modal-content">
+                <PasteMail setClasses={setClasses} defaultContent={''} />
+            </div>
+        </div>
+    ) : (
+        <div className="settings-button" onClick={() => setOpen(true)}>
+            <FiSettings />
+        </div>
+    )
 }
+
+export default Settings

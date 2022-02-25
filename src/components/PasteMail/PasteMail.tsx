@@ -8,22 +8,21 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 01:10:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/25 12:02:07 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { parse } from 'node:path/win32'
-import { createRef, useEffect } from 'react'
+import { createRef } from 'react'
 import { Class, parseMail } from 'utils'
 import './PasteMail.scss'
 
 export interface PasteMailProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
-    description?: string | JSX.Element
+    defaultContent?: string
 }
 
 const PasteMail = (props: PasteMailProps) => {
-    const { setClasses } = props
+    const { setClasses, defaultContent } = props
 
     const ref = createRef<HTMLTextAreaElement>()
 
@@ -33,10 +32,7 @@ const PasteMail = (props: PasteMailProps) => {
         setClasses(data)
     }
 
-    useEffect(() => {
-        const mail = `
-     
-
+    const placeHolder = `
  CM13       C 1     JEUDI... 10:15-12:15,F1,S=FA106   
  CM13       D 2     MARDI... 16:30-18:30,F1,S=FA420   
  CM13       T 1 A   JEUDI... 14:30-18:30,F2,S=ES109   
@@ -58,19 +54,16 @@ const PasteMail = (props: PasteMailProps) => {
  SY01       D 4     JEUDI... 08:00-10:00,F1,S=FA616   
 
  TC00       D 1     MARDI... 18:45-20:45,F1,S=FA100   
- 
- 
- 
-       
         `
-        const data = parseMail(mail)
-        setClasses(data)
-    }, [])
+
     return (
         <div className="pastemail">
-            <div className="pastemail-content">
-                <textarea ref={ref} />
-            </div>
+            <textarea
+                className="pastemail-textarea"
+                ref={ref}
+                defaultValue={defaultContent}
+                placeholder={placeHolder}
+            />
             <button onClick={handlerLoadData}>Charger</button>
         </div>
     )

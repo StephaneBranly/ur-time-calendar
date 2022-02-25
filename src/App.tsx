@@ -8,13 +8,13 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 01:06:35 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/25 11:50:30 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import React, { useState } from 'react'
 import './App.css'
-import { Calendar, PasteMail } from 'components'
+import { Calendar, Settings } from 'components'
 import { Class } from 'utils'
 
 function App() {
@@ -22,10 +22,10 @@ function App() {
 
     return (
         <div className="App">
-            <PasteMail setClasses={setClasses} />
             <div className="calendar-container">
                 <Calendar view="compact" classes={classes} />
             </div>
+            <Settings setClasses={setClasses} />
         </div>
     )
 }
