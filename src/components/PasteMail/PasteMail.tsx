@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 12:02:07 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/28 19:08:15 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -19,10 +19,11 @@ import './PasteMail.scss'
 export interface PasteMailProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
     defaultContent?: string
+    setLastContent: React.Dispatch<React.SetStateAction<string>>
 }
 
 const PasteMail = (props: PasteMailProps) => {
-    const { setClasses, defaultContent } = props
+    const { setClasses, defaultContent, setLastContent } = props
 
     const ref = createRef<HTMLTextAreaElement>()
 
@@ -30,6 +31,7 @@ const PasteMail = (props: PasteMailProps) => {
         if (!ref.current) return
         const data = parseMail(ref.current.value)
         setClasses(data)
+        setLastContent(ref.current.value)
     }
 
     const placeHolder = `

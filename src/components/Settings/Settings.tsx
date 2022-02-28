@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 21:33:32 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/28 19:14:43 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -21,11 +21,34 @@ import { Class } from 'utils'
 
 export interface SettingsProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
+    defaultOpenValue?: boolean
+    defaultContent?: string
 }
 
 const Settings = (props: SettingsProps) => {
-    const { setClasses } = props
-    const [open, setOpen] = useState<boolean>(false)
+    const { setClasses, defaultOpenValue, defaultContent } = props
+    const [open, setOpen] = useState<boolean>(defaultOpenValue ?? false)
+    const [kifyAccepted, setKifyAccepted] = useState(
+        localStorage.getItem('kify_accepted') ? true : false
+    )
+    const [lastContent, setLastContent] = useState<string>(defaultContent ?? '')
+
+    const handleKifyClick = (e: any) => {
+        setKifyAccepted(e.target.checked)
+        localStorage.setItem('kify_accepted', e.target.checked)
+    }
+
+    const saveInCache = () => {
+        localStorage.setItem('p22-schedule', lastContent)
+    }
+
+    const deleteCache = () => {
+        const confirmed = window.confirm(
+            'Etes-vous sûr.e de vouloir supprimer le contenu du cache (les emplois du temps enregistrés)?'
+        )
+        if (confirmed) localStorage.removeItem('p22-schedule')
+    }
+
     return open ? (
         <div className="settings-modal-fragment">
             <div
@@ -34,7 +57,28 @@ const Settings = (props: SettingsProps) => {
             ></div>
             <div className="settings-modal-content">
                 <div className="settings-section">
-                    <PasteMail setClasses={setClasses} defaultContent={''} />
+                    <PasteMail
+                        setClasses={setClasses}
+                        defaultContent={defaultContent}
+                        setLastContent={setLastContent}
+                    />
+                </div>
+                <div className="settings-section">
+                    <input
+                        type={'checkbox'}
+                        checked={kifyAccepted}
+                        onClick={handleKifyClick}
+                    />
+                    <label>Accepter la mise en cache</label>
+                    {kifyAccepted ? (
+                        <button onClick={saveInCache}>
+                            Sauvergarder dans le cache
+                        </button>
+                    ) : (
+                        <button onClick={deleteCache}>
+                            Supprimer le cache
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

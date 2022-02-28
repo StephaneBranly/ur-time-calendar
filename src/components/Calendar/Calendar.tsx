@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 21:38:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/25 21:43:57 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -53,6 +53,19 @@ const Calendar = (props: CalendarProps) => {
         const rowStartIndex = timeToRowIndex(hour, min)
         const rowEndIndex = min === 0 ? rowStartIndex + 5 : rowStartIndex + 2
         const position = `row-start-${rowStartIndex} row-end-${rowEndIndex}`
+
+        const importance = [
+            '8:0',
+            '10:0',
+            '10:15',
+            '12:15',
+            '14:15',
+            '16:15',
+            '16:30',
+            '18:30',
+        ].includes(`${hour}:${min}`)
+            ? 'important'
+            : ''
         return (
             <>
                 {min === 0 && (
@@ -63,7 +76,7 @@ const Calendar = (props: CalendarProps) => {
                     </div>
                 )}
                 <div
-                    className={`slot ${position} ${
+                    className={`slot ${importance} ${position} ${
                         min === 0 ? 'solid' : 'dashed'
                     }`}
                 ></div>

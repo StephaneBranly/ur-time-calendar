@@ -8,24 +8,37 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 11:50:30 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/02/28 19:11:38 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Settings } from 'components'
-import { Class } from 'utils'
+import { Class, parseMail } from 'utils'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
+
+    useEffect(() => {
+        const kify = localStorage.getItem('kify_accepted')
+        const p22Schedule = localStorage.getItem('p22-schedule')
+        if (kify && p22Schedule) {
+            const result = parseMail(p22Schedule)
+            setClasses(result)
+        }
+    }, [])
 
     return (
         <div className="App">
             <div className="calendar-container">
                 <Calendar view="compact" classes={classes} />
             </div>
-            <Settings setClasses={setClasses} />
+            <Settings
+                setClasses={setClasses}
+                defaultOpenValue={classes.length !== 0}
+                defaultContent={localStorage.getItem('p22-schedule') ?? ''}
+            />
         </div>
     )
 }
