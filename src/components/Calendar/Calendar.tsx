@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/01 14:26:14 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/01 15:28:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -26,7 +26,14 @@ export interface CalendarProps {
 const Calendar = (props: CalendarProps) => {
     const { classes } = props
 
-    const [view, setView] = useState<string>('complete')
+    const getCurrentDay = () => {
+        var stringDateName = new Date().toLocaleDateString('fr-FR', {
+            weekday: 'long',
+        })
+        return stringDateName[0].toUpperCase() + stringDateName.slice(1)
+    }
+
+    const [view, setView] = useState<string>(getCurrentDay())
 
     const renderDays = () => {
         var days: string[] = []
@@ -51,9 +58,9 @@ const Calendar = (props: CalendarProps) => {
         return days.map((day, index) => (
             <div
                 key={index}
-                className={`day col-start-${index * 2 + 2} col-end-${
-                    index * 2 + 4
-                }`}
+                className={`calendar-legend-day col-start-${
+                    index * 2 + 2
+                } col-end-${index * 2 + 4}`}
             >
                 {day}
             </div>
@@ -112,8 +119,10 @@ const Calendar = (props: CalendarProps) => {
     const renderClasses = () => {
         return classes.map((unit: Class, index) => {
             if (isViewADayView() && unit.day !== view.toUpperCase()) return null
-            var colStartIndex = daysIndex[unit.day] * 2 + 2
-            var colEndIndex = daysIndex[unit.day] * 2 + 4
+            var colStartIndex = isViewADayView()
+                ? 2
+                : daysIndex[unit.day] * 2 + 2
+            var colEndIndex = isViewADayView() ? 4 : daysIndex[unit.day] * 2 + 4
 
             switch (unit.week) {
                 case 'A':
@@ -151,7 +160,7 @@ const Calendar = (props: CalendarProps) => {
                     className={`calendar-mode-selector ${
                         isViewADayView() ? 'active' : ''
                     }`}
-                    onClick={() => setView('Lundi')}
+                    onClick={() => setView(getCurrentDay())}
                 >
                     Au jour
                 </div>

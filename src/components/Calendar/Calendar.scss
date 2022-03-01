@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/01 14:26:29 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/01 15:19:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -74,7 +74,16 @@ $max-rows: (21 - 7) * 4;
     background: inherit;
     z-index: 1;
 }
+.calendar-legend-day {
+    border-bottom: 4px solid rgba(255, 255, 255, 0.5);
 
+    &.week-a {
+        border-bottom: 4px solid rgba(255, 0, 0, 0.9);
+    }
+    &.week-b {
+        border-bottom: 4px solid rgba(0, 0, 255, 0.9);
+    }
+}
 .calendar-fragment:after {
     content: '';
     position: absolute;
@@ -114,10 +123,6 @@ $max-columns: 16;
     gap: 10px;
     justify-content: end;
 }
-.day {
-    border-bottom: 4px solid rgba(255, 255, 255, 0.5);
-}
-
 .slot {
     font-size: xx-small;
     grid-column: 1 / -1;
