@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 21:44:42 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/01 14:26:29 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -23,18 +23,28 @@ $max-rows: (21 - 7) * 4;
     position: absolute;
     overflow: hidden;
     color: white;
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-    align-content: stretch;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: stretch;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.calendar-content-fragment {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    align-content: stretch;
 }
 .calendar-content {
     display: grid;
-    flex: 1 1 auto;
     &.complete {
         grid-template-columns: max-content repeat(14, 1fr);
     }
@@ -44,11 +54,14 @@ $max-rows: (21 - 7) * 4;
     &.day {
         grid-template-columns: max-content repeat(2, 1fr);
     }
-    // grid-gap: 10px;
     grid-auto-rows: 1fr;
     column-gap: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
 .calendar-fragment:before {
     content: '';
     position: absolute;
@@ -146,4 +159,25 @@ $max-columns: 16;
     text-align: left;
     padding: 5px;
     color: black;
+}
+.calendar-mode-selector {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 11;
+
+    &.active {
+        text-decoration: underline;
+    }
+}
+.calendar-mode-selector:hover {
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+    .calendar-fragment {
+        padding: 5px;
+        margin: 5px;
+        font-size: xx-small;
+        border-radius: 10px;
+    }
 }

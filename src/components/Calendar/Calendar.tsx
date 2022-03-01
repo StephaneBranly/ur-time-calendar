@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 21:43:57 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/01 14:26:14 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,36 +17,47 @@ import { CgPin } from 'react-icons/cg'
 import { RiBook2Line } from 'react-icons/ri'
 
 import './Calendar.scss'
+import { useState } from 'react'
 
 export interface CalendarProps {
-    view: string
-    defaultActiveDay?: string
     classes: Class[]
 }
 
 const Calendar = (props: CalendarProps) => {
-    const { view, defaultActiveDay, classes } = props
+    const { classes } = props
+
+    const [view, setView] = useState<string>('complete')
 
     const renderDays = () => {
+        var days: string[] = []
         switch (view) {
-            case 'day':
-                return defaultActiveDay ? <>Today</> : <></>
             case 'compact':
-                return ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'].map(
-                    (day, index) => (
-                        <div
-                            key={index}
-                            className={`day col-start-${
-                                index * 2 + 2
-                            } col-end-${index * 2 + 4}`}
-                        >
-                            {day}
-                        </div>
-                    )
-                )
+                days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi']
+                break
             case 'complete':
-                return <></>
+                days = [
+                    'Lundi',
+                    'Mardi',
+                    'Mercredi',
+                    'Jeudi',
+                    'Vendredi',
+                    'Samedi',
+                    'Dimanche',
+                ]
+                break
+            default:
+                days = [view]
         }
+        return days.map((day, index) => (
+            <div
+                key={index}
+                className={`day col-start-${index * 2 + 2} col-end-${
+                    index * 2 + 4
+                }`}
+            >
+                {day}
+            </div>
+        ))
     }
 
     const renderSlot = (hour: number, min: number) => {
@@ -94,8 +105,13 @@ const Calendar = (props: CalendarProps) => {
         return (hour - 7) * 4 + min / 15 + 2
     }
 
+    const isViewADayView = () => {
+        return !['compact', 'complete'].includes(view)
+    }
+
     const renderClasses = () => {
         return classes.map((unit: Class, index) => {
+            if (isViewADayView() && unit.day !== view.toUpperCase()) return null
             var colStartIndex = daysIndex[unit.day] * 2 + 2
             var colEndIndex = daysIndex[unit.day] * 2 + 4
 
@@ -120,7 +136,7 @@ const Calendar = (props: CalendarProps) => {
                         {unit.UVname} - {unit.prettyClassType}{' '}
                         {unit.classReference}
                     </span>
-                    <span className="class-place">
+                    <span className="class-place class-label">
                         <CgPin />
                         {unit.place}
                     </span>
@@ -130,15 +146,42 @@ const Calendar = (props: CalendarProps) => {
     }
     return (
         <div className="calendar-fragment">
-            {/* <div className='calendar-header'>
-                <div className='calendar-mode-selector'>Au jour</div>
-                <div className='calendar-mode-selector'>Semaine compacte</div>
-                <div className='calendar-mode-selector'>Semaine complète</div>
-            </div> */}
-            <div className="calendar-content compact">
-                {renderDays()}
-                {renderSlots()}
-                {renderClasses()}
+            <div className="calendar-header">
+                <div
+                    className={`calendar-mode-selector ${
+                        isViewADayView() ? 'active' : ''
+                    }`}
+                    onClick={() => setView('Lundi')}
+                >
+                    Au jour
+                </div>
+                <div
+                    className={`calendar-mode-selector ${
+                        view === 'compact' ? 'active' : ''
+                    }`}
+                    onClick={() => setView('compact')}
+                >
+                    Semaine compacte
+                </div>
+                <div
+                    className={`calendar-mode-selector ${
+                        view === 'complete' ? 'active' : ''
+                    }`}
+                    onClick={() => setView('complete')}
+                >
+                    Semaine complète
+                </div>
+            </div>
+            <div className="calendar-content-fragment">
+                <div
+                    className={`calendar-content ${
+                        isViewADayView() ? 'day' : view
+                    }`}
+                >
+                    {renderDays()}
+                    {renderSlots()}
+                    {renderClasses()}
+                </div>
             </div>
         </div>
     )
