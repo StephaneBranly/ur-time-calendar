@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/02 13:22:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/02 14:05:20 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -146,7 +146,7 @@ const Calendar = (props: CalendarProps) => {
                     rowStartIndex={rowStartIndex}
                     rowEndIndex={rowEndIndex}
                     selected={selectedClass === unit}
-                    setSelected={() => setSelectedClass(unit)}
+                    setSelected={() => setSelectedClass(selectedClass === unit ? undefined : unit)}
                 />
             )
         })
@@ -185,6 +185,7 @@ const Calendar = (props: CalendarProps) => {
                         isViewADayView() ? 'day' : view
                     }`}
                 >
+                    <div className='calendar-background-fragment' onClick={() => setSelectedClass(undefined)}></div>
                     {renderDays()}
                     {renderSlots()}
                     {renderClasses()}
