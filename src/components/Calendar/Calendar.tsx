@@ -8,16 +8,15 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/01 15:28:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/02 13:22:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import { Class, daysIndex } from 'utils'
-import { CgPin } from 'react-icons/cg'
-import { RiBook2Line } from 'react-icons/ri'
 
 import './Calendar.scss'
 import { useState } from 'react'
+import { ClassSlot } from 'components'
 
 export interface CalendarProps {
     classes: Class[]
@@ -34,6 +33,9 @@ const Calendar = (props: CalendarProps) => {
     }
 
     const [view, setView] = useState<string>(getCurrentDay())
+    const [selectedClass, setSelectedClass] = useState<Class | undefined>(
+        undefined
+    )
 
     const renderDays = () => {
         var days: string[] = []
@@ -136,20 +138,16 @@ const Calendar = (props: CalendarProps) => {
             const rowStartIndex = timeToRowIndex(unit.startHour, unit.startMin)
             const rowEndIndex = timeToRowIndex(unit.endHour, unit.endMin)
             return (
-                <div
+                <ClassSlot
                     key={index}
-                    className={`class col-start-${colStartIndex} col-end-${colEndIndex} row-start-${rowStartIndex} row-end-${rowEndIndex}`}
-                >
-                    <span className="class-uvname">
-                        <RiBook2Line />
-                        {unit.UVname} - {unit.prettyClassType}{' '}
-                        {unit.classReference}
-                    </span>
-                    <span className="class-place class-label">
-                        <CgPin />
-                        {unit.place}
-                    </span>
-                </div>
+                    unit={unit}
+                    colStartIndex={colStartIndex}
+                    colEndIndex={colEndIndex}
+                    rowStartIndex={rowStartIndex}
+                    rowEndIndex={rowEndIndex}
+                    selected={selectedClass === unit}
+                    setSelected={() => setSelectedClass(unit)}
+                />
             )
         })
     }

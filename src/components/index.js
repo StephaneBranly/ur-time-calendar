@@ -8,12 +8,12 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 11:31:24 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/02 12:58:36 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import PasteMail from './PasteMail/PasteMail'
 import Calendar from './Calendar/Calendar'
 import Settings from './Settings/Settings'
-
-export { PasteMail, Calendar, Settings }
+import ClassSlot from './ClassSlot/ClassSlot'
+export { PasteMail, Calendar, Settings, ClassSlot }

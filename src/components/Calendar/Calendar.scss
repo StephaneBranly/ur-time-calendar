@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/01 15:19:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/02 12:54:55 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -141,29 +141,6 @@ $max-columns: 16;
 
 .slot-time {
     font-size: 10px;
-}
-.class {
-    background-color: #ff9a8b;
-    background-image: linear-gradient(90deg, #3be69f 0%, #00b4c5 100%);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    position: relative;
-    z-index: 15;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-.class-uvname {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px;
-    border-radius: 3px;
-    display: inline-block;
-}
-.class-place {
-    text-align: left;
-    padding: 5px;
-    color: black;
 }
 .calendar-mode-selector {
     background-color: rgba(0, 0, 0, 0.5);
