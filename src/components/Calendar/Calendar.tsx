@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 18:00:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/08 21:03:51 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -40,7 +40,7 @@ const Calendar = (props: CalendarProps) => {
     )
     const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
-    const renderDays = () => {
+    const getDaysDatesToRender = () => {
         var days: Date[] = []
         const mof = getMonday(selectedDate)
         switch (view) {
@@ -67,20 +67,33 @@ const Calendar = (props: CalendarProps) => {
             default:
                 days = [selectedDate]
         }
-        return days.map((day, index) => (
-            <div
-                key={index}
-                className={`calendar-legend-day col-start-${
-                    index * 2 + 2
-                } col-end-${index * 2 + 4} ${
-                    semesterPlanning.weekAlternance === 'A'
-                        ? 'week-a'
-                        : 'week-b'
-                }`}
-            >
-                {getDayLabel(day)}
-            </div>
-        ))
+        return days
+    }
+    const renderDays = () => {
+        return getDaysDatesToRender().map((day, index) => {
+            const extraLabel = `${semesterPlanning.isExam(day) ? 'Exam ' : ''}${
+                semesterPlanning.isFerie(day) ? 'Férié ' : ''
+            }${semesterPlanning.isHoliday(day) ? 'Vacs ' : ''}${
+                semesterPlanning.becomesA(day)
+                    ? `(${semesterPlanning.becomesA(day)}) `
+                    : ''
+            }`
+            return (
+                <div
+                    key={index}
+                    className={`calendar-legend-day col-start-${
+                        index * 2 + 2
+                    } col-end-${index * 2 + 4} ${
+                        semesterPlanning.getWeekAlternance(day) === 'A'
+                            ? 'week-a'
+                            : 'week-b'
+                    }`}
+                >
+                    {getDayLabel(day)} {day.getDate()}{' '}
+                    {extraLabel ? ` - ${extraLabel}` : ''}
+                </div>
+            )
+        })
     }
 
     const renderSlot = (hour: number, min: number) => {
@@ -129,48 +142,59 @@ const Calendar = (props: CalendarProps) => {
     }
 
     const renderClasses = () => {
-        return classes.map((unit: Class, index) => {
-            const isADayView = view === 'day'
+        const isADayView = view === 'day'
+        return getDaysDatesToRender().map((day) => {
             if (
-                isADayView &&
-                unit.day !== getDayLabel(selectedDate).toUpperCase()
+                semesterPlanning.isExam(day) ||
+                semesterPlanning.isFerie(day) ||
+                semesterPlanning.isHoliday(day)
             )
                 return null
-            if (
-                unit.week !== undefined &&
-                unit.week !== semesterPlanning.weekAlternance
+            const filtered = classes.filter(
+                (c) =>
+                    ((!semesterPlanning.becomesA(day) &&
+                        c.day === getDayLabel(day).toUpperCase()) ||
+                        semesterPlanning.becomesA(day)?.toUpperCase() ===
+                            c.day) &&
+                    (c.week === undefined ||
+                        c.week === semesterPlanning.getWeekAlternance(day))
             )
-                return null
-            var colStartIndex = isADayView ? 2 : daysIndex[unit.day] * 2 + 2
-            var colEndIndex = isADayView ? 4 : daysIndex[unit.day] * 2 + 4
+            return filtered.map((unit: Class, index) => {
+                const dayLabel = getDayLabel(day).toUpperCase()
+                var colStartIndex = isADayView ? 2 : daysIndex[dayLabel] * 2 + 2
+                var colEndIndex = isADayView ? 4 : daysIndex[dayLabel] * 2 + 4
 
-            // switch (unit.week) {
-            //     case 'A':
-            //         colEndIndex = colStartIndex + 1
-            //         break
-            //     case 'B':
-            //         colStartIndex = colEndIndex - 1
-            //         break
-            // }
+                // switch (unit.week) {
+                //     case 'A':
+                //         colEndIndex = colStartIndex + 1
+                //         break
+                //     case 'B':
+                //         colStartIndex = colEndIndex - 1
+                //         break
+                // }
 
-            const rowStartIndex = timeToRowIndex(unit.startHour, unit.startMin)
-            const rowEndIndex = timeToRowIndex(unit.endHour, unit.endMin)
-            return (
-                <ClassSlot
-                    key={index}
-                    unit={unit}
-                    colStartIndex={colStartIndex}
-                    colEndIndex={colEndIndex}
-                    rowStartIndex={rowStartIndex}
-                    rowEndIndex={rowEndIndex}
-                    selected={selectedClass === unit}
-                    setSelected={() =>
-                        setSelectedClass(
-                            selectedClass === unit ? undefined : unit
-                        )
-                    }
-                />
-            )
+                const rowStartIndex = timeToRowIndex(
+                    unit.startHour,
+                    unit.startMin
+                )
+                const rowEndIndex = timeToRowIndex(unit.endHour, unit.endMin)
+                return (
+                    <ClassSlot
+                        key={index}
+                        unit={unit}
+                        colStartIndex={colStartIndex}
+                        colEndIndex={colEndIndex}
+                        rowStartIndex={rowStartIndex}
+                        rowEndIndex={rowEndIndex}
+                        selected={selectedClass === unit}
+                        setSelected={() =>
+                            setSelectedClass(
+                                selectedClass === unit ? undefined : unit
+                            )
+                        }
+                    />
+                )
+            })
         })
     }
 

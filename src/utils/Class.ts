@@ -8,9 +8,11 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 01:10:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/08 20:13:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
+
+import { weekAlternanceType } from 'types'
 
 export default class Class {
     private _UVname: string
@@ -21,7 +23,7 @@ export default class Class {
     private _frequence: string
     private _classType: string
     private _classReference: number
-    private _week: 'A' | 'B' | undefined
+    private _week: weekAlternanceType
 
     constructor(
         UVname: string,
@@ -32,7 +34,7 @@ export default class Class {
         end: string,
         place: string,
         frequence: string,
-        week: 'A' | 'B' | undefined
+        week: weekAlternanceType
     ) {
         this._UVname = UVname
         this._day = day

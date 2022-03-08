@@ -8,29 +8,10 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 19:49:51 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/08 20:14:34 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import Class from './Class'
-import parseMail from './parseMail'
-import parseLine from './parseLine'
-import parseDay from './parseDay'
-import daysIndex from './daysIndex'
-import moveDate from './moveDate'
-import getMonday from './getMonday'
-import getDayLabel from './getDayLabel'
-import SemesterPlanning from './SemesterPlanning'
-import DaySemesterOrganization from './DaySemesterOrganization'
-export {
-    Class,
-    parseLine,
-    parseMail,
-    parseDay,
-    daysIndex,
-    moveDate,
-    getMonday,
-    getDayLabel,
-    SemesterPlanning,
-    DaySemesterOrganization,
-}
+import weekAlternanceType from './weekAlternanceType'
+
+export { weekAlternanceType }
