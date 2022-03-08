@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/02 14:04:38 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/08 17:06:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -121,7 +121,29 @@ $max-columns: 16;
     display: flex;
     flex-direction: row;
     gap: 10px;
-    justify-content: end;
+    justify-content: space-between;
+
+    & > div {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
+    }
+}
+
+.calendar-current-date div {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.calendar-current-date div:hover {
+    cursor: pointer;
 }
 .slot {
     font-size: xx-small;
@@ -158,7 +180,7 @@ $max-columns: 16;
 .calendar-background-fragment {
     position: absolute;
     background-color: rgba(0, 0, 0, 0);
-    top:0;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;

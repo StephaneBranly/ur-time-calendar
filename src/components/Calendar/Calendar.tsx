@@ -8,63 +8,77 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/02 14:05:20 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/08 18:00:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { Class, daysIndex } from 'utils'
+import {
+    Class,
+    daysIndex,
+    getDayLabel,
+    getMonday,
+    moveDate,
+    SemesterPlanning,
+} from 'utils'
 
 import './Calendar.scss'
 import { useState } from 'react'
 import { ClassSlot } from 'components'
+import { BsCaretLeft, BsCaretRight } from 'react-icons/bs'
 
 export interface CalendarProps {
     classes: Class[]
+    semesterPlanning: SemesterPlanning
 }
 
 const Calendar = (props: CalendarProps) => {
-    const { classes } = props
+    const { classes, semesterPlanning } = props
 
-    const getCurrentDay = () => {
-        var stringDateName = new Date().toLocaleDateString('fr-FR', {
-            weekday: 'long',
-        })
-        return stringDateName[0].toUpperCase() + stringDateName.slice(1)
-    }
-
-    const [view, setView] = useState<string>(getCurrentDay())
+    const [view, setView] = useState<string>('day')
     const [selectedClass, setSelectedClass] = useState<Class | undefined>(
         undefined
     )
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
     const renderDays = () => {
-        var days: string[] = []
+        var days: Date[] = []
+        const mof = getMonday(selectedDate)
         switch (view) {
             case 'compact':
-                days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi']
+                days = [
+                    mof,
+                    moveDate(mof, 1),
+                    moveDate(mof, 2),
+                    moveDate(mof, 3),
+                    moveDate(mof, 4),
+                ]
                 break
             case 'complete':
                 days = [
-                    'Lundi',
-                    'Mardi',
-                    'Mercredi',
-                    'Jeudi',
-                    'Vendredi',
-                    'Samedi',
-                    'Dimanche',
+                    mof,
+                    moveDate(mof, 1),
+                    moveDate(mof, 2),
+                    moveDate(mof, 3),
+                    moveDate(mof, 4),
+                    moveDate(mof, 5),
+                    moveDate(mof, 6),
                 ]
                 break
             default:
-                days = [view]
+                days = [selectedDate]
         }
         return days.map((day, index) => (
             <div
                 key={index}
                 className={`calendar-legend-day col-start-${
                     index * 2 + 2
-                } col-end-${index * 2 + 4}`}
+                } col-end-${index * 2 + 4} ${
+                    semesterPlanning.weekAlternance === 'A'
+                        ? 'week-a'
+                        : 'week-b'
+                }`}
             >
-                {day}
+                {getDayLabel(day)}
             </div>
         ))
     }
@@ -114,26 +128,30 @@ const Calendar = (props: CalendarProps) => {
         return (hour - 7) * 4 + min / 15 + 2
     }
 
-    const isViewADayView = () => {
-        return !['compact', 'complete'].includes(view)
-    }
-
     const renderClasses = () => {
         return classes.map((unit: Class, index) => {
-            if (isViewADayView() && unit.day !== view.toUpperCase()) return null
-            var colStartIndex = isViewADayView()
-                ? 2
-                : daysIndex[unit.day] * 2 + 2
-            var colEndIndex = isViewADayView() ? 4 : daysIndex[unit.day] * 2 + 4
+            const isADayView = view === 'day'
+            if (
+                isADayView &&
+                unit.day !== getDayLabel(selectedDate).toUpperCase()
+            )
+                return null
+            if (
+                unit.week !== undefined &&
+                unit.week !== semesterPlanning.weekAlternance
+            )
+                return null
+            var colStartIndex = isADayView ? 2 : daysIndex[unit.day] * 2 + 2
+            var colEndIndex = isADayView ? 4 : daysIndex[unit.day] * 2 + 4
 
-            switch (unit.week) {
-                case 'A':
-                    colEndIndex = colStartIndex + 1
-                    break
-                case 'B':
-                    colStartIndex = colEndIndex - 1
-                    break
-            }
+            // switch (unit.week) {
+            //     case 'A':
+            //         colEndIndex = colStartIndex + 1
+            //         break
+            //     case 'B':
+            //         colStartIndex = colEndIndex - 1
+            //         break
+            // }
 
             const rowStartIndex = timeToRowIndex(unit.startHour, unit.startMin)
             const rowEndIndex = timeToRowIndex(unit.endHour, unit.endMin)
@@ -146,46 +164,87 @@ const Calendar = (props: CalendarProps) => {
                     rowStartIndex={rowStartIndex}
                     rowEndIndex={rowEndIndex}
                     selected={selectedClass === unit}
-                    setSelected={() => setSelectedClass(selectedClass === unit ? undefined : unit)}
+                    setSelected={() =>
+                        setSelectedClass(
+                            selectedClass === unit ? undefined : unit
+                        )
+                    }
                 />
             )
         })
     }
+
+    const handlerMoveDate = (index: -1 | 1) => {
+        const week = view === 'compact' || view === 'complete'
+        setSelectedDate(moveDate(selectedDate, index, week))
+    }
+    const displaySelectedDate = () => {
+        const week = view === 'compact' || view === 'complete'
+        const stringMonthName = selectedDate.toLocaleDateString('fr-FR', {
+            month: 'long',
+        })
+        if (week) {
+            const mondayOfWeek = getMonday(selectedDate)
+
+            return `Semaine du ${mondayOfWeek.getDate()} ${stringMonthName}`
+        }
+        const stringDayName = getDayLabel(selectedDate)
+        return `${stringDayName} ${selectedDate.getDate()} ${stringMonthName}`
+    }
+
     return (
         <div className="calendar-fragment">
             <div className="calendar-header">
-                <div
-                    className={`calendar-mode-selector ${
-                        isViewADayView() ? 'active' : ''
-                    }`}
-                    onClick={() => setView(getCurrentDay())}
-                >
-                    Au jour
+                <div className="calendar-current-date">
+                    <div
+                        className="calendar-current-date-before"
+                        onClick={() => handlerMoveDate(-1)}
+                    >
+                        <BsCaretLeft />
+                    </div>
+                    <div className="calendar-current-date-label">
+                        {displaySelectedDate()}
+                    </div>
+                    <div
+                        className="calendar-current-date-after"
+                        onClick={() => handlerMoveDate(1)}
+                    >
+                        <BsCaretRight />
+                    </div>
                 </div>
-                <div
-                    className={`calendar-mode-selector ${
-                        view === 'compact' ? 'active' : ''
-                    }`}
-                    onClick={() => setView('compact')}
-                >
-                    Semaine compacte
-                </div>
-                <div
-                    className={`calendar-mode-selector ${
-                        view === 'complete' ? 'active' : ''
-                    }`}
-                    onClick={() => setView('complete')}
-                >
-                    Semaine complète
+                <div className="calendar-mode">
+                    <div
+                        className={`calendar-mode-selector ${
+                            view === 'day' ? 'active' : ''
+                        }`}
+                        onClick={() => setView('day')}
+                    >
+                        Au jour
+                    </div>
+                    <div
+                        className={`calendar-mode-selector ${
+                            view === 'compact' ? 'active' : ''
+                        }`}
+                        onClick={() => setView('compact')}
+                    >
+                        Semaine compacte
+                    </div>
+                    <div
+                        className={`calendar-mode-selector ${
+                            view === 'complete' ? 'active' : ''
+                        }`}
+                        onClick={() => setView('complete')}
+                    >
+                        Semaine complète
+                    </div>
                 </div>
             </div>
             <div className="calendar-content-fragment">
-                <div
-                    className={`calendar-content ${
-                        isViewADayView() ? 'day' : view
-                    }`}
-                >
-                    <div className='calendar-background-fragment' onClick={() => setSelectedClass(undefined)}></div>
+                <div className={`calendar-content ${view}`}>
+                    <div
+                        className="calendar-background-fragment"
+                        onClick={() => setSelectedClass(undefined)}
+                    ></div>
                     {renderDays()}
                     {renderSlots()}
                     {renderClasses()}

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 01:10:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/08 17:52:38 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,5 +17,19 @@ import parseMail from './parseMail'
 import parseLine from './parseLine'
 import parseDay from './parseDay'
 import daysIndex from './daysIndex'
+import moveDate from './moveDate'
+import getMonday from './getMonday'
+import getDayLabel from './getDayLabel'
+import SemesterPlanning from './SemesterPlanning'
 
-export { Class, parseLine, parseMail, parseDay, daysIndex }
+export {
+    Class,
+    parseLine,
+    parseMail,
+    parseDay,
+    daysIndex,
+    moveDate,
+    getMonday,
+    getDayLabel,
+    SemesterPlanning,
+}

@@ -1,49 +1,23 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     App.tsx                                            ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     SemesterPlanning.ts                                ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 17:53:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/08 18:03:13 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import React, { useEffect, useState } from 'react'
-import './App.css'
-import { Calendar, Settings } from 'components'
-import { Class, parseMail, SemesterPlanning } from 'utils'
+export default class SemesterPlanning {
+    constructor() {}
 
-function App() {
-    const [classes, setClasses] = useState<Class[]>([])
+    get weekAlternance() {
+        return 'A'
 
-    useEffect(() => {
-        const kify = localStorage.getItem('kify_accepted')
-        const p22Schedule = localStorage.getItem('p22-schedule')
-        if (kify && p22Schedule) {
-            const result = parseMail(p22Schedule)
-            setClasses(result)
-        }
-    }, [])
-
-    return (
-        <div className="App">
-            <div className="calendar-container">
-                <Calendar
-                    classes={classes}
-                    semesterPlanning={new SemesterPlanning()}
-                />
-            </div>
-            <Settings
-                setClasses={setClasses}
-                defaultOpenValue={classes.length !== 0}
-                defaultContent={localStorage.getItem('p22-schedule') ?? ''}
-            />
-        </div>
-    )
+        return undefined
+    }
 }
-
-export default App
