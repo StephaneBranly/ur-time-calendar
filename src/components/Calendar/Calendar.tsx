@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 21:03:51 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/03/10 18:25:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -22,7 +22,7 @@ import {
 } from 'utils'
 
 import './Calendar.scss'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { ClassSlot } from 'components'
 import { BsCaretLeft, BsCaretRight } from 'react-icons/bs'
 
@@ -71,27 +71,42 @@ const Calendar = (props: CalendarProps) => {
     }
     const renderDays = () => {
         return getDaysDatesToRender().map((day, index) => {
-            const extraLabel = `${semesterPlanning.isExam(day) ? 'Exam ' : ''}${
-                semesterPlanning.isFerie(day) ? 'Férié ' : ''
-            }${semesterPlanning.isHoliday(day) ? 'Vacs ' : ''}${
-                semesterPlanning.becomesA(day)
-                    ? `(${semesterPlanning.becomesA(day)}) `
-                    : ''
-            }`
+            const extraLabel = semesterPlanning.isExam(day)
+                ? 'Examens'
+                : semesterPlanning.isFerie(day)
+                ? 'Férié '
+                : semesterPlanning.isHoliday(day)
+                ? 'Vacances '
+                : ''
+            const rowStartIndex = timeToRowIndex(7, 0)
+            const rowEndIndex = timeToRowIndex(20, 0)
+            const replaceDay = semesterPlanning.becomesA(day)
             return (
-                <div
-                    key={index}
-                    className={`calendar-legend-day col-start-${
-                        index * 2 + 2
-                    } col-end-${index * 2 + 4} ${
-                        semesterPlanning.getWeekAlternance(day) === 'A'
-                            ? 'week-a'
-                            : 'week-b'
-                    }`}
-                >
-                    {getDayLabel(day)} {day.getDate()}{' '}
-                    {extraLabel ? ` - ${extraLabel}` : ''}
-                </div>
+                <Fragment key={index}>
+                    <div
+                        className={`calendar-legend-day col-start-${
+                            index * 2 + 2
+                        } col-end-${index * 2 + 4} ${
+                            semesterPlanning.getWeekAlternance(day) === 'A'
+                                ? 'week-a'
+                                : 'week-b'
+                        }`}
+                    >
+                        {getDayLabel(day)} {day.getDate()}{' '}
+                        {replaceDay && ` (${replaceDay})`}
+                    </div>
+                    {extraLabel && (
+                        <div
+                            className={`calendar-special-day ${extraLabel} col-start-${
+                                index * 2 + 2
+                            } col-end-${
+                                index * 2 + 4
+                            } row-start-${rowStartIndex} row-end-${rowEndIndex}`}
+                        >
+                            {extraLabel}
+                        </div>
+                    )}
+                </Fragment>
             )
         })
     }
