@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 20:19:27 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/11 14:03:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,12 +16,12 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Settings } from 'components'
 import { Class, parseMail, SemesterPlanning } from 'utils'
-import { getP22organization } from 'data'
+import { getA22organization } from 'data'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getP22organization())
+        useState<SemesterPlanning>(getA22organization)
 
     useEffect(() => {
         const kify = localStorage.getItem('kify_accepted')

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 19:49:51 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/11 13:59:56 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -22,6 +22,7 @@ import getMonday from './getMonday'
 import getDayLabel from './getDayLabel'
 import SemesterPlanning from './SemesterPlanning'
 import DaySemesterOrganization from './DaySemesterOrganization'
+import parseSemester from './parseSemester'
 export {
     Class,
     parseLine,
@@ -33,4 +34,5 @@ export {
     getDayLabel,
     SemesterPlanning,
     DaySemesterOrganization,
+    parseSemester,
 }
