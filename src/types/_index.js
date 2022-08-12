@@ -8,10 +8,11 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 20:14:34 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/12 15:22:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import weekAlternanceType from './weekAlternanceType'
+// import weekAlternance from './weekAlternance'
+// import classColor from './classColor'
 
-export { weekAlternanceType }
+// export {weekAlternance, classColor}

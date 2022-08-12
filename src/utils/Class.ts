@@ -8,11 +8,12 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 20:13:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/12 15:23:16 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { weekAlternanceType } from 'types'
+import { classColor } from "types/classColor"
+import { weekAlternance } from "types/weekAlternance"
 
 export default class Class {
     private _UVname: string
@@ -23,7 +24,8 @@ export default class Class {
     private _frequence: string
     private _classType: string
     private _classReference: number
-    private _week: weekAlternanceType
+    private _week: weekAlternance
+    private _color: classColor
 
     constructor(
         UVname: string,
@@ -34,7 +36,8 @@ export default class Class {
         end: string,
         place: string,
         frequence: string,
-        week: weekAlternanceType
+        week: weekAlternance,
+        color: classColor
     ) {
         this._UVname = UVname
         this._day = day
@@ -45,6 +48,7 @@ export default class Class {
         this._classType = classType
         this._classReference = classReference
         this._week = week
+        this._color = color
     }
 
     prettyPrint = (): string => {
@@ -104,5 +108,8 @@ export default class Class {
     }
     get week() {
         return this._week
+    }
+    get color() {
+        return this._color
     }
 }

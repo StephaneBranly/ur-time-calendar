@@ -8,15 +8,16 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 20:48:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/12 15:22:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { weekAlternanceType } from 'types'
+import { weekAlternance } from "types/weekAlternance"
+
 
 export default class DaySemesterOrganization {
     private _date: Date
-    private _weekAlternance: weekAlternanceType
+    private _weekAlternance: weekAlternance
     private _becomesA: string | undefined
     private _isHoliday: boolean | undefined
     private _isExam: boolean | undefined
@@ -25,7 +26,7 @@ export default class DaySemesterOrganization {
     constructor(
         date: Date,
         options?: {
-            weekAlternance?: weekAlternanceType
+            weekAlternance?: weekAlternance
             becomesA?:
                 | 'Lundi'
                 | 'Mardi'

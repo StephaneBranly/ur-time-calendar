@@ -8,13 +8,15 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 01:10:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/12 15:28:57 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
+import { classColor } from 'types/classColor'
 import { Class, parseDay } from 'utils'
 
-const parseLine = (line: string): Class | undefined => {
+const parseLine = (line: string, uvs: string[]): Class | undefined => {
+    const colors: classColor[] = ['barbapapa', 'cool-blues', 'lagon', 'orange-coral', 'sulfur', 'starfall']
     const match = line.match(
         /([A-Z0-9]{4})\s*(([A-Z]{1})\s([0-9]*)|([A-Z]{1})([0-9]*))\s([AB])?\s*([A-Z.]*)\s([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2}),(F[0-9]),S=([A-Z0-9]*)/
     )
@@ -28,7 +30,7 @@ const parseLine = (line: string): Class | undefined => {
         const end = match[10]
         const place = match[12]
         const frequence = match[11]
-
+        const color = uvs.includes(UVname) ? colors[uvs.indexOf(UVname)] : colors[(uvs.length % colors.length)]
         return new Class(
             UVname,
             classType,
@@ -38,7 +40,8 @@ const parseLine = (line: string): Class | undefined => {
             end,
             place,
             frequence,
-            week as 'A' | 'B' | undefined
+            week as 'A' | 'B' | undefined,
+            color
         )
     }
     return undefined
