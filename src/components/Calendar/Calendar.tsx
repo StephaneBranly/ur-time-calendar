@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/10 18:25:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/20 11:21:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -231,8 +231,32 @@ const Calendar = (props: CalendarProps) => {
         return `${stringDayName} ${selectedDate.getDate()} ${stringMonthName}`
     }
 
+
+    // Mobile swipes management
+    const [touchStart, setTouchStart] = useState(0)
+    const [touchEnd, setTouchEnd] = useState(0)
+
+    function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
+        setTouchStart(e.targetTouches[0].clientX)
+    }
+
+    function handleTouchMove(e: React.TouchEvent<HTMLDivElement>) {
+        setTouchEnd(e.targetTouches[0].clientX)
+    }
+
+    function handleTouchEnd() {
+        if (touchStart - touchEnd > 150)
+            handlerMoveDate(1)
+        if (touchStart - touchEnd < -150) 
+            handlerMoveDate(-1)
+    }
+
     return (
-        <div className="calendar-fragment">
+        <div className="calendar-fragment"
+            onTouchStart={touchStartEvent => handleTouchStart(touchStartEvent)}
+            onTouchMove={touchMoveEvent =>  handleTouchMove(touchMoveEvent)}
+            onTouchEnd={() => handleTouchEnd()}
+            >
             <div className="calendar-header">
                 <div className="calendar-current-date">
                     <div
