@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/28 19:14:43 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/20 09:58:54 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -18,6 +18,7 @@ import { FiSettings } from 'react-icons/fi'
 import { useState } from 'react'
 import { PasteMail } from 'components'
 import { Class } from 'utils'
+import { isMobile } from 'react-device-detect'
 
 export interface SettingsProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
@@ -56,6 +57,10 @@ const Settings = (props: SettingsProps) => {
                 onClick={() => setOpen(false)}
             ></div>
             <div className="settings-modal-content">
+                {isMobile && <button className='settings-exit' onClick={() => setOpen(false)}>
+                                Fermer x
+                            </button>}
+                <h1 className='settings-title'>Charger son emploi du temps depuis le mail SME</h1>
                 <div className="settings-section">
                     <PasteMail
                         setClasses={setClasses}

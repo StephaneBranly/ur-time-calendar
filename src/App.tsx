@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/11 14:03:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/20 09:54:43 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -42,7 +42,7 @@ function App() {
             </div>
             <Settings
                 setClasses={setClasses}
-                defaultOpenValue={classes.length !== 0}
+                defaultOpenValue={localStorage.getItem('p22-schedule') ? false : true}
                 defaultContent={localStorage.getItem('p22-schedule') ?? ''}
             />
         </div>
