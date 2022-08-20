@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/11 14:05:53 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/20 09:49:18 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -18,12 +18,10 @@ const parseSemester = (organisation: string, semesterName: string) => {
     const semester = new SemesterPlanning(semesterName)
     const lines = organisation.split('\n')
     lines.forEach((line) => {
-        console.log('here')
         const match = line.match(
             /([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([A|B])-([E|F|H|x])-(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|x)/
         )
         if (match?.length) {
-            console.log('match')
             const [_, startYear, startMonth, startDay, endYear, endMonth, endDay, weekAlternance, type, becomesA] = match
             for (let i = parseInt(startYear); i <= parseInt(endYear); i++) {
                 for (let j = parseInt(startMonth); j <= parseInt(endMonth); j++) {
