@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/20 09:58:54 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/21 14:34:15 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,7 +17,7 @@ import './Settings.scss'
 import { FiSettings } from 'react-icons/fi'
 import { useState } from 'react'
 import { PasteMail } from 'components'
-import { Class } from 'utils'
+import { Class, isKifyAccepted } from 'utils'
 import { isMobile } from 'react-device-detect'
 
 export interface SettingsProps {
@@ -29,9 +29,7 @@ export interface SettingsProps {
 const Settings = (props: SettingsProps) => {
     const { setClasses, defaultOpenValue, defaultContent } = props
     const [open, setOpen] = useState<boolean>(defaultOpenValue ?? false)
-    const [kifyAccepted, setKifyAccepted] = useState(
-        localStorage.getItem('kify_accepted') ? true : false
-    )
+    const [kifyAccepted, setKifyAccepted] = useState(isKifyAccepted())
     const [lastContent, setLastContent] = useState<string>(defaultContent ?? '')
 
     const handleKifyClick = (e: any) => {
@@ -40,14 +38,17 @@ const Settings = (props: SettingsProps) => {
     }
 
     const saveInCache = () => {
-        localStorage.setItem('p22-schedule', lastContent)
+        localStorage.setItem('a22-schedule', lastContent)
     }
 
     const deleteCache = () => {
         const confirmed = window.confirm(
             'Etes-vous sûr.e de vouloir supprimer le contenu du cache (les emplois du temps enregistrés)?'
         )
-        if (confirmed) localStorage.removeItem('p22-schedule')
+        if (confirmed) {
+            localStorage.removeItem('a22-schedule')
+            localStorage.removeItem('view')
+        }
     }
 
     return open ? (

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/20 09:54:43 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/21 14:24:19 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -25,9 +25,9 @@ function App() {
 
     useEffect(() => {
         const kify = localStorage.getItem('kify_accepted')
-        const p22Schedule = localStorage.getItem('p22-schedule')
-        if (kify && p22Schedule) {
-            const result = parseMail(p22Schedule)
+        const a22Schedule = localStorage.getItem('a22-schedule')
+        if (kify && a22Schedule) {
+            const result = parseMail(a22Schedule)
             setClasses(result)
         }
     }, [])
@@ -42,8 +42,8 @@ function App() {
             </div>
             <Settings
                 setClasses={setClasses}
-                defaultOpenValue={localStorage.getItem('p22-schedule') ? false : true}
-                defaultContent={localStorage.getItem('p22-schedule') ?? ''}
+                defaultOpenValue={localStorage.getItem('a22-schedule') ? false : true}
+                defaultContent={localStorage.getItem('a22-schedule') ?? ''}
             />
         </div>
     )

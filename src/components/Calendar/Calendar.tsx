@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/21 14:14:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/21 14:32:46 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,6 +17,7 @@ import {
     daysIndex,
     getDayLabel,
     getMonday,
+    isKifyAccepted,
     moveDate,
     SemesterPlanning,
 } from 'utils'
@@ -34,7 +35,7 @@ export interface CalendarProps {
 const Calendar = (props: CalendarProps) => {
     const { classes, semesterPlanning } = props
 
-    const [view, setView] = useState<string>('day')
+    const [view, setView] = useState<string>(isKifyAccepted() ? localStorage.getItem('view') ?? 'day' : 'day')
     const [selectedClass, setSelectedClass] = useState<Class | undefined>(
         undefined
     )
@@ -69,6 +70,14 @@ const Calendar = (props: CalendarProps) => {
         }
         return days
     }
+
+    const handlerSetView = (view: string) => {
+        setView(view)
+        if (isKifyAccepted()) {
+            localStorage.setItem('view', view)
+        }
+    }
+
     const renderDays = () => {
         return getDaysDatesToRender().map((day, index) => {
             const extraLabel = semesterPlanning.isExam(day)
@@ -280,7 +289,7 @@ const Calendar = (props: CalendarProps) => {
                         className={`calendar-mode-selector ${
                             view === 'day' ? 'active' : ''
                         }`}
-                        onClick={() => setView('day')}
+                        onClick={() => handlerSetView('day')}
                     >
                         Au jour
                     </div>
@@ -288,7 +297,7 @@ const Calendar = (props: CalendarProps) => {
                         className={`calendar-mode-selector ${
                             view === 'compact' ? 'active' : ''
                         }`}
-                        onClick={() => setView('compact')}
+                        onClick={() => handlerSetView('compact')}
                     >
                         Semaine compacte
                     </div>
@@ -296,7 +305,7 @@ const Calendar = (props: CalendarProps) => {
                         className={`calendar-mode-selector ${
                             view === 'complete' ? 'active' : ''
                         }`}
-                        onClick={() => setView('complete')}
+                        onClick={() => handlerSetView('complete')}
                     >
                         Semaine complète
                     </div>
