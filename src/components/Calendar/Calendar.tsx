@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/20 11:21:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/08/21 14:14:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -245,9 +245,9 @@ const Calendar = (props: CalendarProps) => {
     }
 
     function handleTouchEnd() {
-        if (touchStart - touchEnd > 150)
+        if (touchStart - touchEnd > 100)
             handlerMoveDate(1)
-        if (touchStart - touchEnd < -150) 
+        if (touchStart - touchEnd < -100) 
             handlerMoveDate(-1)
     }
 
