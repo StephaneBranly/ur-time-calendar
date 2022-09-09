@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/20 10:00:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:39:12 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -65,6 +65,7 @@
     position: relative;
     align-content: stretch;
     align-items: stretch;
+    overflow-y: scroll;
 }
 
 .settings-section {
@@ -86,6 +87,19 @@
     border: 1px solid rgb(184, 9, 9);
     border-radius: 2px;
     padding: 5px;
+}
+
+.settings-modal-fragment button {
+    background-color: rgb(107, 44, 254);
+    color: white;
+    border: 0px solid #00000000;
+    border-radius: 5px;
+    padding: 10px;
+
+    &:hover{
+        background-color: rgb(107, 44, 254, 0.8);
+        cursor: pointer;
+    }
 }
 @media (max-width: 480px) {
     .settings-modal-content {

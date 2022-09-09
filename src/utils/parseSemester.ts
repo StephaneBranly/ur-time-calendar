@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/20 09:49:18 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:43:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -47,6 +47,18 @@ const parseSemester = (organisation: string, semesterName: string) => {
                         semester.registerDay(organisationDay)                 
                     }
                 }
+            }
+        } else {
+            const match = line.match(
+                /(starts|ends):([0-9]{4})\/([0-9]{2})\/([0-9]{2})/
+            )
+            if (match?.length) {
+                const [_, type, year, month, day] = match
+                const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+                if (type === 'starts')
+                    semester.setStartDate(date)
+                else
+                    semester.setEndDate(date)
             }
         }
     })

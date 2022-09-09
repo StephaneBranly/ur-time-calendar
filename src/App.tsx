@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/21 14:24:19 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 17:58:30 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -43,8 +43,10 @@ function App() {
             <Settings
                 setClasses={setClasses}
                 defaultOpenValue={localStorage.getItem('a22-schedule') ? false : true}
-                defaultContent={localStorage.getItem('a22-schedule') ?? ''}
-            />
+                defaultContent={localStorage.getItem('a22-schedule') ?? ''} 
+                classes={classes}
+                semesterPlanning={semesterOrganization}
+                />
         </div>
     )
 }

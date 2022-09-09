@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/03/08 20:48:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:33:31 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,16 +17,27 @@ import DaySemesterOrganization from './DaySemesterOrganization'
 export default class SemesterPlanning {
     private _semesterName: string
     private _referencedDays: DaySemesterOrganization[]
+    private _starts: Date
+    private _ends: Date
 
     constructor(semesterName: string) {
         this._semesterName = semesterName
         this._referencedDays = []
+        this._starts = new Date()
+        this._ends = new Date()
     }
 
     registerDay = (newDay: DaySemesterOrganization) => {
         this._referencedDays.push(newDay)
     }
 
+    setStartDate = (newStarts: Date) => {
+        this._starts = new Date(newStarts)
+    }
+    setEndDate = (newEnds: Date) => {
+        this._ends = new Date(newEnds)
+    }
+    
     getDaySemesterOrganizaton = (date: Date) => {
         const filteredResult = this._referencedDays.filter((f) => {
             const d = f.date
@@ -62,5 +73,11 @@ export default class SemesterPlanning {
     }
     get semesterName() {
         return this._semesterName
+    }
+    get starts() {
+        return new Date(this._starts)
+    }
+    get ends() {
+        return new Date(this._ends)
     }
 }
