@@ -8,14 +8,13 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 19:32:43 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:43:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import { DaySemesterOrganization, SemesterPlanning } from "utils"
 
 const parseSemester = (organisation: string, semesterName: string) => {
-    console.log('loaded')
     const semester = new SemesterPlanning(semesterName)
     const lines = organisation.split('\n')
     lines.forEach((line) => {

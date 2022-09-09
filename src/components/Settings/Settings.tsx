@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 19:10:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:42:39 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -89,10 +89,15 @@ const Settings = (props: SettingsProps) => {
                     )}
                 </div>
                 <div className='settings-section'>
-                    <input 
-                        type='button' 
-                        value='Exporter au format .ics' 
-                        onClick={() => saveFile('calendrier.ics', toICS(semesterPlanning, classes))} />
+                    <button 
+                        onClick={() => saveFile('calendrier.ics', toICS(semesterPlanning, classes))}>
+                            Exporter au format .ics
+                    </button>
+                </div>
+                <div className='settings-section'>
+                        Développé avec ❤️ par <a href='https://github.com/StephaneBranly'>Stéphane Branly</a>.
+                        <a href='https://github.com/StephaneBranly/ur-time-calendar'>Code disponible sur Github</a>.
+                        Paye moi un ☕️ si tu veux me soutenir : <a href='https://www.paypal.com/paypalme/StephaneBranly'>paypal</a>.
                 </div>
             </div>
         </div>
