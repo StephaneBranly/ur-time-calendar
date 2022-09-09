@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 18:15:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:33:31 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -75,9 +75,9 @@ export default class SemesterPlanning {
         return this._semesterName
     }
     get starts() {
-        return this._starts
+        return new Date(this._starts)
     }
     get ends() {
-        return this._ends
+        return new Date(this._ends)
     }
 }

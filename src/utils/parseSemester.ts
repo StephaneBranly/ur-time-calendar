@@ -8,13 +8,14 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 18:13:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:32:43 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import { DaySemesterOrganization, SemesterPlanning } from "utils"
 
 const parseSemester = (organisation: string, semesterName: string) => {
+    console.log('loaded')
     const semester = new SemesterPlanning(semesterName)
     const lines = organisation.split('\n')
     lines.forEach((line) => {
@@ -53,10 +54,8 @@ const parseSemester = (organisation: string, semesterName: string) => {
                 /(starts|ends):([0-9]{4})\/([0-9]{2})\/([0-9]{2})/
             )
             if (match?.length) {
-                console.log('here')
                 const [_, type, year, month, day] = match
                 const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
-                console.log(date)
                 if (type === 'starts')
                     semester.setStartDate(date)
                 else

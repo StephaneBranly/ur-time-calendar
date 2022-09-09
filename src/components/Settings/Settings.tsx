@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 18:09:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 19:10:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,7 +17,7 @@ import './Settings.scss'
 import { FiSettings } from 'react-icons/fi'
 import { useState } from 'react'
 import { PasteMail } from 'components'
-import { Class, isKifyAccepted, SemesterPlanning, toICS } from 'utils'
+import { Class, isKifyAccepted, saveFile, SemesterPlanning, toICS } from 'utils'
 import { isMobile } from 'react-device-detect'
 
 export interface SettingsProps {
@@ -92,7 +92,7 @@ const Settings = (props: SettingsProps) => {
                     <input 
                         type='button' 
                         value='Exporter au format .ics' 
-                        onClick={() => console.log(toICS(semesterPlanning, classes))} />
+                        onClick={() => saveFile('calendrier.ics', toICS(semesterPlanning, classes))} />
                 </div>
             </div>
         </div>
