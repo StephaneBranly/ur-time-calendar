@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/21 14:30:34 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 17:51:31 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -24,6 +24,7 @@ import SemesterPlanning from './SemesterPlanning'
 import DaySemesterOrganization from './DaySemesterOrganization'
 import parseSemester from './parseSemester'
 import isKifyAccepted from './isKifyAccepted'
+import toICS from './toICS'
 export {
     Class,
     parseLine,
@@ -37,4 +38,5 @@ export {
     DaySemesterOrganization,
     parseSemester,
     isKifyAccepted,
+    toICS
 }

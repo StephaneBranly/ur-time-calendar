@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/21 14:34:15 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 18:09:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,17 +17,19 @@ import './Settings.scss'
 import { FiSettings } from 'react-icons/fi'
 import { useState } from 'react'
 import { PasteMail } from 'components'
-import { Class, isKifyAccepted } from 'utils'
+import { Class, isKifyAccepted, SemesterPlanning, toICS } from 'utils'
 import { isMobile } from 'react-device-detect'
 
 export interface SettingsProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
     defaultOpenValue?: boolean
     defaultContent?: string
+    classes: Class[]
+    semesterPlanning: SemesterPlanning
 }
 
 const Settings = (props: SettingsProps) => {
-    const { setClasses, defaultOpenValue, defaultContent } = props
+    const { setClasses, defaultOpenValue, defaultContent, classes, semesterPlanning } = props
     const [open, setOpen] = useState<boolean>(defaultOpenValue ?? false)
     const [kifyAccepted, setKifyAccepted] = useState(isKifyAccepted())
     const [lastContent, setLastContent] = useState<string>(defaultContent ?? '')
@@ -85,6 +87,12 @@ const Settings = (props: SettingsProps) => {
                             Supprimer le cache
                         </button>
                     )}
+                </div>
+                <div className='settings-section'>
+                    <input 
+                        type='button' 
+                        value='Exporter au format .ics' 
+                        onClick={() => console.log(toICS(semesterPlanning, classes))} />
                 </div>
             </div>
         </div>
