@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 19:27:33 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/09 20:01:24 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -35,7 +35,7 @@ const writeDayEvent = (date: Date, name: string, tags='') => {
 }
 
 const writeClassEvent = (classSlot: Class, date: Date) => {
-    return `BEGIN:VEVENT\nSUMMARY:${classSlot.UVname} - ${classSlot.prettyClassType}\nUID:${uuidv4()}@urtimecalendar.com\nTRANSP:TRANSPARENT\nDTSTART:${toICSDateTime(date, classSlot.startHour, classSlot.startMin)}\nDTEND:${toICSDateTime(date, classSlot.endHour, classSlot.endMin)}\nDTSTAMP:19970901T130000Z\nLOCATION:${classSlot.place}\nCATEGORIES:UTC,${classSlot.UVname},${classSlot.prettyClassType}\nEND:VEVENT\n`
+    return `BEGIN:VEVENT\nSUMMARY:${classSlot.UVname} - ${classSlot.prettyClassType} ${classSlot.classReference}\nUID:${uuidv4()}@urtimecalendar.com\nTRANSP:TRANSPARENT\nDTSTART:${toICSDateTime(date, classSlot.startHour, classSlot.startMin)}\nDTEND:${toICSDateTime(date, classSlot.endHour, classSlot.endMin)}\nDTSTAMP:19970901T130000Z\nLOCATION:${classSlot.place}\nCATEGORIES:UTC,${classSlot.UVname},${classSlot.prettyClassType}${classSlot.classReference}\nEND:VEVENT\n`
 }
 
 const toICS = (semesterPlanning: SemesterPlanning, classes: Class[]) => {
