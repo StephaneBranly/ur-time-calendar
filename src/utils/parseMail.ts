@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/12 15:08:45 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/09/11 23:53:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -19,11 +19,11 @@ const parseMail = (content: string): Class[] => {
     const classes: Class[] = []
     const uvs: string[] = []
     lines.forEach((line) => {
-        const result = parseLine(line, uvs)
-        if (result) {
-            classes.push(result)
-            if (!uvs.includes(result.UVname)) {
-                uvs.push(result.UVname)
+        const results = parseLine(line, uvs)
+        if (results) {
+            classes.push(...results)
+            if (!uvs.includes(results[0].UVname)) {
+                uvs.push(results[0].UVname)
             }
         }
     })
