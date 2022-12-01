@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/25 01:10:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/11/30 20:55:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -29,4 +29,40 @@
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.feedback {
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 30px;
+    padding: 10px;
+    text-decoration: none;
+    color: #eaeaea;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    background-image: linear-gradient(90deg, #e91fff, #390da0, #ca59ff);
+    background-size: 400%;
+    animation: gradient 10.5s ease infinite;
+}
+
+@media (max-width: 480px) {
+    .feedback {
+        font-size: 10px;
+        bottom: 0;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
