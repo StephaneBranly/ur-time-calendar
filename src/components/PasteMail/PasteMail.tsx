@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:37:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 23:34:36 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,7 +17,7 @@ import { Class, parseMail } from 'utils'
 import './PasteMail.scss'
 
 export interface PasteMailProps {
-    setClasses: React.Dispatch<React.SetStateAction<Class[]>>
+    setClasses: (classes: Class[]) => void
 }
 
 const PasteMail = (props: PasteMailProps) => {

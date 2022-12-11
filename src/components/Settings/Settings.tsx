@@ -8,17 +8,18 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:53:34 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 23:11:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import './Settings.scss'
 
 import { FiSettings } from 'react-icons/fi'
-import { useState } from 'react'
-import { PasteMail } from 'components'
-import { Class, isKifyAccepted, saveFile, SemesterPlanning, toICS } from 'utils'
+import { SetStateAction, useState } from 'react'
+import { Class, isKifyAccepted, SemesterPlanning } from 'utils'
 import { isMobile } from 'react-device-detect'
+import { SettingsClasses } from 'components'
+
 
 export interface SettingsProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
@@ -56,30 +57,23 @@ const Settings = (props: SettingsProps) => {
         switch (tab) {
             case 'classes':
                 return (
-                    <div className="settings-section">
-                        <PasteMail setClasses={setClasses} />
-                    </div>
+                    <SettingsClasses classes={classes} setClasses={setClasses} semesterPlanning={semesterPlanning} />
                 )
             case 'exams':
                 return (
-                    <div className="settings-section">
-                        <p>Charge les horaires de tes examens!</p>
-                    </div>
-
+                    <p>Charge les horaires de tes examens!</p>
                 )
             case 'semester':
                 return (
-                    <div className="settings-section">
-                        <p>Tu as de la chance, actuellement les semestres sont gérés par l'admin ;)</p>
-                    </div>
+                    <p>Tu as de la chance, actuellement les semestres sont gérés par l'admin ;)</p>
                 )
             case 'about':
                 return (
-                    <div className='settings-section'>
+                    <>
                         <p>Développé avec ❤️ par <a href='https://github.com/StephaneBranly'>Stéphane Branly</a>.</p>
                         <p><a href='https://github.com/StephaneBranly/ur-time-calendar'>Code disponible sur Github</a>.</p>
                         <p>Paye moi un ☕️ si tu veux me soutenir : <a href='https://www.paypal.com/paypalme/StephaneBranly'>paypal</a>.</p>
-                    </div>
+                    </>
                 )
         }
     }

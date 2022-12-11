@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:28:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 00:02:36 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -64,15 +64,35 @@ export default class Class {
     get UVname() {
         return this._UVname
     }
+
+    set UVname(value: string) {
+        this._UVname = value
+    }
+
     get day() {
         return this._day
     }
+
+    set day(value: string) {
+        this._day = value
+    }
+
     get place() {
         return this._place
     }
+
+    set place(value: string) {
+        this._place = value
+    }
+
     get start() {
         return this._start
     }
+
+    set start(value: string) {
+        this._start = value
+    }
+
     get startHour() {
         return this.splitTime(this._start, 'hour')
     }
@@ -82,6 +102,11 @@ export default class Class {
     get end() {
         return this._end
     }
+
+    set end(value: string) {
+        this._end = value
+    }
+
     get endHour() {
         return this.splitTime(this._end, 'hour')
     }
@@ -91,9 +116,19 @@ export default class Class {
     get frequence() {
         return this._frequence
     }
+
+    set frequence(value: string) {
+        this._frequence = value
+    }
+
     get classType() {
         return this._classType
     }
+
+    set classType(value: string) {
+        this._classType = value
+    }
+
     get prettyClassType() {
         switch (this._classType) {
             case 'C':
@@ -108,9 +143,19 @@ export default class Class {
     get classReference() {
         return this._classReference
     }
+
+    set classReference(value: number) {
+        this._classReference = value
+    }
+
     get week() {
         return this._week
     }
+
+    set week(value: weekAlternance) {
+        this._week = value
+    }
+    
     get color() {
         return this._color
     }
