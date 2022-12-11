@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/11/30 20:55:56 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:05:29 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -34,11 +34,6 @@ function App() {
 
     return (
         <div className="App">
-             <a href='https://framaforms.org/feedback-ur-time-calendar-1669858139' target='_blank' rel='noreferrer' className='feedback'>
-                <div className="App-header">
-                    Donne un feedback sur l'application
-                </div>
-            </a>
             <div className="calendar-container">
                 <Calendar
                     classes={classes}
