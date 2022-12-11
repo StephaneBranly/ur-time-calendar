@@ -1,48 +1,37 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     index.js                                           ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     parseCache.ts                                      ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:16:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:34:36 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import Class from './Class'
-import parseMail from './parseMail'
-import parseLine from './parseLine'
-import parseDay from './parseDay'
-import daysIndex from './daysIndex'
-import moveDate from './moveDate'
-import getMonday from './getMonday'
-import getDayLabel from './getDayLabel'
-import SemesterPlanning from './SemesterPlanning'
-import DaySemesterOrganization from './DaySemesterOrganization'
-import parseSemester from './parseSemester'
-import isKifyAccepted from './isKifyAccepted'
-import toICS from './toICS'
-import saveFile from './saveFile'
-import loadFromLocalStorage from './loadFromLocalStorage'
-import parseCache from './parseCache'
-export {
-    Class,
-    parseLine,
-    parseMail,
-    parseDay,
-    daysIndex,
-    moveDate,
-    getMonday,
-    getDayLabel,
-    SemesterPlanning,
-    DaySemesterOrganization,
-    parseSemester,
-    isKifyAccepted,
-    toICS,
-    saveFile,
-    loadFromLocalStorage,
-    parseCache
+import { Class } from 'utils'
+
+const parseCache = (cache: string | null, object_type: 'Classes' | null): any => {
+    if (cache === null)
+        return null
+
+    const json_object = JSON.parse(cache)
+    const without_underscore = json_object.map((o: any) => {
+        const new_object: any = {}
+        for (const key in o) {
+            new_object[key.replace('_', '')] = o[key]
+        }
+        return new_object
+    })
+    switch (object_type) {
+        case 'Classes':
+            return without_underscore.map((c: any) => new Class(c))
+        default:
+            return null
+    }
 }
+
+export default parseCache

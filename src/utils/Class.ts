@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/12 15:23:16 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:28:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -28,27 +28,29 @@ export default class Class {
     private _color: classColor
 
     constructor(
-        UVname: string,
-        classType: string,
-        classReference: number,
-        day: string,
-        start: string,
-        end: string,
-        place: string,
-        frequence: string,
-        week: weekAlternance,
-        color: classColor
+        obj: {
+            UVname: string,
+            classType: string,
+            classReference: number,
+            day: string,
+            start: string,
+            end: string,
+            place: string,
+            frequence: string,
+            week: weekAlternance,
+            color: classColor,
+        }
     ) {
-        this._UVname = UVname
-        this._day = day
-        this._start = start
-        this._end = end
-        this._place = place
-        this._frequence = frequence
-        this._classType = classType
-        this._classReference = classReference
-        this._week = week
-        this._color = color
+        this._UVname = obj.UVname
+        this._day = obj.day
+        this._start = obj.start
+        this._end = obj.end
+        this._place = obj.place
+        this._frequence = obj.frequence
+        this._classType = obj.classType
+        this._classReference = obj.classReference
+        this._week = obj.week
+        this._color = obj.color
     }
 
     prettyPrint = (): string => {

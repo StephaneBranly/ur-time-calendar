@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/11 23:58:02 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:32:27 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -32,18 +32,18 @@ const parseLine = (line: string, uvs: string[]): Class[] | undefined => {
         const place = match[12]
         const frequence = match[11]
         const color = uvs.includes(UVname) ? colors[uvs.indexOf(UVname)] : colors[(uvs.length % colors.length)]
-        const classes = [new Class(
+        const classes = [new Class({
             UVname,
             classType,
-            Number(classReference),
+            classReference: Number(classReference),
             day,
             start,
             end,
             place,
             frequence,
-            week as 'A' | 'B' | undefined,
+            week: week as 'A' | 'B' | undefined,
             color
-        )]
+        })]
         if(match[13]) {
             const day_2 = parseDay(match[14]) ?? ''
             const start_2 = match[15]
@@ -51,18 +51,18 @@ const parseLine = (line: string, uvs: string[]): Class[] | undefined => {
             const place_2 = match[18]
             const frequence_2 = match[17]
             const week_2 = match[19]
-            classes.push(new Class(
+            classes.push(new Class({
                 UVname,
                 classType,
-                Number(classReference),
-                day_2,
-                start_2,
-                end_2,
-                place_2,
-                frequence_2,
-                week_2 as 'A' | 'B' | undefined,
+                classReference: Number(classReference),
+                day: day_2,
+                start: start_2,
+                end: end_2,
+                place: place_2,
+                frequence: frequence_2,
+                week: week_2 as 'A' | 'B' | undefined,
                 color
-            ))
+            }))
         }
         return classes
     }
