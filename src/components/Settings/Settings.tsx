@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 23:11:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 00:44:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -18,7 +18,7 @@ import { FiSettings } from 'react-icons/fi'
 import { SetStateAction, useState } from 'react'
 import { Class, isKifyAccepted, SemesterPlanning } from 'utils'
 import { isMobile } from 'react-device-detect'
-import { SettingsClasses } from 'components'
+import { SettingsClasses, SettingsSemester } from 'components'
 
 
 export interface SettingsProps {
@@ -65,7 +65,7 @@ const Settings = (props: SettingsProps) => {
                 )
             case 'semester':
                 return (
-                    <p>Tu as de la chance, actuellement les semestres sont gérés par l'admin ;)</p>
+                    <SettingsSemester semesterPlanning={semesterPlanning} />
                 )
             case 'about':
                 return (
@@ -97,7 +97,7 @@ const Settings = (props: SettingsProps) => {
                         Examens <span className='settings-tab-count'>0</span>
                     </div>
                     <div className={tab === 'semester' ? 'settings-tab-active' : ''} onClick={() => setTab('semester')}>
-                        Semestre <span className='settings-tab-count'>a22</span>
+                        Semestre <span className='settings-tab-count'>{semesterPlanning.semesterName}</span>
                     </div>
                     <div className={tab === 'about' ? 'settings-tab-active' : ''} onClick={() => setTab('about')}>
                         A propos

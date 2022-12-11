@@ -1,22 +1,51 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     index.js                                           ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     SettingsSemester.scss                              ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 00:43:07 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 01:11:50 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import PasteMail from './PasteMail/PasteMail'
-import Calendar from './Calendar/Calendar'
-import Settings from './Settings/Settings'
-import ClassSlot from './ClassSlot/ClassSlot'
-import SettingsClasses from './SettingsClasses/SettingsClasses'
-import SettingsClass from './SettingsClass/SettingsClass'
-import SettingsSemester from './SettingsSemester/SettingsSemester'
-export { PasteMail, Calendar, Settings, ClassSlot, SettingsClasses, SettingsClass, SettingsSemester }
+.settings-semester {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: stretch;
+    align-items: flex-start;
+    align-content: stretch;
+}
+.settings-semester_day {
+    position: relative;
+}
+
+.settings-semester_day-label {
+    background-color: rgb(107, 44, 254);
+    color: white;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 12px;
+    padding: 0 5px;
+    margin: 10px;
+
+    &.finaux {
+        background-color: rgb(156, 1, 135);
+    }
+    &.medians {
+        background-color: rgb(156, 1, 135);
+    }
+    &.ferie {
+        background-color: rgb(46, 67, 198);   
+    }
+    &.becomesA{
+        background-color: rgb(9, 214, 173);   
+    }
+    &.vacances{
+        background-color: rgb(124, 135, 197) 
+    }
+}

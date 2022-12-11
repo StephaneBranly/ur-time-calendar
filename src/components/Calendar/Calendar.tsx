@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/21 14:32:46 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 00:37:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -80,8 +80,10 @@ const Calendar = (props: CalendarProps) => {
 
     const renderDays = () => {
         return getDaysDatesToRender().map((day, index) => {
-            const extraLabel = semesterPlanning.isExam(day)
-                ? 'Examens'
+            const extraLabel = semesterPlanning.isMedian(day)
+                ? 'Médians'
+                : semesterPlanning.isFinal(day)
+                ? 'Finaux'
                 : semesterPlanning.isFerie(day)
                 ? 'Férié '
                 : semesterPlanning.isHoliday(day)

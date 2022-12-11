@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 19:33:31 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 00:46:14 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -60,8 +60,16 @@ export default class SemesterPlanning {
         return this.getDaySemesterOrganizaton(date)?.isHoliday
     }
 
+    isMedian = (date: Date) => {
+        return this.getDaySemesterOrganizaton(date)?.isMedian
+    }
+
+    isFinal = (date: Date) => {
+        return this.getDaySemesterOrganizaton(date)?.isFinal
+    }
+
     isExam = (date: Date) => {
-        return this.getDaySemesterOrganizaton(date)?.isExam
+        return this.isFinal(date) || this.isMedian(date)
     }
 
     isFerie = (date: Date) => {
@@ -79,5 +87,9 @@ export default class SemesterPlanning {
     }
     get ends() {
         return new Date(this._ends)
+    }
+
+    get referencedDays() {
+        return this._referencedDays
     }
 }
