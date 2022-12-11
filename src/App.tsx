@@ -8,14 +8,14 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:05:29 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:08:25 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Settings } from 'components'
-import { Class, parseMail, SemesterPlanning } from 'utils'
+import { Class, loadFromLocalStorage, parseMail, SemesterPlanning } from 'utils'
 import { getA22organization } from 'data'
 
 function App() {
@@ -24,9 +24,8 @@ function App() {
         useState<SemesterPlanning>(getA22organization)
 
     useEffect(() => {
-        const kify = localStorage.getItem('kify_accepted')
-        const a22Schedule = localStorage.getItem('a22-schedule')
-        if (kify && a22Schedule) {
+        const a22Schedule = loadFromLocalStorage('a22-schedule')
+        if (a22Schedule) {
             const result = parseMail(a22Schedule)
             setClasses(result)
         }
@@ -42,8 +41,8 @@ function App() {
             </div>
             <Settings
                 setClasses={setClasses}
-                defaultOpenValue={localStorage.getItem('a22-schedule') ? false : true}
-                defaultContent={localStorage.getItem('a22-schedule') ?? ''} 
+                defaultOpenValue={loadFromLocalStorage('a22-schedule') ? false : true}
+                defaultContent={loadFromLocalStorage('a22-schedule') ?? ''} 
                 classes={classes}
                 semesterPlanning={semesterOrganization}
                 />
