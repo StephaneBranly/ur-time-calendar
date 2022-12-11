@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/02/28 19:08:15 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:37:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -18,12 +18,10 @@ import './PasteMail.scss'
 
 export interface PasteMailProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
-    defaultContent?: string
-    setLastContent: React.Dispatch<React.SetStateAction<string>>
 }
 
 const PasteMail = (props: PasteMailProps) => {
-    const { setClasses, defaultContent, setLastContent } = props
+    const { setClasses } = props
 
     const ref = createRef<HTMLTextAreaElement>()
 
@@ -31,7 +29,6 @@ const PasteMail = (props: PasteMailProps) => {
         if (!ref.current) return
         const data = parseMail(ref.current.value)
         setClasses(data)
-        setLastContent(ref.current.value)
     }
 
     const placeHolder = `
@@ -63,7 +60,6 @@ const PasteMail = (props: PasteMailProps) => {
             <textarea
                 className="pastemail-textarea"
                 ref={ref}
-                defaultValue={defaultContent}
                 placeholder={placeHolder}
             />
             <button onClick={handlerLoadData}>Charger</button>

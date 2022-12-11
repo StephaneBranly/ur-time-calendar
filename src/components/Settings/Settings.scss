@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/10 11:32:35 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:55:00 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -101,6 +101,45 @@
         cursor: pointer;
     }
 }
+
+.settings-tabs {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+
+    & > div {
+        padding: 10px;
+        cursor: pointer;
+        position: relative;
+
+        .settings-tab-count {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            background-color: rgb(107, 44, 254);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+        }
+    }
+}
+
+.settings-tab-active {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 @media (max-width: 480px) {
     .settings-modal-content {
         width: 90vw;

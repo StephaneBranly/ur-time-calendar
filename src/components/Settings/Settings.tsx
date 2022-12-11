@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:13:38 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:53:34 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -23,16 +23,15 @@ import { isMobile } from 'react-device-detect'
 export interface SettingsProps {
     setClasses: React.Dispatch<React.SetStateAction<Class[]>>
     defaultOpenValue?: boolean
-    defaultContent?: string
     classes: Class[]
     semesterPlanning: SemesterPlanning
 }
 
 const Settings = (props: SettingsProps) => {
-    const { setClasses, defaultOpenValue, defaultContent, classes, semesterPlanning } = props
+    const { setClasses, defaultOpenValue, classes, semesterPlanning } = props
     const [open, setOpen] = useState<boolean>(defaultOpenValue ?? false)
     const [kifyAccepted, setKifyAccepted] = useState(isKifyAccepted())
-    const [lastContent, setLastContent] = useState<string>(defaultContent ?? '')
+    const [tab, setTab] = useState<'classes' | 'exams' | 'semester' | 'about'>('classes')
 
     const handleKifyClick = (e: any) => {
         setKifyAccepted(e.target.checked)
@@ -53,6 +52,38 @@ const Settings = (props: SettingsProps) => {
         }
     }
 
+    const renderTab = () => {
+        switch (tab) {
+            case 'classes':
+                return (
+                    <div className="settings-section">
+                        <PasteMail setClasses={setClasses} />
+                    </div>
+                )
+            case 'exams':
+                return (
+                    <div className="settings-section">
+                        <p>Charge les horaires de tes examens!</p>
+                    </div>
+
+                )
+            case 'semester':
+                return (
+                    <div className="settings-section">
+                        <p>Tu as de la chance, actuellement les semestres sont gérés par l'admin ;)</p>
+                    </div>
+                )
+            case 'about':
+                return (
+                    <div className='settings-section'>
+                        <p>Développé avec ❤️ par <a href='https://github.com/StephaneBranly'>Stéphane Branly</a>.</p>
+                        <p><a href='https://github.com/StephaneBranly/ur-time-calendar'>Code disponible sur Github</a>.</p>
+                        <p>Paye moi un ☕️ si tu veux me soutenir : <a href='https://www.paypal.com/paypalme/StephaneBranly'>paypal</a>.</p>
+                    </div>
+                )
+        }
+    }
+
     return open ? (
         <div className="settings-modal-fragment">
             <div
@@ -63,15 +94,23 @@ const Settings = (props: SettingsProps) => {
                 {isMobile && <button className='settings-exit' onClick={() => setOpen(false)}>
                                 Fermer x
                             </button>}
-                <h1 className='settings-title'>Charger son emploi du temps depuis le mail SME</h1>
-                <div className="settings-section">
-                    <PasteMail
-                        setClasses={setClasses}
-                        defaultContent={defaultContent}
-                        setLastContent={setLastContent}
-                    />
+                <h1 className='settings-title'>Paramètres</h1>
+                <div className='settings-tabs'>
+                    <div className={tab === 'classes' ? 'settings-tab-active' : ''} onClick={() => setTab('classes')}>
+                        Classes <span className='settings-tab-count'>{classes.length}</span>
+                    </div>
+                    <div className={tab === 'exams' ? 'settings-tab-active' : ''} onClick={() => setTab('exams')}>
+                        Examens <span className='settings-tab-count'>0</span>
+                    </div>
+                    <div className={tab === 'semester' ? 'settings-tab-active' : ''} onClick={() => setTab('semester')}>
+                        Semestre <span className='settings-tab-count'>a22</span>
+                    </div>
+                    <div className={tab === 'about' ? 'settings-tab-active' : ''} onClick={() => setTab('about')}>
+                        A propos
+                    </div>
                 </div>
-                <div className="settings-section">
+                {renderTab()}
+                {/* <div className="settings-section">
                     <input
                         type={'checkbox'}
                         checked={kifyAccepted}
@@ -93,12 +132,7 @@ const Settings = (props: SettingsProps) => {
                         onClick={() => saveFile('calendrier.ics', toICS(semesterPlanning, classes))}>
                             Exporter au format .ics
                     </button>
-                </div>
-                <div className='settings-section'>
-                        Développé avec ❤️ par <a href='https://github.com/StephaneBranly'>Stéphane Branly</a>.
-                        <a href='https://github.com/StephaneBranly/ur-time-calendar'>Code disponible sur Github</a>.
-                        Paye moi un ☕️ si tu veux me soutenir : <a href='https://www.paypal.com/paypalme/StephaneBranly'>paypal</a>.
-                </div>
+                </div> */}
             </div>
         </div>
     ) : (
