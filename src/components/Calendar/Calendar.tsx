@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 15:52:35 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 16:28:39 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -65,6 +65,15 @@ const Calendar = (props: CalendarProps) => {
                     moveDate(mof, 6),
                 ]
                 break
+            case 'typical':
+                days = [
+                    mof,
+                    moveDate(mof, 1),
+                    moveDate(mof, 2),
+                    moveDate(mof, 3),
+                    moveDate(mof, 4),
+                ]
+                break
             default:
                 days = [selectedDate]
         }
@@ -80,6 +89,7 @@ const Calendar = (props: CalendarProps) => {
 
     const renderDays = () => {
         return getDaysDatesToRender().map((day, index) => {
+            const isTypicalView = view === 'typical'
             const extraLabel = semesterPlanning.isMedian(day)
                 ? 'Médians'
                 : semesterPlanning.isFinal(day)
@@ -91,22 +101,22 @@ const Calendar = (props: CalendarProps) => {
                 : ''
             const rowStartIndex = timeToRowIndex(7, 0)
             const rowEndIndex = timeToRowIndex(20, 0)
-            const replaceDay = semesterPlanning.becomesA(day)
+            const replaceDay = isTypicalView ? undefined : semesterPlanning.becomesA(day)
             return (
                 <Fragment key={index}>
                     <div
                         className={`calendar-legend-day col-start-${
                             index * 2 + 2
                         } col-end-${index * 2 + 4} ${
-                            semesterPlanning.getWeekAlternance(day) === 'A'
+                            isTypicalView ? '' : semesterPlanning.getWeekAlternance(day) === 'A'
                                 ? 'week-a'
                                 : 'week-b'
                         }`}
                     >
-                        {getDayLabel(day)} {day.getDate()}{' '}
+                        {getDayLabel(day)} {!isTypicalView && day.getDate()}{' '}
                         {replaceDay && ` (${replaceDay})`}
                     </div>
-                    {extraLabel && (
+                    {extraLabel && !isTypicalView && (
                         <div
                             className={`calendar-special-day ${extraLabel} col-start-${
                                 index * 2 + 2
@@ -169,11 +179,14 @@ const Calendar = (props: CalendarProps) => {
 
     const renderClasses = () => {
         const isADayView = view === 'day'
+        const isTypicalView = view === 'typical'
+
         return getDaysDatesToRender().map((day) => {
             if (
-                semesterPlanning.isExam(day) ||
+                (semesterPlanning.isExam(day) ||
                 semesterPlanning.isFerie(day) ||
-                semesterPlanning.isHoliday(day)
+                semesterPlanning.isHoliday(day)) &&
+                !isTypicalView
             )
                 return null
             const filtered = classes.filter(
@@ -181,23 +194,25 @@ const Calendar = (props: CalendarProps) => {
                     ((!semesterPlanning.becomesA(day) &&
                         c.day === getDayLabel(day).toUpperCase()) ||
                         semesterPlanning.becomesA(day)?.toUpperCase() ===
-                            c.day) &&
+                            c.day || (isTypicalView && c.day === getDayLabel(day).toUpperCase())) &&
                     (c.week === undefined ||
-                        c.week === semesterPlanning.getWeekAlternance(day))
+                        c.week === semesterPlanning.getWeekAlternance(day) || isTypicalView)
             )
             return filtered.map((unit: Class, index) => {
                 const dayLabel = getDayLabel(day).toUpperCase()
                 var colStartIndex = isADayView ? 2 : daysIndex[dayLabel] * 2 + 2
                 var colEndIndex = isADayView ? 4 : daysIndex[dayLabel] * 2 + 4
 
-                // switch (unit.week) {
-                //     case 'A':
-                //         colEndIndex = colStartIndex + 1
-                //         break
-                //     case 'B':
-                //         colStartIndex = colEndIndex - 1
-                //         break
-                // }
+                if (isTypicalView) {
+                    switch (unit.week) {
+                        case 'A':
+                            colEndIndex = colStartIndex + 1
+                            break
+                        case 'B':
+                            colStartIndex = colEndIndex - 1
+                            break
+                    }
+                }
 
                 const rowStartIndex = timeToRowIndex(
                     unit.startHour,
@@ -270,6 +285,7 @@ const Calendar = (props: CalendarProps) => {
             >
             <div className="calendar-header">
                 <div className="calendar-current-date">
+                    {view !== 'typical' && (<>
                     <div
                         className="calendar-current-date-before"
                         onClick={() => handlerMoveDate(-1)}
@@ -284,33 +300,15 @@ const Calendar = (props: CalendarProps) => {
                         onClick={() => handlerMoveDate(1)}
                     >
                         <BsCaretRight />
-                    </div>
+                    </div></>)}
                 </div>
                 <div className="calendar-mode">
-                    <div
-                        className={`calendar-mode-selector ${
-                            view === 'day' ? 'active' : ''
-                        }`}
-                        onClick={() => handlerSetView('day')}
-                    >
-                        Au jour
-                    </div>
-                    <div
-                        className={`calendar-mode-selector ${
-                            view === 'compact' ? 'active' : ''
-                        }`}
-                        onClick={() => handlerSetView('compact')}
-                    >
-                        Semaine compacte
-                    </div>
-                    <div
-                        className={`calendar-mode-selector ${
-                            view === 'complete' ? 'active' : ''
-                        }`}
-                        onClick={() => handlerSetView('complete')}
-                    >
-                        Semaine complète
-                    </div>
+                    <select className="calendar-mode-selector" onChange={(e) => handlerSetView(e.target.value)}>
+                        <option value="day">Au jour</option>
+                        <option value="compact">Semaine compacte</option>
+                        <option value="complete">Semaine complète</option>
+                        <option value="typical">Semaine type</option>
+                    </select>
                 </div>
             </div>
             <div className="calendar-content-fragment">

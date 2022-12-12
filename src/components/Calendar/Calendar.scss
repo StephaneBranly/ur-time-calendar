@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 16:02:09 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 16:29:19 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -47,6 +47,9 @@ $max-rows: (21 - 7) * 4;
     display: grid;
     &.complete {
         grid-template-columns: max-content repeat(14, 1fr);
+    }
+    &.typical {
+        grid-template-columns: max-content repeat(10, 1fr);
     }
     &.compact {
         grid-template-columns: max-content repeat(10, 1fr);
@@ -155,14 +158,16 @@ $max-columns: 16;
 }
 .calendar-mode-selector {
     background-color: rgba(0, 0, 0, 0.5);
+    color: white;
     padding: 5px;
     border-radius: 5px;
     z-index: 11;
-
+    border: 0px solid rgba(255, 255, 255, 0.5);
     &.active {
         text-decoration: underline;
     }
 }
+
 .calendar-mode-selector:hover {
     cursor: pointer;
 }
