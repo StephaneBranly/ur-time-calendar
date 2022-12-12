@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 01:24:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 21:36:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -37,7 +37,7 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
     const toRender = [...finauxDays, ...mediansDays, ...holidays, ...feriesDays, ...becomesA].sort((a, b) => { return (a.date.getTime() - b.date.getTime() < 0) ? -1 : 1})
 
     const renderDays = () => {
-        const labelsStack = toRender.map(day => [day, ...renderDayLabel(day)])
+        const labelsStack = toRender.map(day => [`${day.date.getDate()}/${day.date.getMonth()+1}/${day.date.getFullYear()}`, ...renderDayLabel(day)])
         
         let currentId = 0
         return labelsStack.map((day, index) => {
@@ -45,23 +45,23 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
                 currentId = day[2] as number
                 if (index !== labelsStack.length-1 && labelsStack[index + 1][2] === currentId)
                     return (
-                        <div className="settings-semester_day" key={(day[0] as DaySemesterOrganization).date.getTime()}>
-                            Du <span className="settings-semester_day-date">{(day[0] as DaySemesterOrganization).date.toLocaleDateString()}</span>
+                        <div className="settings-semester_day" key={index}>
+                            Du <span className="settings-semester_day-date">{day[0]}</span>
                             {day[1]}
                         </div>
                     )
                 else
                     return (
-                        <div className="settings-semester_day" key={(day[0] as DaySemesterOrganization).date.getTime()}>
-                            <span className="settings-semester_day-date">{(day[0] as DaySemesterOrganization).date.toLocaleDateString()}</span>
+                        <div className="settings-semester_day" key={index}>
+                            <span className="settings-semester_day-date">{day[0]}</span>
                             {day[1]}
                         </div>
                     )
             } else {
                 if (index === labelsStack.length-1 || labelsStack[index + 1][2] !== currentId)
                     return (
-                        <div className="settings-semester_day" key={(day[0] as DaySemesterOrganization).date.getTime()}>
-                            au <span className="settings-semester_day-date">{(day[0] as DaySemesterOrganization).date.toLocaleDateString()}</span>
+                        <div className="settings-semester_day" key={index}>
+                            au <span className="settings-semester_day-date">{day[0]}</span>
                         </div>
                     )
                 else
