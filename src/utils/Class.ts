@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 22:37:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 15:53:42 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -54,7 +54,7 @@ export default class Class {
     }
 
     prettyPrint = (): string => {
-        return `${this.UVname} - de ${this.start} à ${this.end} en salle ${this.place}`
+        return `${this.UVname} - ${this.day.toLowerCase()} de ${this.start} à ${this.end}`
     }
 
     private splitTime = (time: string, property: 'min' | 'hour') => {

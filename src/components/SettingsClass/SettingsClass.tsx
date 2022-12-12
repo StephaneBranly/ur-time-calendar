@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 22:41:45 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 15:56:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -54,7 +54,7 @@ const SettingsClass = (props: SettingsClassProps) => {
                     <select name="classType" defaultValue={edit.classType} onChange={(e) => edit.classType = e.target.value}>
                         <option value="C">Cours</option>
                         <option value="D">TD</option>
-                        <option value="P">TP</option>
+                        <option value="T">TP</option>
                     </select>
                 </div>
 
@@ -107,11 +107,10 @@ const SettingsClass = (props: SettingsClassProps) => {
                     </select>
                 </div>
             </div>
-            <div>
-
-            <button onClick={() => handlerSave()}>Sauvegarder</button>
-            <button onClick={() => setEdit(undefined)}>Annuler</button>
-            <button onClick={() => handlerDelete()}>Supprimer</button>
+            <div className='settings-grouped-buttons'>
+                <button onClick={() => handlerSave()}>Sauvegarder</button>
+                <button onClick={() => setEdit(undefined)}>Annuler</button>
+                <button onClick={() => handlerDelete()}>Supprimer</button>
             </div>
         </div> :
             <div className={`class-slot ${class_.color}`}  onClick={() => setEdit(Object.assign(Object.create(Object.getPrototypeOf(class_)), class_))} >

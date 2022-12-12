@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 22:10:13 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 15:59:55 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,7 +17,7 @@
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background-color: rgb(255, 255, 255, 0.5);
+    background-color: rgb(255, 255, 255, 0.8);
     border-radius: 100%;
     width: 40px;
     height: 40px;
@@ -56,7 +56,7 @@
 }
 
 .settings-modal-content {
-    background-color: rgb(255, 255, 255, 0.8);
+    background-color: rgb(240, 240, 240, 0.98);
     width: 70vw;
     height: 70vh;
     border-radius: 10px;
@@ -69,7 +69,7 @@
 }
 
 .settings-section {
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgb(255, 255, 255);
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
@@ -136,9 +136,16 @@
 }
 
 .settings-tab-active {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     cursor: pointer;
+}
+
+.settings-grouped-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
 }
 
 @media (max-width: 480px) {

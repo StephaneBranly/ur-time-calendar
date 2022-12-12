@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/12 15:11:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 16:01:28 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -48,7 +48,6 @@ const ClassSlot = (props: ClassSlotProps) => {
             onClick={() => setSelected()}
         >
             <span className="class-slot-uvname">
-                <RiBook2Line />
                 {unit.UVname} - {unit.prettyClassType} {unit.classReference}
             </span>
             <span className="class-slot-place class-label">

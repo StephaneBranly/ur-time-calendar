@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 22:24:22 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 15:58:22 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -70,7 +70,7 @@ const SettingsClasses = (props: SettingsClassesProps) => {
         </div>
     }
     return <>
-        <div className='settings-section'>
+        <div className='settings-section settings-grouped-buttons'>
             <button onClick={() => handlerDeleteClasses()}>Supprimer</button>
             <button 
                 onClick={() => saveFile('calendrier.ics', toICS(semesterPlanning, classes))}>
