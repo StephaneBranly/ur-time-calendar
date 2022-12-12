@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 21:36:41 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 22:26:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -53,7 +53,7 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
                 else
                     return (
                         <div className="settings-semester_day" key={index}>
-                            <span className="settings-semester_day-date">{day[0]}</span>
+                            Le <span className="settings-semester_day-date">{day[0]}</span>
                             {day[1]}
                         </div>
                     )
@@ -80,7 +80,7 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
         if (day.isHoliday)
             return [<span className="settings-semester_day-label vacances">Vacances</span>,4]
         if (day.isFerie)
-            return [<span className="settings-semester_day-label feries">Fériés</span>,5]
+            return [<span className="settings-semester_day-label feries">Férié</span>,5]
         return [<></>, 0]
     }
 

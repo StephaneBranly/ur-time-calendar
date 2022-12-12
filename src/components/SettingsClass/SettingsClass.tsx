@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 00:19:00 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 22:41:45 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,6 +17,7 @@ import './SettingsClass.scss'
 import { useState } from 'react'
 import { Class } from 'utils'
 import { weekAlternance } from 'types/weekAlternance'
+import { classColor } from 'types/classColor'
 
 export interface SettingsClassProps {
     class_: Class
@@ -25,7 +26,7 @@ export interface SettingsClassProps {
 
 const SettingsClass = (props: SettingsClassProps) => {
     const { class_, setClass } = props
-    const [edit, setEdit] = useState<undefined | Class>(undefined)
+    const [edit, setEdit] = useState<Class|undefined>(undefined)
 
     const handlerDelete = () => {
         const response = window.confirm('Voulez-vous vraiment supprimer cette classe ?')
@@ -38,9 +39,9 @@ const SettingsClass = (props: SettingsClassProps) => {
         setClass(edit)
         setEdit(undefined)
     }
-    
+
     return <div className='settings-class'>
-        {edit ? <div className='class-slot'>
+        {edit ? <div className={`class-slot ${edit.color}`}>
             <div>{class_.prettyPrint()}</div>
             <div className="settings-class-editable-inputs">
                 <div className="settings-class-editable-input">
@@ -98,6 +99,13 @@ const SettingsClass = (props: SettingsClassProps) => {
                         <option value="B">B</option>
                     </select>
                 </div>
+
+                <div className="settings-class-editable-input">
+                    <label htmlFor="color">Couleur</label>
+                    <select name="color" defaultValue={edit.color} onChange={(e) => edit.color= e.target.value as classColor} >
+                        {['lagon', 'starfall', 'orange-coral', 'sulfur', 'barbapapa', 'cool-blues' ].map((color) => <option value={color}>{color}</option>)}
+                    </select>
+                </div>
             </div>
             <div>
 
@@ -106,7 +114,7 @@ const SettingsClass = (props: SettingsClassProps) => {
             <button onClick={() => handlerDelete()}>Supprimer</button>
             </div>
         </div> :
-            <div className='class-slot'  onClick={() => setEdit(Object.assign(Object.create(Object.getPrototypeOf(class_)), class_))}>
+            <div className={`class-slot ${class_.color}`}  onClick={() => setEdit(Object.assign(Object.create(Object.getPrototypeOf(class_)), class_))} >
                 <div>{class_.prettyPrint()}</div>
             </div>}
     </div>

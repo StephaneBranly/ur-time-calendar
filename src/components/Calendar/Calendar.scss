@@ -8,21 +8,21 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 01:14:27 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 22:42:14 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 $max-rows: (21 - 7) * 4;
 
 .calendar-fragment {
-    border-radius: 40px;
+    border-radius: 10px;
     margin: 50px;
     padding: 20px;
     background: inherit;
     z-index: 10;
     position: absolute;
     overflow: hidden;
-    color: white;
+    // color: white;
     top: 0;
     bottom: 0;
     left: 0;
@@ -70,7 +70,7 @@ $max-rows: (21 - 7) * 4;
     right: 0;
     bottom: 0;
     box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
-    filter: blur(10px);
+    // filter: blur(10px);
     background: inherit;
     z-index: 1;
 }
@@ -83,18 +83,6 @@ $max-rows: (21 - 7) * 4;
     &.week-b {
         border-bottom: 4px solid rgba(0, 0, 255, 0.9);
     }
-}
-.calendar-fragment:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    filter: blur(10px);
-    background: inherit;
-    z-index: 2;
 }
 
 $max-columns: 16;
@@ -122,6 +110,7 @@ $max-columns: 16;
     flex-direction: row;
     gap: 10px;
     justify-content: space-between;
+    color: white;
     
     & > div {
         display: flex;

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 00:24:38 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 22:24:22 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -26,7 +26,9 @@ const SettingsClasses = (props: SettingsClassesProps) => {
     const { classes, setClasses, semesterPlanning } = props
 
     const [loadFromMail, setLoadFromMail] = useState<boolean>(classes.length === 0)
-    
+    const [selectedClass, setSelectedClass] = useState<Class|undefined>(undefined)
+    const [copySelectedClass, setCopySelectedClass] = useState<Class|undefined>(undefined)
+
     const handlerLoadFromMail = (loaded_classes: Class[]) => {
         if (loaded_classes.length === 0) {
             alert("L'emploi du temps n'a pas pu être chargé. Vérifiez que vous avez bien copié le mail complet.")
@@ -77,14 +79,18 @@ const SettingsClasses = (props: SettingsClassesProps) => {
         </div>
         <div className='settings-section'>
             {classes.sort((a,b) => {return a.UVname < b.UVname ? -1 : 1}).map((c, key) => (
-                <SettingsClass key={key} class_={c} setClass={(newClass) => setClass(c, newClass)} />
+                <SettingsClass 
+                key={key}
+                class_={c}
+                setClass={(newClass) => setClass(c, newClass)}
+                />
             ))}
             <button onClick={() => setClass(undefined, new Class({
-            UVname: "Nouvelle classe",
+            UVname: "YZ89",
             classType: "C",
             classReference: 1,
             day: "LUNDI",
-            start: "8:00",
+            start: "08:00",
             end: "10:00",
             place: "BF100",
             frequence: '1',

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 00:16:13 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 22:14:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,17 +16,32 @@
     margin: 10px 0;
 }
 
-// properlly display inputs and their respective label for settings-class-editable-inputs
-
 .settings-class-editable-inputs {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: stretch;
     margin: 10px 0;
+    padding: 10px;
+    gap: 20px;
 }
 
-.settings-class-editable-inputs > label {
-    margin: 10px 0;
+.settings-class-editable-input {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    border-radius: 10px;
+
+    & input, & select {
+        background-color: rgb(255, 255, 255);
+        border: 0px solid rgba(0,0,0,0);
+        padding: 5px;
+        &:focus {
+            outline: none
+        }
+    }
 }
