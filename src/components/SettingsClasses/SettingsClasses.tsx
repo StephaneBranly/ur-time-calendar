@@ -8,17 +8,17 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 15:58:22 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:12:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { ClassSlot, PasteMail, SettingsClass } from 'components'
+import { PasteMail, SettingsClass } from 'components'
 import { useState } from 'react'
-import { Class, isKifyAccepted, saveFile, SemesterPlanning, toICS } from 'utils'
+import { Class, saveFile, SemesterPlanning, toICS } from 'utils'
 
 export interface SettingsClassesProps {
     classes: Class[]
-    setClasses: React.Dispatch<React.SetStateAction<Class[]>>
+    setClasses: (classes: Class[]) => void
     semesterPlanning: SemesterPlanning
 }
 
@@ -26,8 +26,6 @@ const SettingsClasses = (props: SettingsClassesProps) => {
     const { classes, setClasses, semesterPlanning } = props
 
     const [loadFromMail, setLoadFromMail] = useState<boolean>(classes.length === 0)
-    const [selectedClass, setSelectedClass] = useState<Class|undefined>(undefined)
-    const [copySelectedClass, setCopySelectedClass] = useState<Class|undefined>(undefined)
 
     const handlerLoadFromMail = (loaded_classes: Class[]) => {
         if (loaded_classes.length === 0) {

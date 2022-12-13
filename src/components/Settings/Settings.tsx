@@ -8,21 +8,21 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 22:32:09 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:12:27 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import './Settings.scss'
 
 import { FiSettings } from 'react-icons/fi'
-import { SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import { Class, isKifyAccepted, SemesterPlanning } from 'utils'
 import { isMobile } from 'react-device-detect'
 import { SettingsClasses, SettingsSemester } from 'components'
 
 
 export interface SettingsProps {
-    setClasses: React.Dispatch<React.SetStateAction<Class[]>>
+    setClasses: (classes: Class[]) => void
     defaultOpenValue?: boolean
     classes: Class[]
     semesterPlanning: SemesterPlanning
@@ -37,10 +37,6 @@ const Settings = (props: SettingsProps) => {
     const handleKifyClick = (e: any) => {
         setKifyAccepted(e.target.checked)
         localStorage.setItem('kify_accepted', e.target.checked)
-    }
-
-    const saveInCache = () => {
-        localStorage.setItem('a22-schedule', JSON.stringify(classes))
     }
 
     const deleteCache = () => {

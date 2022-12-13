@@ -8,14 +8,14 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:37:51 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:14:20 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Settings } from 'components'
-import { Class, loadFromLocalStorage, parseCache, SemesterPlanning } from 'utils'
+import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning } from 'utils'
 import { getA22organization } from 'data'
 
 function App() {
@@ -24,12 +24,17 @@ function App() {
         useState<SemesterPlanning>(getA22organization)
 
     useEffect(() => {
-        const a22Schedule = loadFromLocalStorage('a22-schedule')
-        if (a22Schedule) {
-            const result = parseCache(a22Schedule, "Classes")
+        const a22Classes = loadFromLocalStorage('a22-classes')
+        if (a22Classes) {
+            const result = parseCache(a22Classes, "Classes")
             setClasses(result)
         }
     }, [])
+
+    const handlerSetClasses = (classes: Class[]) => {
+        setClasses(classes)
+        saveToCache(JSON.stringify(classes), "a22-classes")
+    }
 
     return (
         <div className="App">
@@ -40,9 +45,8 @@ function App() {
                 />
             </div>
             <Settings
-                setClasses={setClasses}
-                // defaultOpenValue={loadFromLocalStorage('a22-schedule') ? false : true}
-                defaultOpenValue={true}
+                setClasses={handlerSetClasses}
+                defaultOpenValue={loadFromLocalStorage('a22-schedule') ? false : true}
                 classes={classes}
                 semesterPlanning={semesterOrganization}
                 />

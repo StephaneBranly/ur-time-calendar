@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 16:28:39 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:16:24 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -303,7 +303,7 @@ const Calendar = (props: CalendarProps) => {
                     </div></>)}
                 </div>
                 <div className="calendar-mode">
-                    <select className="calendar-mode-selector" onChange={(e) => handlerSetView(e.target.value)}>
+                    <select className="calendar-mode-selector" onChange={(e) => handlerSetView(e.target.value)} defaultValue={view}>
                         <option value="day">Au jour</option>
                         <option value="compact">Semaine compacte</option>
                         <option value="complete">Semaine complète</option>
