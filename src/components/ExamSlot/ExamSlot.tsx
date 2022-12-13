@@ -1,26 +1,25 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     ClassSlot.tsx                                      ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     ExamSlot.tsx                                       ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 16:01:28 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:05:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { Class } from 'utils'
+import { Exam } from 'utils'
 import { CgPin } from 'react-icons/cg'
-import { RiBook2Line } from 'react-icons/ri'
 import { BsClock } from 'react-icons/bs'
 
-import './ClassSlot.scss'
+import './ExamSlot.scss'
 
-export interface ClassSlotProps {
-    unit: Class
+export interface ExamSlotProps {
+    unit: Exam
     selected: boolean
     setSelected: () => void
     colStartIndex: number
@@ -29,7 +28,7 @@ export interface ClassSlotProps {
     rowEndIndex: number
 }
 
-const ClassSlot = (props: ClassSlotProps) => {
+const ExamSlot = (props: ExamSlotProps) => {
     const {
         unit,
         colStartIndex,
@@ -42,26 +41,26 @@ const ClassSlot = (props: ClassSlotProps) => {
 
     return (
         <div
-            className={`class-slot ${unit.color} ${
+            className={`exam-slot ${
                 selected ? 'selected' : ''
             } col-start-${colStartIndex} col-end-${colEndIndex} row-start-${rowStartIndex} row-end-${rowEndIndex}`}
             onClick={() => setSelected()}
         >
-            <span className="class-slot-uvname">
-                {unit.UVname} - {unit.prettyClassType} {unit.classReference}
+            <span className="exam-slot-uvname">
+                {unit.UVname} - {unit.type}
             </span>
-            <span className="class-slot-place class-label">
+            <span className="exam-slot-place exam-label">
                 <CgPin />
-                {unit.place}
+                {`${unit.place}`} {unit.seat? `, ${unit.seat}`:''}
             </span>
             {selected && (
-                <span className="class-slot-time">
+                <span className="exam-slot-time">
                     <BsClock />
-                    {` de ${unit.start} à ${unit.end}`}
+                    {` de ${unit.printTime(unit.start)} à ${unit.printTime(unit.end)}`}
                 </span>
             )}
         </div>
     )
 }
 
-export default ClassSlot
+export default ExamSlot

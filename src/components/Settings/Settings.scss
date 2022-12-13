@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/10 11:32:35 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:40:57 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,7 +17,7 @@
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background-color: rgb(255, 255, 255, 0.5);
+    background-color: rgb(255, 255, 255, 0.8);
     border-radius: 100%;
     width: 40px;
     height: 40px;
@@ -56,10 +56,10 @@
 }
 
 .settings-modal-content {
-    background-color: rgb(255, 255, 255, 0.8);
+    background-color: rgb(240, 240, 240, 0.98);
     width: 70vw;
     height: 70vh;
-    border-radius: 40px;
+    border-radius: 10px;
     filter: blur(0px);
     padding: 10px;
     position: relative;
@@ -69,18 +69,22 @@
 }
 
 .settings-section {
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgb(255, 255, 255);
     padding: 10px;
     margin: 10px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
-.settings-title {
+.settings-title, .settings-subtitle {
     font-size: 20px;
     font-weight: bold;
     color: rgb(107, 44, 254);
     text-align: center;
 }
+.settings-subtitle {
+    font-size: 16px;
+}
+
 
 .settings-exit {
     color:rgb(184, 9, 9);
@@ -101,9 +105,61 @@
         cursor: pointer;
     }
 }
+
+.settings-tabs {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+    align-content: flex-start;
+    border-radius: 10px;
+
+    & > div {
+        padding: 10px;
+        cursor: pointer;
+        position: relative;
+
+        .settings-tab-count {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            background-color: rgb(107, 44, 254);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+        }
+    }
+}
+
+.settings-tab-active {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.settings-grouped-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
 @media (max-width: 480px) {
     .settings-modal-content {
         width: 90vw;
         height: 90vh;
+    }
+
+    .settings-tabs {
+        justify-content: space-between;
+        gap: 0;
     }
 }

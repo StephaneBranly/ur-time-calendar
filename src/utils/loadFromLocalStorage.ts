@@ -1,15 +1,23 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     classColor.d.ts                                    ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     loadFromLocalStorage.ts                            ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:11:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/10 22:07:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-export type classColor = 'lagon' | 'starfall' | 'orange-coral' | 'sulfur' | 'barbapapa' | 'cool-blues' | 'amethyst' | 'park-life' | 'cherryblossoms' | 'reef' | 'candy' | 'nelson' | 'almost' | 'miaka' | 'calm-darya' | 'juicy-orange' | undefined
+import isKifyAccepted from "./isKifyAccepted"
+
+const loadFromLocalStorage = (key: string): string | null => {
+    if (!isKifyAccepted())
+        return null
+    return localStorage.getItem(key)
+}
+
+export default loadFromLocalStorage

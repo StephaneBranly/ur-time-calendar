@@ -8,11 +8,11 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 20:01:24 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:05:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { Class, getDayLabel, SemesterPlanning } from "utils"
+import { Class, getDayLabel, SemesterPlanning, Exam } from "utils"
 import { v4 as uuidv4 } from 'uuid'
 
 const toICSDateTime = (date: Date, hour: number, min: number) => {
@@ -20,9 +20,6 @@ const toICSDateTime = (date: Date, hour: number, min: number) => {
 }
 
 const toICSDate = (date: Date) => {
-    // const year = date.getFullYear()
-    // const month = date.getMonth() + 1
-    // const day = date.getDate()
     return date.getFullYear().toString() +
     ((date.getMonth() + 1)<10? "0" + (date.getMonth() + 1).toString():(date.getMonth() + 1).toString()) + 
     (date.getDate()<10? "0" + date.getDate().toString():date.getDate().toString());
@@ -38,9 +35,13 @@ const writeClassEvent = (classSlot: Class, date: Date) => {
     return `BEGIN:VEVENT\nSUMMARY:${classSlot.UVname} - ${classSlot.prettyClassType} ${classSlot.classReference}\nUID:${uuidv4()}@urtimecalendar.com\nTRANSP:TRANSPARENT\nDTSTART:${toICSDateTime(date, classSlot.startHour, classSlot.startMin)}\nDTEND:${toICSDateTime(date, classSlot.endHour, classSlot.endMin)}\nDTSTAMP:19970901T130000Z\nLOCATION:${classSlot.place}\nCATEGORIES:UTC,${classSlot.UVname},${classSlot.prettyClassType}${classSlot.classReference}\nEND:VEVENT\n`
 }
 
-const toICS = (semesterPlanning: SemesterPlanning, classes: Class[]) => {
+const writeExamEvent = (exam: Exam, date: Date) => {
+    return `BEGIN:VEVENT\nSUMMARY:${exam.UVname} - ${exam.type}\nUID:${uuidv4()}@urtimecalendar.com\nTRANSP:TRANSPARENT\nDTSTART:${toICSDateTime(date, exam.start.getHours(), exam.start.getMinutes())}\nDTEND:${toICSDateTime(date, exam.end.getHours(), exam.end.getMinutes())}\nDTSTAMP:19970901T130000Z\nLOCATION:${exam.place} ${exam.seat??''}\nCATEGORIES:UTC,${exam.UVname},${exam.type}\nEND:VEVENT\n`
+}
+
+const classesToICS = (semesterPlanning: SemesterPlanning, classes: Class[]) => {
     let icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//urtimecalendar.com//NONSGML UrTimeCalendar//EN\n`
-    
+   
     for (const day = semesterPlanning.starts; day <= semesterPlanning.ends; day.setDate(day.getDate() + 1)) 
     {
         const replaceDay = semesterPlanning.becomesA(day)
@@ -71,15 +72,27 @@ const toICS = (semesterPlanning: SemesterPlanning, classes: Class[]) => {
                         c.week === semesterPlanning.getWeekAlternance(day))
             )
 
-              // eslint-disable-next-line no-loop-func
+            // eslint-disable-next-line no-loop-func
             filtered.forEach((c) => {
                 icsContent += writeClassEvent(c, day)
             })
         }
-      
+    
     }
+
     icsContent += 'END:VCALENDAR'
     return icsContent
 }
 
-export default toICS
+const examsToICS = (exams: Exam[]) => {
+    let icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//urtimecalendar.com//NONSGML UrTimeCalendar//EN\n`
+   
+    exams.forEach((exam) => {
+        icsContent += writeExamEvent(exam, exam.start)
+    })
+
+    icsContent += 'END:VCALENDAR'
+    return icsContent
+}
+
+export { classesToICS, examsToICS }

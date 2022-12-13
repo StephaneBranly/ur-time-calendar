@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/08/12 15:22:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 00:35:36 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -20,7 +20,8 @@ export default class DaySemesterOrganization {
     private _weekAlternance: weekAlternance
     private _becomesA: string | undefined
     private _isHoliday: boolean | undefined
-    private _isExam: boolean | undefined
+    private _isMedian: boolean | undefined
+    private _isFinal: boolean | undefined
     private _isFerie: boolean | undefined
 
     constructor(
@@ -35,7 +36,8 @@ export default class DaySemesterOrganization {
                 | 'Vendredi'
                 | 'Samedi'
             isHoliday?: boolean
-            isExam?: boolean
+            isMedian?: boolean
+            isFinal?: boolean
             isFerie?: boolean
         }
     ) {
@@ -43,7 +45,8 @@ export default class DaySemesterOrganization {
         this._weekAlternance = options?.weekAlternance
         this._becomesA = options?.becomesA
         this._isHoliday = options?.isHoliday
-        this._isExam = options?.isExam
+        this._isMedian = options?.isMedian
+        this._isFinal = options?.isFinal
         this._isFerie = options?.isFerie
     }
 
@@ -59,10 +62,14 @@ export default class DaySemesterOrganization {
     get isHoliday() {
         return this._isHoliday
     }
-    get isExam() {
-        return this._isExam
+    get isMedian() {
+        return this._isMedian
     }
 
+    get isFinal() {
+        return this._isFinal
+    }
+    
     get isFerie() {
         return this._isFerie
     }

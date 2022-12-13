@@ -1,15 +1,45 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     classColor.d.ts                                    ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     Notif.scss                                         ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:11:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:34:20 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-export type classColor = 'lagon' | 'starfall' | 'orange-coral' | 'sulfur' | 'barbapapa' | 'cool-blues' | 'amethyst' | 'park-life' | 'cherryblossoms' | 'reef' | 'candy' | 'nelson' | 'almost' | 'miaka' | 'calm-darya' | 'juicy-orange' | undefined
+.notif {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 100;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    align-content: stretch;
+    row-gap: 10px;
+    padding: 10px;
+    &.hidden {
+        display: none;
+    }
+    &.success {
+        background-color: #54ef5491;
+    }
+    &.error {
+        background-color: #e42525d1;
+    }
+    &.warning {
+        background-color: #f9bb1fec;
+    }
+    &.info {
+        background-color: #1f79d4d2;
+    }
+}

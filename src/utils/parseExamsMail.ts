@@ -1,34 +1,34 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     parseMail.ts                                       ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     parseExamsMail.ts                                  ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/11 23:53:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 11:08:24 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { Class, parseLine } from 'utils'
+import { Exam } from 'utils'
+import parseExamsLine from './parseExamsLine'
 
-const parseMail = (content: string): Class[] => {
+const parseClassesMail = (content: string): Exam[] => {
     const lines = content.split('\n')
-    const classes: Class[] = []
-    const uvs: string[] = []
+    const exams: Exam[] = []
     lines.forEach((line) => {
-        const results = parseLine(line, uvs)
-        if (results) {
-            classes.push(...results)
-            if (!uvs.includes(results[0].UVname)) {
-                uvs.push(results[0].UVname)
-            }
+        const result = parseExamsLine(line, 'final')
+        if (result) {
+            exams.push(result)
         }
+        
     })
 
-    return classes
+    console.log(exams)
+
+    return exams
 }
 
-export default parseMail
+export default parseClassesMail

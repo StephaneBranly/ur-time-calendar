@@ -1,15 +1,36 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     classColor.d.ts                                    ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     Notif.tsx                                          ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:11:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:34:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-export type classColor = 'lagon' | 'starfall' | 'orange-coral' | 'sulfur' | 'barbapapa' | 'cool-blues' | 'amethyst' | 'park-life' | 'cherryblossoms' | 'reef' | 'candy' | 'nelson' | 'almost' | 'miaka' | 'calm-darya' | 'juicy-orange' | undefined
+import { notifType } from 'types/notifType'
+import './Notif.scss'
+
+export interface NotifProps {
+    setOpen: (open: boolean) => void
+    isOpen: boolean
+    notif?: [string, notifType]
+}
+
+const Notif = (props: NotifProps) => {
+    const { setOpen, isOpen, notif } = props
+
+    if (!isOpen || !notif)
+        return null
+    return (
+        <div className={`notif ${notif[1]}`} onClick={() => setOpen(false)}>
+            {notif[0]}
+        </div>
+    )
+}
+
+export default Notif

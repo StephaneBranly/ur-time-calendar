@@ -1,15 +1,19 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     classColor.d.ts                                    ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     printDate.ts                                       ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:11:59 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 13:33:58 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-export type classColor = 'lagon' | 'starfall' | 'orange-coral' | 'sulfur' | 'barbapapa' | 'cool-blues' | 'amethyst' | 'park-life' | 'cherryblossoms' | 'reef' | 'candy' | 'nelson' | 'almost' | 'miaka' | 'calm-darya' | 'juicy-orange' | undefined
+const printDate = (date: Date): string => {
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+}
+
+export default printDate

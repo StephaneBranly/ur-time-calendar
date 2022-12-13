@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 19:43:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/11 00:34:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -19,7 +19,7 @@ const parseSemester = (organisation: string, semesterName: string) => {
     const lines = organisation.split('\n')
     lines.forEach((line) => {
         const match = line.match(
-            /([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([A|B])-([E|F|H|x])-(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|x)/
+            /([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([A|B])-([E|C|H|F|M|x])-(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|x)/
         )
         if (match?.length) {
             const [_, startYear, startMonth, startDay, endYear, endMonth, endDay, weekAlternance, type, becomesA] = match
@@ -29,10 +29,13 @@ const parseSemester = (organisation: string, semesterName: string) => {
                         const date = new Date(i, j - 1, k)
                         const options: Record<string, any> = { 'weekAlternance': weekAlternance }
                         switch (type) {
-                            case 'E':
-                                options['isExam'] = true;
-                                break;
                             case 'F':
+                                options['isFinal'] = true;
+                                break;
+                            case 'M':
+                                options['isMedian'] = true;
+                                break;
+                            case 'C':
                                 options['isFerie'] = true;
                                 break;
                             case 'H':

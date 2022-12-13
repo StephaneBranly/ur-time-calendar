@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 19:42:39 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:47:02 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,31 +16,34 @@ import './Settings.scss'
 
 import { FiSettings } from 'react-icons/fi'
 import { useState } from 'react'
-import { PasteMail } from 'components'
-import { Class, isKifyAccepted, saveFile, SemesterPlanning, toICS } from 'utils'
+import { Class, Exam, isKifyAccepted, SemesterPlanning } from 'utils'
 import { isMobile } from 'react-device-detect'
+import { SettingsClasses, SettingsExams, SettingsSemester } from 'components'
+
 
 export interface SettingsProps {
-    setClasses: React.Dispatch<React.SetStateAction<Class[]>>
+    setClasses: (classes: Class[]) => void
+    setExams: (exams: Exam[]) => void
     defaultOpenValue?: boolean
-    defaultContent?: string
     classes: Class[]
+    exams: Exam[]
     semesterPlanning: SemesterPlanning
 }
 
 const Settings = (props: SettingsProps) => {
-    const { setClasses, defaultOpenValue, defaultContent, classes, semesterPlanning } = props
+    const { setClasses, defaultOpenValue, classes, semesterPlanning, exams, setExams } = props
     const [open, setOpen] = useState<boolean>(defaultOpenValue ?? false)
     const [kifyAccepted, setKifyAccepted] = useState(isKifyAccepted())
-    const [lastContent, setLastContent] = useState<string>(defaultContent ?? '')
+    const [tab, setTab] = useState<'classes' | 'exams' | 'semester' | 'others'>('classes')
 
     const handleKifyClick = (e: any) => {
         setKifyAccepted(e.target.checked)
         localStorage.setItem('kify_accepted', e.target.checked)
-    }
 
-    const saveInCache = () => {
-        localStorage.setItem('a22-schedule', lastContent)
+        if (e.target.checked) {
+            setClasses(classes)
+            setExams(exams)
+        }
     }
 
     const deleteCache = () => {
@@ -49,7 +52,49 @@ const Settings = (props: SettingsProps) => {
         )
         if (confirmed) {
             localStorage.removeItem('a22-schedule')
+            localStorage.removeItem('classes')
+            localStorage.removeItem('exams')
             localStorage.removeItem('view')
+        }
+    }
+
+    const renderTab = () => {
+        switch (tab) {
+            case 'classes':
+                return (
+                    <SettingsClasses classes={classes} setClasses={setClasses} semesterPlanning={semesterPlanning} />
+                )
+            case 'exams':
+                return (
+                    <SettingsExams exams={exams} setExams={setExams} semesterPlanning={semesterPlanning} />
+                )
+            case 'semester':
+                return (
+                    <SettingsSemester semesterPlanning={semesterPlanning} />
+                )
+            case 'others':
+                return (<>
+                    <div className="settings-section">
+                        <p>Accepte la mise en cache pour que ton emploi du temps soit sauvegardé sur ton appareil.</p>
+                        <input
+                            type={'checkbox'}
+                            defaultChecked={kifyAccepted}
+                            onClick={handleKifyClick}
+                        />
+                        <label>Accepter la mise en cache</label>
+                        <p>
+                            <button onClick={deleteCache}>
+                                Supprimer le cache
+                            </button>
+                        </p>
+                    </div>
+                    <div className="settings-section">
+                        <p>Développé avec ❤️ par <a href='https://github.com/StephaneBranly'>Stéphane Branly</a>.</p>
+                        <p><a href='https://github.com/StephaneBranly/ur-time-calendar'>Code disponible sur Github</a>.</p>
+                        <p>Paye moi un ☕️ si tu veux me soutenir : <a href='https://www.paypal.com/paypalme/StephaneBranly'>paypal</a>.</p>
+                    </div>
+                    </>
+                )
         }
     }
 
@@ -63,42 +108,22 @@ const Settings = (props: SettingsProps) => {
                 {isMobile && <button className='settings-exit' onClick={() => setOpen(false)}>
                                 Fermer x
                             </button>}
-                <h1 className='settings-title'>Charger son emploi du temps depuis le mail SME</h1>
-                <div className="settings-section">
-                    <PasteMail
-                        setClasses={setClasses}
-                        defaultContent={defaultContent}
-                        setLastContent={setLastContent}
-                    />
+                <h1 className='settings-title'>Paramètres</h1>
+                <div className='settings-tabs'>
+                    <div className={tab === 'classes' ? 'settings-tab-active' : ''} onClick={() => setTab('classes')}>
+                        Classes <span className='settings-tab-count'>{classes.length}</span>
+                    </div>
+                    <div className={tab === 'exams' ? 'settings-tab-active' : ''} onClick={() => setTab('exams')}>
+                        Examens <span className='settings-tab-count'>{exams.length}</span>
+                    </div>
+                    <div className={tab === 'semester' ? 'settings-tab-active' : ''} onClick={() => setTab('semester')}>
+                        Semestre <span className='settings-tab-count'>{semesterPlanning.semesterName}</span>
+                    </div>
+                    <div className={tab === 'others' ? 'settings-tab-active' : ''} onClick={() => setTab('others')}>
+                        Autres
+                    </div>
                 </div>
-                <div className="settings-section">
-                    <input
-                        type={'checkbox'}
-                        checked={kifyAccepted}
-                        onClick={handleKifyClick}
-                    />
-                    <label>Accepter la mise en cache</label>
-                    {kifyAccepted ? (
-                        <button onClick={saveInCache}>
-                            Sauvergarder dans le cache
-                        </button>
-                    ) : (
-                        <button onClick={deleteCache}>
-                            Supprimer le cache
-                        </button>
-                    )}
-                </div>
-                <div className='settings-section'>
-                    <button 
-                        onClick={() => saveFile('calendrier.ics', toICS(semesterPlanning, classes))}>
-                            Exporter au format .ics
-                    </button>
-                </div>
-                <div className='settings-section'>
-                        Développé avec ❤️ par <a href='https://github.com/StephaneBranly'>Stéphane Branly</a>.
-                        <a href='https://github.com/StephaneBranly/ur-time-calendar'>Code disponible sur Github</a>.
-                        Paye moi un ☕️ si tu veux me soutenir : <a href='https://www.paypal.com/paypalme/StephaneBranly'>paypal</a>.
-                </div>
+                {renderTab()}
             </div>
         </div>
     ) : (

@@ -8,14 +8,16 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/09 19:09:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:30:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import Class from './Class'
-import parseMail from './parseMail'
-import parseLine from './parseLine'
-import parseDay from './parseDay'
+import Exam from './Exam'
+import parseClassesMail from './parseClassesMail'
+import parseExamsMail from './parseExamsMail'
+import parseClassesLine from './parseClassesLine'
+import parseClassesDay from './parseClassesDay'
 import daysIndex from './daysIndex'
 import moveDate from './moveDate'
 import getMonday from './getMonday'
@@ -24,13 +26,19 @@ import SemesterPlanning from './SemesterPlanning'
 import DaySemesterOrganization from './DaySemesterOrganization'
 import parseSemester from './parseSemester'
 import isKifyAccepted from './isKifyAccepted'
-import toICS from './toICS'
+import { classesToICS, examsToICS} from './toICS'
 import saveFile from './saveFile'
+import loadFromLocalStorage from './loadFromLocalStorage'
+import parseCache from './parseCache'
+import saveToCache from './saveToCache'
+import printDate from './printDate'
 export {
     Class,
-    parseLine,
-    parseMail,
-    parseDay,
+    parseClassesLine,
+    parseClassesMail,
+    parseClassesDay,
+    Exam,
+    parseExamsMail,
     daysIndex,
     moveDate,
     getMonday,
@@ -39,6 +47,11 @@ export {
     DaySemesterOrganization,
     parseSemester,
     isKifyAccepted,
-    toICS,
-    saveFile
+    classesToICS,
+    examsToICS,
+    saveFile,
+    loadFromLocalStorage,
+    parseCache,
+    saveToCache,
+    printDate
 }

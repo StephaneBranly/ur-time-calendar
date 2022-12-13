@@ -1,0 +1,70 @@
+/* *********************************************************************************************************************** */
+/*  UTC Header                                                                                                             */
+/*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
+/*     SettingsSemester.scss                              ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
+/*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
+/*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
+/*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
+/*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
+/*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
+/*     Update: 2022/12/12 22:46:35 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*                                                                                                                         */
+/* *********************************************************************************************************************** */
+
+.settings-semester {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: stretch;
+    align-items: flex-start;
+    align-content: stretch;
+}
+.settings-semester_day {
+    position: relative;
+}
+
+.settings-semester_day-label {
+    background-color: rgb(107, 44, 254);
+    color: white;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 14px;
+    padding: 2px 5px;
+    margin: 10px;
+
+    &.finaux {
+        background-color: rgb(156, 1, 135);
+    }
+    &.medians {
+        background-color: rgb(156, 1, 135);
+    }
+    &.ferie {
+        background-color: rgb(46, 67, 198);   
+    }
+    &.becomesA{
+        background-color: rgb(9, 214, 173);   
+    }
+    &.vacances{
+        background-color: rgb(124, 135, 197) 
+    }
+}
+
+.settings-week-alternance {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: stretch;
+    align-items: stretch;
+    align-content: stretch;
+    margin: 10px 0;
+}
+
+.settings-week-alternance-a {
+    border-left: 10px solid rgb(231, 46, 5);
+    padding: 0 5px;
+}
+.settings-week-alternance-b {
+    border-left: 10px solid rgb(0, 11, 218);
+    padding: 0 5px;
+}
