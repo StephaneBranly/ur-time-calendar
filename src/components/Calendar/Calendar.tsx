@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 18:09:02 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:25:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -303,6 +303,7 @@ const Calendar = (props: CalendarProps) => {
 
     function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
         setTouchStart(e.targetTouches[0].clientX)
+        setTouchEnd(e.targetTouches[0].clientX)
     }
 
     function handleTouchMove(e: React.TouchEvent<HTMLDivElement>) {
