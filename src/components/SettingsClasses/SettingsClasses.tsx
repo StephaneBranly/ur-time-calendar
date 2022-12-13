@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 14:30:16 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:16:12 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -66,7 +66,20 @@ const SettingsClasses = (props: SettingsClassesProps) => {
 
     if(loadFromMail) {
         return <div className='settings-section'>
+            <h2 className='settings-subtitle'>Importer depuis un mail</h2>
             <PasteMail setClasses={handlerLoadFromMail} />
+            <button style={{marginTop: '10px'}} onClick={() => setClass(undefined, new Class({
+            UVname: "YZ89",
+            classType: "C",
+            classReference: 1,
+            day: "LUNDI",
+            start: "08:00",
+            end: "10:00",
+            place: "BF100",
+            frequence: '1',
+            week: undefined,
+            color: 'lagon',
+        }))}>Ajouter une classe</button>
         </div>
     }
     return <>
@@ -78,6 +91,7 @@ const SettingsClasses = (props: SettingsClassesProps) => {
             </button>
         </div>
         <div className='settings-section'>
+            <h2 className='settings-subtitle'>Mes classes</h2>
             <div className='settings-all-classes'>
                 {classes.sort((a,b) => {return a.UVname < b.UVname ? -1 : 1}).map((c, key) => (
                     <SettingsClass 
