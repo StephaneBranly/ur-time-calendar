@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 22:45:31 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 12:40:22 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -22,7 +22,6 @@ $max-rows: (21 - 7) * 4;
     z-index: 10;
     position: absolute;
     overflow: hidden;
-    // color: white;
     top: 0;
     bottom: 0;
     left: 0;
@@ -73,7 +72,6 @@ $max-rows: (21 - 7) * 4;
     right: 0;
     bottom: 0;
     box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
-    // filter: blur(10px);
     background: inherit;
     z-index: 1;
 }
@@ -113,7 +111,7 @@ $max-columns: 16;
     flex-direction: row;
     gap: 10px;
     justify-content: space-between;
-    color: white;
+    color: rgb(83, 83, 83);
     
     & > div {
         display: flex;
@@ -124,7 +122,7 @@ $max-columns: 16;
 }
 
 .calendar-current-date div {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(255, 255, 255);
     padding: 5px;
     border-radius: 5px;
     z-index: 11;
@@ -133,6 +131,16 @@ $max-columns: 16;
     align-content: center;
     justify-content: center;
 }
+
+.calendar-mode-selector {
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 11;
+    color: rgb(83, 83, 83);
+    border: 0px solid rgba(255, 255, 255, 0.5);
+}
+
 
 .calendar-current-date div:hover {
     cursor: pointer;
@@ -155,17 +163,6 @@ $max-columns: 16;
 
 .slot-time {
     font-size: 10px;
-}
-.calendar-mode-selector {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    z-index: 11;
-    border: 0px solid rgba(255, 255, 255, 0.5);
-    &.active {
-        text-decoration: underline;
-    }
 }
 
 .calendar-mode-selector:hover {

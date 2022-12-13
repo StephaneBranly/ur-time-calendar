@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 12:00:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 13:29:58 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -63,7 +63,7 @@ const Settings = (props: SettingsProps) => {
                 )
             case 'exams':
                 return (
-                    <SettingsExams exams={exams} setExams={setExams} />
+                    <SettingsExams exams={exams} setExams={setExams} semesterPlanning={semesterPlanning} />
                 )
             case 'semester':
                 return (

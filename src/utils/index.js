@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 10:55:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 13:34:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -31,6 +31,7 @@ import saveFile from './saveFile'
 import loadFromLocalStorage from './loadFromLocalStorage'
 import parseCache from './parseCache'
 import saveToCache from './saveToCache'
+import printDate from './printDate'
 export {
     Class,
     parseClassesLine,
@@ -51,4 +52,5 @@ export {
     loadFromLocalStorage,
     parseCache,
     saveToCache,
+    printDate
 }

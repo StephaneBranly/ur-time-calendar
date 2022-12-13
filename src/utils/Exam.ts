@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 11:57:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 12:19:28 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -19,7 +19,7 @@ export default class Exam {
     private _seet: string
     private _start: Date
     private _end: Date
-    private _type: 'median' | 'final'
+    private _type: 'médian' | 'final'
 
     constructor(
         obj: {
@@ -28,7 +28,7 @@ export default class Exam {
             end: Date,
             place: string,
             seet: string
-            type: 'median' | 'final',
+            type: 'médian' | 'final',
         }
     ) {
         this._UVname = obj.UVname
@@ -49,6 +49,14 @@ export default class Exam {
 
     set UVname(value: string) {
         this._UVname = value
+    }
+
+    get type() {
+        return this._type
+    }
+
+    set type(value: 'médian' | 'final') {
+        this._type = value
     }
 
     get place() {
