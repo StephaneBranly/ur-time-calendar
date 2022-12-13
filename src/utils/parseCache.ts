@@ -8,13 +8,13 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:34:36 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 12:05:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { Class } from 'utils'
+import { Class, Exam } from 'utils'
 
-const parseCache = (cache: string | null, object_type: 'Classes' | null): any => {
+const parseCache = (cache: string | null, object_type: 'Classes' | 'Exams' | null): any => {
     if (cache === null)
         return null
 
@@ -29,6 +29,17 @@ const parseCache = (cache: string | null, object_type: 'Classes' | null): any =>
     switch (object_type) {
         case 'Classes':
             return without_underscore.map((c: any) => new Class(c))
+        case 'Exams':
+            return without_underscore.map((e: any) => 
+                new Exam({
+                    start: new Date(e.start),
+                    end: new Date(e.end),
+                    UVname: e.UVname,
+                    place: e.place,
+                    seet: e.seet,
+                    type: e.type
+                })
+            )
         default:
             return null
     }

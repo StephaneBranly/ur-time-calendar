@@ -1,52 +1,26 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     SettingsClass.scss                                 ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     parseDay.ts                                        ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 10:42:29 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 10:44:48 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-.settings-class {
-    & > .can-be-opened {
-        cursor: pointer;
-    }
-    & > .class-slot {
-        padding: 10px;
-    }
+const parseClassesDay = (day: string): string | undefined => {
+    const dayUpper = day.toUpperCase()
+    if (dayUpper.includes('LUN')) return 'LUNDI'
+    if (dayUpper.includes('MAR')) return 'MARDI'
+    if (dayUpper.includes('MER')) return 'MERCREDI'
+    if (dayUpper.includes('JEU')) return 'JEUDI'
+    if (dayUpper.includes('VEN')) return 'VENDREDI'
+    if (dayUpper.includes('SAM')) return 'SAMEDI'
+    return undefined
 }
 
-.settings-class-editable-inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: stretch;
-    margin: 10px 0;
-    padding: 10px;
-    gap: 10px;
-}
-
-.settings-class-editable-input {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-between;
-    border-radius: 10px;
-
-    & input, & select {
-        background-color: rgb(255, 255, 255);
-        border: 0px solid rgba(0,0,0,0);
-        padding: 5px;
-        &:focus {
-            outline: none
-        }
-    }
-}
+export default parseClassesDay

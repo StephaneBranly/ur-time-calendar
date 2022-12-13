@@ -8,12 +8,12 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 23:34:36 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 10:45:39 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import { createRef } from 'react'
-import { Class, parseMail } from 'utils'
+import { Class, parseClassesMail } from 'utils'
 import './PasteMail.scss'
 
 export interface PasteMailProps {
@@ -27,12 +27,11 @@ const PasteMail = (props: PasteMailProps) => {
 
     const handlerLoadData = () => {
         if (!ref.current) return
-        const data = parseMail(ref.current.value)
+        const data = parseClassesMail(ref.current.value)
         setClasses(data)
     }
 
-    const placeHolder = `
- CM13       C 1     JEUDI... 10:15-12:15,F1,S=FA106   
+    const placeHolder = `CM13       C 1     JEUDI... 10:15-12:15,F1,S=FA106   
  CM13       D 2     MARDI... 16:30-18:30,F1,S=FA420   
  CM13       T 1 A   JEUDI... 14:30-18:30,F2,S=ES109   
 

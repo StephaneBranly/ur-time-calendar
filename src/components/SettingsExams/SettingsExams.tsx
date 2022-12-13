@@ -1,52 +1,54 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     SettingsClass.scss                                 ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     SettingsExams.tsx                                  ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 10:42:29 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 11:17:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-.settings-class {
-    & > .can-be-opened {
-        cursor: pointer;
-    }
-    & > .class-slot {
-        padding: 10px;
-    }
+import { createRef } from 'react'
+import { Exam, parseExamsMail } from 'utils'
+// import './SettingsExams.scss'
+
+export interface SettingsExamsProps {
+    setExams: (exams: Exam[]) => void
+    exams: Exam[]
 }
 
-.settings-class-editable-inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: stretch;
-    margin: 10px 0;
-    padding: 10px;
-    gap: 10px;
-}
+const SettingsExams = (props: SettingsExamsProps) => {
+    const { setExams } = props
 
-.settings-class-editable-input {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-between;
-    border-radius: 10px;
+    const ref = createRef<HTMLTextAreaElement>()
 
-    & input, & select {
-        background-color: rgb(255, 255, 255);
-        border: 0px solid rgba(0,0,0,0);
-        padding: 5px;
-        &:focus {
-            outline: none
-        }
+    const handlerLoadData = () => {
+        if (!ref.current) return
+        const data = parseExamsMail(ref.current.value)
+        setExams(data)
     }
+
+    const placeHolder = `MT12	11/01/2021	de 08:00	à 09:30	SI S ASP	place 131
+    LO21	15/01/2021	de 08:00	à 09:30	SI S ASP	place 151
+    IA01	12/01/2021	de 08:00	à 09:30	SI S ASP	place 203
+    `
+
+    return (
+        <div className="settings-section">
+            <h2 className="settings-subtitle">Médians</h2>
+            <textarea
+                className="settings-textarea"
+                ref={ref}
+                placeholder={placeHolder}
+            />
+            <button onClick={handlerLoadData}>Charger</button>
+        </div>
+
+    )
 }
+
+export default SettingsExams

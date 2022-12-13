@@ -8,14 +8,16 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 22:10:51 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 10:55:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import Class from './Class'
-import parseMail from './parseMail'
-import parseLine from './parseLine'
-import parseDay from './parseDay'
+import Exam from './Exam'
+import parseClassesMail from './parseClassesMail'
+import parseExamsMail from './parseExamsMail'
+import parseClassesLine from './parseClassesLine'
+import parseClassesDay from './parseClassesDay'
 import daysIndex from './daysIndex'
 import moveDate from './moveDate'
 import getMonday from './getMonday'
@@ -31,9 +33,11 @@ import parseCache from './parseCache'
 import saveToCache from './saveToCache'
 export {
     Class,
-    parseLine,
-    parseMail,
-    parseDay,
+    parseClassesLine,
+    parseClassesMail,
+    parseClassesDay,
+    Exam,
+    parseExamsMail,
     daysIndex,
     moveDate,
     getMonday,

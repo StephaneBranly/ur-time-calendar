@@ -1,35 +1,34 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     parseMail.ts                                       ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     parseExamsMail.ts                                  ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:22:25 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 11:08:24 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-import { classColor } from 'types/classColor'
-import { Class, parseLine } from 'utils'
+import { Exam } from 'utils'
+import parseExamsLine from './parseExamsLine'
 
-const parseMail = (content: string): Class[] => {
+const parseClassesMail = (content: string): Exam[] => {
     const lines = content.split('\n')
-    const classes: Class[] = []
-    const uvsColors: Record<string, classColor> = {}
+    const exams: Exam[] = []
     lines.forEach((line) => {
-        const results = parseLine(line, uvsColors)
-        if (results) {
-            classes.push(...results)
-            if (!(results[0].UVname in uvsColors)) {
-                uvsColors[results[0].UVname] = results[0].color
-            }
+        const result = parseExamsLine(line, 'final')
+        if (result) {
+            exams.push(result)
         }
+        
     })
 
-    return classes
+    console.log(exams)
+
+    return exams
 }
 
-export default parseMail
+export default parseClassesMail

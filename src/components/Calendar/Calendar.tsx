@@ -8,13 +8,14 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 22:16:24 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 11:54:15 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import {
     Class,
     daysIndex,
+    Exam,
     getDayLabel,
     getMonday,
     isKifyAccepted,
@@ -24,19 +25,20 @@ import {
 
 import './Calendar.scss'
 import { Fragment, useState } from 'react'
-import { ClassSlot } from 'components'
+import { ClassSlot, ExamSlot } from 'components'
 import { BsCaretLeft, BsCaretRight } from 'react-icons/bs'
 
 export interface CalendarProps {
     classes: Class[]
+    exams: Exam[]
     semesterPlanning: SemesterPlanning
 }
 
 const Calendar = (props: CalendarProps) => {
-    const { classes, semesterPlanning } = props
+    const { classes, semesterPlanning, exams } = props
 
     const [view, setView] = useState<string>(isKifyAccepted() ? localStorage.getItem('view') ?? 'day' : 'day')
-    const [selectedClass, setSelectedClass] = useState<Class | undefined>(
+    const [selectedSlot, setSelectedSlot] = useState<Class | Exam | undefined>(
         undefined
     )
     const [selectedDate, setSelectedDate] = useState<Date>(new Date())
@@ -129,6 +131,42 @@ const Calendar = (props: CalendarProps) => {
                     )}
                 </Fragment>
             )
+        })
+    }
+
+    const renderExams= () => {
+        const isADayView = view === 'day'
+        return getDaysDatesToRender().map((day) => {
+            const filtered = exams.filter(
+                (e) =>
+                    e.start.getDate() === day.getDate() && e.start.getMonth() === day.getMonth() && e.start.getFullYear() === day.getFullYear()
+            )
+            return filtered.map((exam, index) => {
+                const dayIndex = daysIndex[exam.start.toLocaleDateString('fr-FR', {
+                    weekday: 'long',
+                }).toUpperCase()]
+
+                const rowStartIndex = timeToRowIndex(exam.start.getHours(), exam.start.getMinutes())
+                const rowEndIndex = timeToRowIndex(exam.end.getHours(), exam.end.getMinutes())
+                var colStartIndex = isADayView ? 2 : dayIndex * 2 + 2
+                var colEndIndex = isADayView ? 4 : dayIndex * 2 + 4
+                
+                
+                return (
+                    <ExamSlot unit={exam} key={index}
+                    colStartIndex={colStartIndex}
+                    colEndIndex={colEndIndex}
+                    rowStartIndex={rowStartIndex}
+                    rowEndIndex={rowEndIndex}
+                    selected={selectedSlot === exam}
+                    setSelected={() =>
+                        setSelectedSlot(
+                            selectedSlot === exam ? undefined : exam
+                        )
+                    }
+                    />
+                )
+            })
         })
     }
 
@@ -227,10 +265,10 @@ const Calendar = (props: CalendarProps) => {
                         colEndIndex={colEndIndex}
                         rowStartIndex={rowStartIndex}
                         rowEndIndex={rowEndIndex}
-                        selected={selectedClass === unit}
+                        selected={selectedSlot === unit}
                         setSelected={() =>
-                            setSelectedClass(
-                                selectedClass === unit ? undefined : unit
+                            setSelectedSlot(
+                                selectedSlot === unit ? undefined : unit
                             )
                         }
                     />
@@ -315,11 +353,12 @@ const Calendar = (props: CalendarProps) => {
                 <div className={`calendar-content ${view}`}>
                     <div
                         className="calendar-background-fragment"
-                        onClick={() => setSelectedClass(undefined)}
+                        onClick={() => setSelectedSlot(undefined)}
                     ></div>
                     {renderDays()}
                     {renderSlots()}
                     {renderClasses()}
+                    {renderExams()}
                 </div>
             </div>
         </div>

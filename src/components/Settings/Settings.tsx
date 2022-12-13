@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 22:36:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 12:00:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,20 +16,22 @@ import './Settings.scss'
 
 import { FiSettings } from 'react-icons/fi'
 import { useState } from 'react'
-import { Class, isKifyAccepted, SemesterPlanning } from 'utils'
+import { Class, Exam, isKifyAccepted, SemesterPlanning } from 'utils'
 import { isMobile } from 'react-device-detect'
-import { SettingsClasses, SettingsSemester } from 'components'
+import { SettingsClasses, SettingsExams, SettingsSemester } from 'components'
 
 
 export interface SettingsProps {
     setClasses: (classes: Class[]) => void
+    setExams: (exams: Exam[]) => void
     defaultOpenValue?: boolean
     classes: Class[]
+    exams: Exam[]
     semesterPlanning: SemesterPlanning
 }
 
 const Settings = (props: SettingsProps) => {
-    const { setClasses, defaultOpenValue, classes, semesterPlanning } = props
+    const { setClasses, defaultOpenValue, classes, semesterPlanning, exams, setExams } = props
     const [open, setOpen] = useState<boolean>(defaultOpenValue ?? false)
     const [kifyAccepted, setKifyAccepted] = useState(isKifyAccepted())
     const [tab, setTab] = useState<'classes' | 'exams' | 'semester' | 'others'>('classes')
@@ -61,7 +63,7 @@ const Settings = (props: SettingsProps) => {
                 )
             case 'exams':
                 return (
-                    <div className="settings-section"><p>Charge les horaires de tes examens!</p></div>
+                    <SettingsExams exams={exams} setExams={setExams} />
                 )
             case 'semester':
                 return (
@@ -109,7 +111,7 @@ const Settings = (props: SettingsProps) => {
                         Classes <span className='settings-tab-count'>{classes.length}</span>
                     </div>
                     <div className={tab === 'exams' ? 'settings-tab-active' : ''} onClick={() => setTab('exams')}>
-                        Examens <span className='settings-tab-count'>0</span>
+                        Examens <span className='settings-tab-count'>{exams.length}</span>
                     </div>
                     <div className={tab === 'semester' ? 'settings-tab-active' : ''} onClick={() => setTab('semester')}>
                         Semestre <span className='settings-tab-count'>{semesterPlanning.semesterName}</span>

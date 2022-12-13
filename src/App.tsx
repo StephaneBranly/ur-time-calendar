@@ -8,19 +8,20 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:00:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 12:07:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Notif, Settings } from 'components'
-import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning } from 'utils'
+import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning, Exam } from 'utils'
 import { getA22organization } from 'data'
 import { notifType } from 'types/notifType'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
+    const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
         useState<SemesterPlanning>(getA22organization)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(['Hello world', 'info'])
@@ -44,6 +45,11 @@ function App() {
             const result = parseCache(a22Classes, "Classes")
             setClasses(result)
         }
+        const a22Exams = loadFromLocalStorage('a22-exams')
+        if (a22Exams) {
+            const result = parseCache(a22Exams, "Exams")
+            setExams(result)
+        }
     }, [])
 
     const handlerSetClasses = (classes: Class[]) => {
@@ -56,18 +62,30 @@ function App() {
             handlerSetNotifs(['Accepte la mise en cache pour sauvegarder', 'warning'])
     }
 
+    const handlerSetExams = (exams: Exam[]) => {
+        setExams(exams)
+        const r = saveToCache(JSON.stringify(exams), "a22-exams")
+        if (r)
+            handlerSetNotifs(['Examens sauvegardées', 'success'])
+        else
+            handlerSetNotifs(['Accepte la mise en cache pour sauvegarder', 'warning'])
+    }
+
     return (
         <div className="App">
             <div className="calendar-container">
                 <Calendar
                     classes={classes}
+                    exams={exams}
                     semesterPlanning={semesterOrganization}
                 />
             </div>
             <Settings
+                defaultOpenValue={loadFromLocalStorage('a22-classes') ? false : true}
                 setClasses={handlerSetClasses}
-                defaultOpenValue={loadFromLocalStorage('a22-schedule') ? false : true}
                 classes={classes}
+                setExams={handlerSetExams}
+                exams={exams}
                 semesterPlanning={semesterOrganization}
                 />
             <Notif isOpen={notif?true:false} notif={notif} setOpen={setOpen}/>

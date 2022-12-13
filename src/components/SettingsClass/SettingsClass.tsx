@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:32:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 10:42:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -118,7 +118,7 @@ const SettingsClass = (props: SettingsClassProps) => {
                 <button onClick={() => handlerDelete()}>Supprimer</button>
             </div>
         </div> :
-            <div className={`class-slot ${class_.color}`}  onClick={() => setEdit(Object.assign(Object.create(Object.getPrototypeOf(class_)), class_))} >
+            <div className={`class-slot ${class_.color} can-be-opened`}  onClick={() => setEdit(Object.assign(Object.create(Object.getPrototypeOf(class_)), class_))} >
                 <div>{class_.prettyPrint()}</div>
             </div>}
     </div>
