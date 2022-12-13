@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 14:36:40 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:05:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -36,7 +36,7 @@ const writeClassEvent = (classSlot: Class, date: Date) => {
 }
 
 const writeExamEvent = (exam: Exam, date: Date) => {
-    return `BEGIN:VEVENT\nSUMMARY:${exam.UVname} - ${exam.type}\nUID:${uuidv4()}@urtimecalendar.com\nTRANSP:TRANSPARENT\nDTSTART:${toICSDateTime(date, exam.start.getHours(), exam.start.getMinutes())}\nDTEND:${toICSDateTime(date, exam.end.getHours(), exam.end.getMinutes())}\nDTSTAMP:19970901T130000Z\nLOCATION:${exam.place} ${exam.seet??''}\nCATEGORIES:UTC,${exam.UVname},${exam.type}\nEND:VEVENT\n`
+    return `BEGIN:VEVENT\nSUMMARY:${exam.UVname} - ${exam.type}\nUID:${uuidv4()}@urtimecalendar.com\nTRANSP:TRANSPARENT\nDTSTART:${toICSDateTime(date, exam.start.getHours(), exam.start.getMinutes())}\nDTEND:${toICSDateTime(date, exam.end.getHours(), exam.end.getMinutes())}\nDTSTAMP:19970901T130000Z\nLOCATION:${exam.place} ${exam.seat??''}\nCATEGORIES:UTC,${exam.UVname},${exam.type}\nEND:VEVENT\n`
 }
 
 const classesToICS = (semesterPlanning: SemesterPlanning, classes: Class[]) => {

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 14:15:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:05:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,7 +16,7 @@
 export default class Exam {
     private _UVname: string
     private _place: string
-    private _seet?: string
+    private _seat?: string
     private _start: Date
     private _end: Date
     private _type: 'médian' | 'final'
@@ -27,7 +27,7 @@ export default class Exam {
             start: Date,
             end: Date,
             place: string,
-            seet?: string
+            seat?: string
             type: 'médian' | 'final',
         }
     ) {
@@ -35,7 +35,7 @@ export default class Exam {
         this._start = obj.start
         this._end = obj.end
         this._place = obj.place
-        this._seet = obj.seet
+        this._seat = obj.seat
         this._type = obj.type
     }
 
@@ -67,12 +67,12 @@ export default class Exam {
         this._place = value
     }
 
-    get seet() {
-        return this._seet
+    get seat() {
+        return this._seat
     }
 
-    set seet(value: string | undefined) {
-        this._seet = value
+    set seat(value: string | undefined) {
+        this._seat = value
     }
 
     get start() {

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 14:46:40 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:03:50 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -49,6 +49,16 @@ function App() {
         if (Exams) {
             const result = parseCache(Exams, "Exams")
             setExams(result)
+        }
+
+        const oldClasses = loadFromLocalStorage('a22-schedule')
+        if (oldClasses) {
+            const result = parseClassesMail(oldClasses)
+            setClasses(result)
+            const r = saveToCache(JSON.stringify(result), "classes")
+            if (r)
+                handlerSetNotifs(['Classes sauvegardées', 'success'])
+            localStorage.removeItem('a22-schedule')
         }
     }, [])
 

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 14:21:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:05:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -26,7 +26,7 @@ const parseExamsLine = (line: string, type: 'médian' | 'final'): Exam | undefin
         const startTime = match[5]
         const endTime = match[6]
         const place = match[7]
-        const seet = match[8]
+        const seat = match[8]
 
         const startDate = new Date(year, month, day)
         startDate.setHours(parseInt(startTime.split(':')[0]))
@@ -41,7 +41,7 @@ const parseExamsLine = (line: string, type: 'médian' | 'final'): Exam | undefin
             start: startDate,
             end: endDate,
             place,
-            seet,
+            seat,
             type
         })
         return exam

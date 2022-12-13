@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 14:19:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 18:05:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -93,8 +93,8 @@ const SettingsExam = (props: SettingsExamProps) => {
                 </div>
 
                 {edit.type === 'final' && <div className="settings-exam-editable-input">
-                    <label htmlFor="seet">Place</label>
-                    <input name="seet" type='text' defaultValue={edit.seet} onChange={(e) => edit.seet= e.target.value}/>
+                    <label htmlFor="seat">Place</label>
+                    <input name="seat" type='text' defaultValue={edit.seat} onChange={(e) => edit.seat= e.target.value}/>
                 </div>}
 
             </div>
