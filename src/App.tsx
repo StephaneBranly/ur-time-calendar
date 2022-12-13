@@ -8,20 +8,35 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 22:14:20 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 23:00:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { Calendar, Settings } from 'components'
+import { Calendar, Notif, Settings } from 'components'
 import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning } from 'utils'
 import { getA22organization } from 'data'
+import { notifType } from 'types/notifType'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [semesterOrganization, setSemesterOrganization] =
         useState<SemesterPlanning>(getA22organization)
+    const [notif, setNotif] = useState<[string, notifType] | undefined>(['Hello world', 'info'])
+
+    const setOpen = (open: boolean) => {
+        if (!open)
+            setNotif(undefined)
+    }
+
+    const handlerSetNotifs = (notif: [string, notifType]) => {
+        setNotif(notif)
+        setTimeout(() => {
+            setNotif(undefined)
+        }
+        ,2000)
+    }
 
     useEffect(() => {
         const a22Classes = loadFromLocalStorage('a22-classes')
@@ -32,8 +47,13 @@ function App() {
     }, [])
 
     const handlerSetClasses = (classes: Class[]) => {
-        setClasses(classes)
-        saveToCache(JSON.stringify(classes), "a22-classes")
+        const to_string = JSON.stringify(classes)
+        setClasses(parseCache(to_string, "Classes")) // only way found to force update when changing class name
+        const r = saveToCache(JSON.stringify(classes), "a22-classes")
+        if (r)
+            handlerSetNotifs(['Classes sauvegardées', 'success'])
+        else
+            handlerSetNotifs(['Accepte la mise en cache pour sauvegarder', 'warning'])
     }
 
     return (
@@ -50,6 +70,7 @@ function App() {
                 classes={classes}
                 semesterPlanning={semesterOrganization}
                 />
+            <Notif isOpen={notif?true:false} notif={notif} setOpen={setOpen}/>
         </div>
     )
 }

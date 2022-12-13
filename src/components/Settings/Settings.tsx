@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 22:12:27 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:36:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -37,6 +37,10 @@ const Settings = (props: SettingsProps) => {
     const handleKifyClick = (e: any) => {
         setKifyAccepted(e.target.checked)
         localStorage.setItem('kify_accepted', e.target.checked)
+
+        if (e.target.checked) {
+            setClasses(classes)
+        }
     }
 
     const deleteCache = () => {
@@ -69,7 +73,7 @@ const Settings = (props: SettingsProps) => {
                         <p>Accepte la mise en cache pour que ton emploi du temps soit sauvegardé sur ton appareil.</p>
                         <input
                             type={'checkbox'}
-                            checked={kifyAccepted}
+                            defaultChecked={kifyAccepted}
                             onClick={handleKifyClick}
                         />
                         <label>Accepter la mise en cache</label>

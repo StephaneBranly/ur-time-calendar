@@ -8,9 +8,11 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 22:12:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 23:37:07 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
+
+import './SettingsClasses.scss'
 
 import { PasteMail, SettingsClass } from 'components'
 import { useState } from 'react'
@@ -76,13 +78,15 @@ const SettingsClasses = (props: SettingsClassesProps) => {
             </button>
         </div>
         <div className='settings-section'>
-            {classes.sort((a,b) => {return a.UVname < b.UVname ? -1 : 1}).map((c, key) => (
-                <SettingsClass 
-                key={key}
-                class_={c}
-                setClass={(newClass) => setClass(c, newClass)}
-                />
-            ))}
+            <div className='settings-all-classes'>
+                {classes.sort((a,b) => {return a.UVname < b.UVname ? -1 : 1}).map((c, key) => (
+                    <SettingsClass 
+                    key={key}
+                    class_={c}
+                    setClass={(newClass) => setClass(c, newClass)}
+                    />
+                ))}
+            </div>
             <button onClick={() => setClass(undefined, new Class({
             UVname: "YZ89",
             classType: "C",

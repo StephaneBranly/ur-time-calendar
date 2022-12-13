@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 15:56:52 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 23:32:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -18,6 +18,7 @@ import { useState } from 'react'
 import { Class } from 'utils'
 import { weekAlternance } from 'types/weekAlternance'
 import { classColor } from 'types/classColor'
+import allColors from 'data/allColors'
 
 export interface SettingsClassProps {
     class_: Class
@@ -40,13 +41,17 @@ const SettingsClass = (props: SettingsClassProps) => {
         setEdit(undefined)
     }
 
+    const forceEditUpdate = () => {
+        setEdit(Object.assign(Object.create(Object.getPrototypeOf(edit)), edit))
+    }
+
     return <div className='settings-class'>
         {edit ? <div className={`class-slot ${edit.color}`}>
             <div>{class_.prettyPrint()}</div>
             <div className="settings-class-editable-inputs">
                 <div className="settings-class-editable-input">
                     <label htmlFor="UVname">Nom de l'UV</label>
-                    <input name="UVname" type='text' defaultValue={edit.UVname} onChange={(e) => edit.UVname = e.target.value} />
+                    <input name="UVname" type='text' defaultValue={edit.UVname} onChange={(e) => {edit.UVname = e.target.value; forceEditUpdate()}} />
                 </div>
                 
                 <div className="settings-class-editable-input">
@@ -102,8 +107,8 @@ const SettingsClass = (props: SettingsClassProps) => {
 
                 <div className="settings-class-editable-input">
                     <label htmlFor="color">Couleur</label>
-                    <select name="color" defaultValue={edit.color} onChange={(e) => edit.color= e.target.value as classColor} >
-                        {['lagon', 'starfall', 'orange-coral', 'sulfur', 'barbapapa', 'cool-blues' ].map((color) => <option value={color}>{color}</option>)}
+                    <select name="color" defaultValue={edit.color} onChange={(e) => {edit.color = e.target.value as classColor; forceEditUpdate()}} >
+                        {allColors.map((color) => <option value={color}>{color}</option>)}
                     </select>
                 </div>
             </div>

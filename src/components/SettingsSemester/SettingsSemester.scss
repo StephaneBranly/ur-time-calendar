@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 01:11:50 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:46:35 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -29,8 +29,8 @@
     color: white;
     border-radius: 5px;
     height: 20px;
-    font-size: 12px;
-    padding: 0 5px;
+    font-size: 14px;
+    padding: 2px 5px;
     margin: 10px;
 
     &.finaux {
@@ -48,4 +48,23 @@
     &.vacances{
         background-color: rgb(124, 135, 197) 
     }
+}
+
+.settings-week-alternance {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: stretch;
+    align-items: stretch;
+    align-content: stretch;
+    margin: 10px 0;
+}
+
+.settings-week-alternance-a {
+    border-left: 10px solid rgb(231, 46, 5);
+    padding: 0 5px;
+}
+.settings-week-alternance-b {
+    border-left: 10px solid rgb(0, 11, 218);
+    padding: 0 5px;
 }

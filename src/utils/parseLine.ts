@@ -8,16 +8,16 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/10 22:32:27 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 23:32:38 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
+import allColors from 'data/allColors'
 import { classColor } from 'types/classColor'
 import { Class, parseDay } from 'utils'
+// import math
 
-const parseLine = (line: string, uvs: string[]): Class[] | undefined => {
-    const colors: classColor[] = ['barbapapa', 'cool-blues', 'lagon', 'orange-coral', 'sulfur', 'starfall']
-
+const parseLine = (line: string, uvsColors: Record<string, classColor>): Class[] | undefined => {
     const match = line.match(
         /([A-Z0-9]{4})\s*(([A-Z]{1})\s([0-9]*)|([A-Z]{1})([0-9]*))\s([AB])?\s*([A-Z.]*)\s([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2}),(F[0-9]),S=([A-Z0-9]*)(\s*\/([A-Z.]*)\s([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2}),(F[0-9]),S=([A-Z0-9]*))?/
     )
@@ -31,7 +31,9 @@ const parseLine = (line: string, uvs: string[]): Class[] | undefined => {
         const end = match[10]
         const place = match[12]
         const frequence = match[11]
-        const color = uvs.includes(UVname) ? colors[uvs.indexOf(UVname)] : colors[(uvs.length % colors.length)]
+        const color = (UVname in uvsColors ? uvsColors[UVname] : allColors[Math.floor(Math.random() * allColors.length)]) as classColor
+        // const color = allColors[Math.floor(Math.random() * allColors.length)] as classColor
+        // const color ='reef'
         const classes = [new Class({
             UVname,
             classType,

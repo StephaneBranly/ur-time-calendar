@@ -1,49 +1,15 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     SettingsClass.scss                                 ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     notifType.d.ts                                     ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:39:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:26:57 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-.settings-class {
-    & > .class-slot {
-        padding: 10px;
-    }
-}
-
-.settings-class-editable-inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: stretch;
-    margin: 10px 0;
-    padding: 10px;
-    gap: 10px;
-}
-
-.settings-class-editable-input {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-between;
-    border-radius: 10px;
-
-    & input, & select {
-        background-color: rgb(255, 255, 255);
-        border: 0px solid rgba(0,0,0,0);
-        padding: 5px;
-        &:focus {
-            outline: none
-        }
-    }
-}
+export type notifType = 'success' | 'error' | 'warning' | 'info' | undefined

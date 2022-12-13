@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 22:26:05 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:42:09 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -89,8 +89,13 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
             L'admin s'occupe de la gestion des semestres, vous n'avez pas (encore) besoin de les importer vous même!
         </div>
         <div className="settings-section">
-            
+            <div className="settings-subtitle">Semestre {semesterPlanning.semesterName}</div>
+            <div className='settings-week-alternance'>
+                <div className='settings-week-alternance-a'>Semaine A</div>
+                <div className='settings-week-alternance-b'>Semaine B</div>
+            </div>
             <div className="settings-semester">
+
             {renderDays()}
             </div>
         </div>

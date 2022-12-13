@@ -8,22 +8,23 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/09/11 23:53:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 23:22:25 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
+import { classColor } from 'types/classColor'
 import { Class, parseLine } from 'utils'
 
 const parseMail = (content: string): Class[] => {
     const lines = content.split('\n')
     const classes: Class[] = []
-    const uvs: string[] = []
+    const uvsColors: Record<string, classColor> = {}
     lines.forEach((line) => {
-        const results = parseLine(line, uvs)
+        const results = parseLine(line, uvsColors)
         if (results) {
             classes.push(...results)
-            if (!uvs.includes(results[0].UVname)) {
-                uvs.push(results[0].UVname)
+            if (!(results[0].UVname in uvsColors)) {
+                uvsColors[results[0].UVname] = results[0].color
             }
         }
     })

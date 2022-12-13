@@ -1,49 +1,17 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     SettingsClass.scss                                 ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     allColors.ts                                       ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:39:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 23:13:14 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-.settings-class {
-    & > .class-slot {
-        padding: 10px;
-    }
-}
+const allColors = ['lagon', 'starfall', 'orange-coral', 'sulfur', 'barbapapa', 'cool-blues', 'amethyst', 'park-life', 'cherryblossoms', 'reef', 'candy', 'nelson', 'almost', 'miaka', 'calm-darya', 'juicy-orange']
 
-.settings-class-editable-inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: stretch;
-    margin: 10px 0;
-    padding: 10px;
-    gap: 10px;
-}
-
-.settings-class-editable-input {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-between;
-    border-radius: 10px;
-
-    & input, & select {
-        background-color: rgb(255, 255, 255);
-        border: 0px solid rgba(0,0,0,0);
-        padding: 5px;
-        &:focus {
-            outline: none
-        }
-    }
-}
+export default allColors

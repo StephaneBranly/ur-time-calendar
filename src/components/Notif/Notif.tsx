@@ -1,49 +1,36 @@
 /* *********************************************************************************************************************** */
 /*  UTC Header                                                                                                             */
 /*                                                        ::::::::::::::::::::       :::    ::: :::::::::::  ::::::::      */
-/*     SettingsClass.scss                                 ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
+/*     Notif.tsx                                          ::::::::::::::::::::       :+:    :+:     :+:     :+:    :+:     */
 /*                                                        ::::::::::::::+++#####+++  +:+    +:+     +:+     +:+            */
 /*     By: branlyst <stephane.branly@etu.utc.fr>          ::+++##############+++     +:+    +:+     +:+     +:+            */
 /*     https://github.com/StephaneBranly              +++##############+++::::       +#+    +:+     +#+     +#+            */
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:39:17 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:34:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
-.settings-class {
-    & > .class-slot {
-        padding: 10px;
-    }
+import { notifType } from 'types/notifType'
+import './Notif.scss'
+
+export interface NotifProps {
+    setOpen: (open: boolean) => void
+    isOpen: boolean
+    notif?: [string, notifType]
 }
 
-.settings-class-editable-inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: stretch;
-    margin: 10px 0;
-    padding: 10px;
-    gap: 10px;
+const Notif = (props: NotifProps) => {
+    const { setOpen, isOpen, notif } = props
+
+    if (!isOpen || !notif)
+        return null
+    return (
+        <div className={`notif ${notif[1]}`} onClick={() => setOpen(false)}>
+            {notif[0]}
+        </div>
+    )
 }
 
-.settings-class-editable-input {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-between;
-    border-radius: 10px;
-
-    & input, & select {
-        background-color: rgb(255, 255, 255);
-        border: 0px solid rgba(0,0,0,0);
-        padding: 5px;
-        &:focus {
-            outline: none
-        }
-    }
-}
+export default Notif

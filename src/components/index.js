@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/11 00:43:07 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/12 22:21:53 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -19,4 +19,5 @@ import ClassSlot from './ClassSlot/ClassSlot'
 import SettingsClasses from './SettingsClasses/SettingsClasses'
 import SettingsClass from './SettingsClass/SettingsClass'
 import SettingsSemester from './SettingsSemester/SettingsSemester'
-export { PasteMail, Calendar, Settings, ClassSlot, SettingsClasses, SettingsClass, SettingsSemester }
+import Notif from './Notif/Notif'
+export { PasteMail, Calendar, Settings, ClassSlot, SettingsClasses, SettingsClass, SettingsSemester, Notif }
