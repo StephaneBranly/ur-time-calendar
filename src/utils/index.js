@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 13:34:08 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:30:01 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -26,7 +26,7 @@ import SemesterPlanning from './SemesterPlanning'
 import DaySemesterOrganization from './DaySemesterOrganization'
 import parseSemester from './parseSemester'
 import isKifyAccepted from './isKifyAccepted'
-import toICS from './toICS'
+import { classesToICS, examsToICS} from './toICS'
 import saveFile from './saveFile'
 import loadFromLocalStorage from './loadFromLocalStorage'
 import parseCache from './parseCache'
@@ -47,7 +47,8 @@ export {
     DaySemesterOrganization,
     parseSemester,
     isKifyAccepted,
-    toICS,
+    classesToICS,
+    examsToICS,
     saveFile,
     loadFromLocalStorage,
     parseCache,

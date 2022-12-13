@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 13:23:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:19:47 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -46,7 +46,6 @@ const SettingsExam = (props: SettingsExamProps) => {
     const handlerSetDate = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!edit) return
         const splitted = e.target.value.split('-')
-        console.log(splitted)
         const startDate = new Date(Number(splitted[0]), Number(splitted[1])-1, Number(splitted[2]))
         const endDate = new Date(Number(splitted[0]), Number(splitted[1])-1, Number(splitted[2]))
         startDate.setMinutes(edit.start.getMinutes())
@@ -70,7 +69,7 @@ const SettingsExam = (props: SettingsExamProps) => {
         }
     }
 
-    return <div className='settings-class'>
+    return <div className='settings-exam'>
         {edit ? <div className={`exam-slot`}>
             <div>{exam.prettyPrint()}</div>
             <div className="settings-exam-editable-inputs">
@@ -93,10 +92,10 @@ const SettingsExam = (props: SettingsExamProps) => {
                     <input name="place" type='text' defaultValue={edit.place} onChange={(e) => edit.place= e.target.value}/>
                 </div>
 
-                <div className="settings-exam-editable-input">
+                {edit.type === 'final' && <div className="settings-exam-editable-input">
                     <label htmlFor="seet">Place</label>
                     <input name="seet" type='text' defaultValue={edit.seet} onChange={(e) => edit.seet= e.target.value}/>
-                </div>
+                </div>}
 
             </div>
             <div className='settings-grouped-buttons'>

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 12:19:43 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:21:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -28,9 +28,13 @@ const parseExamsLine = (line: string, type: 'médian' | 'final'): Exam | undefin
         const place = match[7]
         const seet = match[8]
 
-        const startDate = new Date(year, month, day, parseInt(startTime.split(':')[0]), parseInt(startTime.split(':')[1]))
+        const startDate = new Date(year, month, day)
+        startDate.setHours(parseInt(startTime.split(':')[0]))
+        startDate.setMinutes(parseInt(startTime.split(':')[1]))
 
-        const endDate = new Date(year, month, day, parseInt(endTime.split(':')[0]), parseInt(endTime.split(':')[1]))
+        const endDate = new Date(year, month, day)
+        endDate.setHours(parseInt(endTime.split(':')[0]))
+        endDate.setMinutes(parseInt(endTime.split(':')[1]))
 
         const exam = new Exam({
             UVname,

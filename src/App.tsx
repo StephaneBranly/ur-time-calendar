@@ -8,14 +8,14 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 13:16:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:46:40 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Notif, Settings } from 'components'
-import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning, Exam } from 'utils'
+import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning, Exam, parseClassesMail } from 'utils'
 import { getA22organization } from 'data'
 import { notifType } from 'types/notifType'
 
@@ -24,7 +24,7 @@ function App() {
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
         useState<SemesterPlanning>(getA22organization)
-    const [notif, setNotif] = useState<[string, notifType] | undefined>(['Hello world', 'info'])
+    const [notif, setNotif] = useState<[string, notifType] | undefined>(undefined)
 
     const setOpen = (open: boolean) => {
         if (!open)
@@ -40,14 +40,14 @@ function App() {
     }
 
     useEffect(() => {
-        const a22Classes = loadFromLocalStorage('a22-classes')
-        if (a22Classes) {
-            const result = parseCache(a22Classes, "Classes")
+        const Classes = loadFromLocalStorage('classes')
+        if (Classes) {
+            const result = parseCache(Classes, "Classes")
             setClasses(result)
         }
-        const a22Exams = loadFromLocalStorage('a22-exams')
-        if (a22Exams) {
-            const result = parseCache(a22Exams, "Exams")
+        const Exams = loadFromLocalStorage('exams')
+        if (Exams) {
+            const result = parseCache(Exams, "Exams")
             setExams(result)
         }
     }, [])
@@ -55,7 +55,7 @@ function App() {
     const handlerSetClasses = (classes: Class[]) => {
         const to_string = JSON.stringify(classes)
         setClasses(parseCache(to_string, "Classes")) // only way found to force update when changing class name
-        const r = saveToCache(JSON.stringify(classes), "a22-classes")
+        const r = saveToCache(JSON.stringify(classes), "classes")
         if (r)
             handlerSetNotifs(['Classes sauvegardées', 'success'])
         else
@@ -63,8 +63,9 @@ function App() {
     }
 
     const handlerSetExams = (exams: Exam[]) => {
-        setExams(exams)
-        const r = saveToCache(JSON.stringify(exams), "a22-exams")
+        const to_string = JSON.stringify(exams)
+        setExams(parseCache(to_string, "Exams")) // only way found to force update when changing class name
+        const r = saveToCache(JSON.stringify(exams), "exams")
         if (r)
             handlerSetNotifs(['Examens sauvegardées', 'success'])
         else
@@ -81,7 +82,7 @@ function App() {
                 />
             </div>
             <Settings
-                defaultOpenValue={loadFromLocalStorage('a22-classes') ? false : true}
+                defaultOpenValue={loadFromLocalStorage('classes') ? false : true}
                 setClasses={handlerSetClasses}
                 classes={classes}
                 setExams={handlerSetExams}

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 12:19:28 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:15:06 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,7 +16,7 @@
 export default class Exam {
     private _UVname: string
     private _place: string
-    private _seet: string
+    private _seet?: string
     private _start: Date
     private _end: Date
     private _type: 'médian' | 'final'
@@ -27,7 +27,7 @@ export default class Exam {
             start: Date,
             end: Date,
             place: string,
-            seet: string
+            seet?: string
             type: 'médian' | 'final',
         }
     ) {
@@ -71,7 +71,7 @@ export default class Exam {
         return this._seet
     }
 
-    set seet(value: string) {
+    set seet(value: string | undefined) {
         this._seet = value
     }
 

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/12 23:37:07 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:30:16 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,7 +16,7 @@ import './SettingsClasses.scss'
 
 import { PasteMail, SettingsClass } from 'components'
 import { useState } from 'react'
-import { Class, saveFile, SemesterPlanning, toICS } from 'utils'
+import { Class, saveFile, SemesterPlanning, classesToICS } from 'utils'
 
 export interface SettingsClassesProps {
     classes: Class[]
@@ -73,7 +73,7 @@ const SettingsClasses = (props: SettingsClassesProps) => {
         <div className='settings-section settings-grouped-buttons'>
             <button onClick={() => handlerDeleteClasses()}>Supprimer</button>
             <button 
-                onClick={() => saveFile('calendrier.ics', toICS(semesterPlanning, classes))}>
+                onClick={() => saveFile('calendrier.ics', classesToICS(semesterPlanning, classes))}>
                     Exporter au format .ics
             </button>
         </div>
@@ -97,7 +97,7 @@ const SettingsClasses = (props: SettingsClassesProps) => {
             place: "BF100",
             frequence: '1',
             week: undefined,
-            color: undefined,
+            color: 'lagon',
         }))}>Ajouter une classe</button>
         </div>
         </>

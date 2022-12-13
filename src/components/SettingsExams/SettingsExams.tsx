@@ -8,13 +8,13 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 13:35:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:37:49 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
 import { SettingsExam } from 'components'
 import { createRef } from 'react'
-import { Exam, parseExamsMail, printDate, SemesterPlanning } from 'utils'
+import { Exam, parseExamsMail, printDate, SemesterPlanning, examsToICS, saveFile } from 'utils'
 import './SettingsExams.scss'
 
 export interface SettingsExamsProps {
@@ -43,6 +43,25 @@ const SettingsExams = (props: SettingsExamsProps) => {
         setExams([...filtered, newExam])
     }
 
+    const addExam = (type: "médian" | "final") => {
+        const start = new Date()
+        start.setHours(8)
+        start.setMinutes(0)
+        const end = new Date()
+        end.setHours(10)
+        end.setMinutes(0)
+
+        setExam(undefined, new Exam({
+            UVname: "YZ89",
+            type: type,
+            start: start,
+            end: end,
+            place: "HDS",
+            seet: type==='final' ? 'place 1' : undefined
+        }))
+    }
+
+
     const placeHolder = `MT12	11/01/2021	de 08:00	à 09:30	SI S ASP	place 131
     LO21	15/01/2021	de 08:00	à 09:30	SI S ASP	place 151
     IA01	12/01/2021	de 08:00	à 09:30	SI S ASP	place 203
@@ -61,6 +80,7 @@ const SettingsExams = (props: SettingsExamsProps) => {
     return (<>
         <div className="settings-section">
             <h2 className="settings-subtitle">Médians - du {printDate(startMedian)} au {printDate(endMedian)}</h2>
+            {medianExams.length!==0 && <button onClick={() => saveFile('medians.ics', examsToICS(medianExams))}>Exporter au format .ics</button>}
             <div className='settings-all-exams'>
                 {medianExams.map(
                     (exam, index) => (
@@ -68,46 +88,27 @@ const SettingsExams = (props: SettingsExamsProps) => {
                     )
                 )}
             </div>
-            <button onClick={() => setExam(undefined, new Exam({
-            UVname: "YZ89",
-            type: "médian",
-            start: new Date(),
-            end: new Date(),
-            place: "HDS",
-            seet: '1'
-        }))}>Ajouter un médian</button>
+            <button onClick={() => addExam('médian')}>Ajouter un médian</button>
         </div>
         <div className="settings-section">
             <h2 className="settings-subtitle">Finaux - du {printDate(startFinal)} au {printDate(endFinal)}</h2>
             {finalExams.length === 0 ? <><textarea
-                className="settings-textarea"
+                className="pastemail_exams-textarea"
                 ref={ref}
                 placeholder={placeHolder}
             />
-            <button onClick={handlerLoadData}>Charger</button> <button onClick={() => setExam(undefined, new Exam({
-                UVname: "YZ89",
-                type: "final",
-                start: new Date(),
-                end: new Date(),
-                place: "HDS",
-                seet: '1'
-            }))}>Ajouter un final</button></>
+            <button onClick={handlerLoadData}>Charger</button> <button onClick={() => addExam('final')}>Ajouter un final</button></>
             :
-            <><div className='settings-all-exams'>
+            <>
+                <button onClick={() => saveFile('finaux.ics', examsToICS(finalExams))}>Exporter au format .ics</button>
+                <div className='settings-all-exams'>
                 {finalExams.map(
                         (exam, index) => (
                             <SettingsExam exam={exam} setExam={(newExam) => setExam(exam, newExam)} key={index} />
                         )
                     )}
                 </div>
-                <button onClick={() => setExam(undefined, new Exam({
-                UVname: "YZ89",
-                type: "final",
-                start: new Date(),
-                end: new Date(),
-                place: "HDS",
-                seet: '1'
-            }))}>Ajouter un final</button></>}
+                <button onClick={() => addExam('final')}>Ajouter un final</button></>}
         </div>
         </>
     )

@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 13:29:58 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/13 14:47:02 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -42,6 +42,7 @@ const Settings = (props: SettingsProps) => {
 
         if (e.target.checked) {
             setClasses(classes)
+            setExams(exams)
         }
     }
 
@@ -51,6 +52,8 @@ const Settings = (props: SettingsProps) => {
         )
         if (confirmed) {
             localStorage.removeItem('a22-schedule')
+            localStorage.removeItem('classes')
+            localStorage.removeItem('exams')
             localStorage.removeItem('view')
         }
     }
