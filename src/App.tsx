@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 18:03:50 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/26 16:09:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -16,14 +16,14 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Notif, Settings } from 'components'
 import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning, Exam, parseClassesMail } from 'utils'
-import { getA22organization } from 'data'
 import { notifType } from 'types/notifType'
+import getP23organization from 'data/getP23organization'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getA22organization)
+        useState<SemesterPlanning>(getP23organization)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(undefined)
 
     const setOpen = (open: boolean) => {
