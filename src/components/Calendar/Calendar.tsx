@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/13 18:25:37 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2022/12/26 16:23:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -110,7 +110,9 @@ const Calendar = (props: CalendarProps) => {
                         className={`calendar-legend-day col-start-${
                             index * 2 + 2
                         } col-end-${index * 2 + 4} ${
-                            isTypicalView ? '' : semesterPlanning.getWeekAlternance(day) === 'A'
+                            isTypicalView || 
+                            (extraLabel!== '' && !semesterPlanning.isMedian(day)) || 
+                            day.getDay() === 0 ? '' : semesterPlanning.getWeekAlternance(day) === 'A'
                                 ? 'week-a'
                                 : 'week-b'
                         }`}
