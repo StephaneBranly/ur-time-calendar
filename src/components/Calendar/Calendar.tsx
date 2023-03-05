@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/26 16:23:26 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2023/03/05 13:36:42 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -292,7 +292,9 @@ const Calendar = (props: CalendarProps) => {
         if (week) {
             const mondayOfWeek = getMonday(selectedDate)
 
-            return `Semaine du ${mondayOfWeek.getDate()} ${stringMonthName}`
+            return `Semaine du ${mondayOfWeek.getDate()} ${mondayOfWeek.toLocaleDateString('fr-FR', {
+                month: 'long',
+            })}`
         }
         const stringDayName = getDayLabel(selectedDate)
         return `${stringDayName} ${selectedDate.getDate()} ${stringMonthName}`
