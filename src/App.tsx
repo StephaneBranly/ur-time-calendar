@@ -8,7 +8,7 @@
 /*                                                      +++##+++::::::::::::::       +#+    +:+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       +#+    +#+     +#+     +#+            */
 /*                                                        ::::::::::::::::::::       #+#    #+#     #+#     #+#    #+#     */
-/*     Update: 2022/12/26 16:09:03 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
+/*     Update: 2023/09/03 17:28:45 by branlyst            ::::::::::::::::::::        ########      ###      ######## .fr  */
 /*                                                                                                                         */
 /* *********************************************************************************************************************** */
 
@@ -17,13 +17,13 @@ import './App.css'
 import { Calendar, Notif, Settings } from 'components'
 import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning, Exam, parseClassesMail } from 'utils'
 import { notifType } from 'types/notifType'
-import getP23organization from 'data/getP23organization'
+import getA23organization from 'data/getA23organization'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getP23organization)
+        useState<SemesterPlanning>(getA23organization)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(undefined)
 
     const setOpen = (open: boolean) => {
