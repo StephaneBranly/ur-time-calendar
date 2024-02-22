@@ -17,13 +17,13 @@ import './App.css'
 import { Calendar, Notif, Settings } from 'components'
 import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning, Exam, parseClassesMail } from 'utils'
 import { notifType } from 'types/notifType'
-import getA23organization from 'data/getA23organization'
+import getP24organization from 'data/getP24organization'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getA23organization)
+        useState<SemesterPlanning>(getP24organization)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(undefined)
 
     const setOpen = (open: boolean) => {
