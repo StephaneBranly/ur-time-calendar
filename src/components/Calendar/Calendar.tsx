@@ -37,7 +37,9 @@ export interface CalendarProps {
 const Calendar = (props: CalendarProps) => {
     const { classes, semesterPlanning, exams } = props
 
-    const [view, setView] = useState<string>(isKifyAccepted() ? localStorage.getItem('view') ?? 'day' : 'day')
+    const [view, setView] = useState<string>(
+        isKifyAccepted() ? localStorage.getItem('view') ?? 'day' : 'day'
+    )
     const [selectedSlot, setSelectedSlot] = useState<Class | Exam | undefined>(
         undefined
     )
@@ -103,19 +105,33 @@ const Calendar = (props: CalendarProps) => {
                 : ''
             const rowStartIndex = timeToRowIndex(7, 0)
             const rowEndIndex = timeToRowIndex(20, 0)
-            const replaceDay = isTypicalView ? undefined : semesterPlanning.becomesA(day)
+            const replaceDay = isTypicalView
+                ? undefined
+                : semesterPlanning.becomesA(day)
+            console.log(
+                day.toDateString(),
+                new Date().toDateString(),
+                day.toDateString() === new Date().toDateString()
+            )
+            const isToday = isTypicalView
+                ? false
+                : day.toDateString() === new Date().toDateString()
             return (
                 <Fragment key={index}>
                     <div
                         className={`calendar-legend-day col-start-${
                             index * 2 + 2
                         } col-end-${index * 2 + 4} ${
-                            isTypicalView || 
-                            (extraLabel!== '' && !semesterPlanning.isMedian(day)) || 
-                            day.getDay() === 0 ? '' : semesterPlanning.getWeekAlternance(day) === 'A'
+                            isTypicalView ||
+                            (extraLabel !== '' &&
+                                !semesterPlanning.isMedian(day)) ||
+                            day.getDay() === 0
+                                ? ''
+                                : semesterPlanning.getWeekAlternance(day) ===
+                                  'A'
                                 ? 'week-a'
                                 : 'week-b'
-                        }`}
+                        } ${isToday ? 'today' : ''}`}
                     >
                         {getDayLabel(day)} {!isTypicalView && day.getDate()}{' '}
                         {replaceDay && ` (${replaceDay})`}
@@ -137,36 +153,50 @@ const Calendar = (props: CalendarProps) => {
         })
     }
 
-    const renderExams= () => {
+    const renderExams = () => {
         const isADayView = view === 'day'
         return getDaysDatesToRender().map((day) => {
             const filtered = exams.filter(
                 (e) =>
-                    e.start.getDate() === day.getDate() && e.start.getMonth() === day.getMonth() && e.start.getFullYear() === day.getFullYear()
+                    e.start.getDate() === day.getDate() &&
+                    e.start.getMonth() === day.getMonth() &&
+                    e.start.getFullYear() === day.getFullYear()
             )
             return filtered.map((exam, index) => {
-                const dayIndex = daysIndex[exam.start.toLocaleDateString('fr-FR', {
-                    weekday: 'long',
-                }).toUpperCase()]
+                const dayIndex =
+                    daysIndex[
+                        exam.start
+                            .toLocaleDateString('fr-FR', {
+                                weekday: 'long',
+                            })
+                            .toUpperCase()
+                    ]
 
-                const rowStartIndex = timeToRowIndex(exam.start.getHours(), exam.start.getMinutes())
-                const rowEndIndex = timeToRowIndex(exam.end.getHours(), exam.end.getMinutes())
+                const rowStartIndex = timeToRowIndex(
+                    exam.start.getHours(),
+                    exam.start.getMinutes()
+                )
+                const rowEndIndex = timeToRowIndex(
+                    exam.end.getHours(),
+                    exam.end.getMinutes()
+                )
                 var colStartIndex = isADayView ? 2 : dayIndex * 2 + 2
                 var colEndIndex = isADayView ? 4 : dayIndex * 2 + 4
-                
-                
+
                 return (
-                    <ExamSlot unit={exam} key={index}
-                    colStartIndex={colStartIndex}
-                    colEndIndex={colEndIndex}
-                    rowStartIndex={rowStartIndex}
-                    rowEndIndex={rowEndIndex}
-                    selected={selectedSlot === exam}
-                    setSelected={() =>
-                        setSelectedSlot(
-                            selectedSlot === exam ? undefined : exam
-                        )
-                    }
+                    <ExamSlot
+                        unit={exam}
+                        key={index}
+                        colStartIndex={colStartIndex}
+                        colEndIndex={colEndIndex}
+                        rowStartIndex={rowStartIndex}
+                        rowEndIndex={rowEndIndex}
+                        selected={selectedSlot === exam}
+                        setSelected={() =>
+                            setSelectedSlot(
+                                selectedSlot === exam ? undefined : exam
+                            )
+                        }
                     />
                 )
             })
@@ -225,8 +255,8 @@ const Calendar = (props: CalendarProps) => {
         return getDaysDatesToRender().map((day) => {
             if (
                 (semesterPlanning.isExam(day) ||
-                semesterPlanning.isFerie(day) ||
-                semesterPlanning.isHoliday(day)) &&
+                    semesterPlanning.isFerie(day) ||
+                    semesterPlanning.isHoliday(day)) &&
                 !isTypicalView
             )
                 return null
@@ -235,9 +265,12 @@ const Calendar = (props: CalendarProps) => {
                     ((!semesterPlanning.becomesA(day) &&
                         c.day === getDayLabel(day).toUpperCase()) ||
                         semesterPlanning.becomesA(day)?.toUpperCase() ===
-                            c.day || (isTypicalView && c.day === getDayLabel(day).toUpperCase())) &&
+                            c.day ||
+                        (isTypicalView &&
+                            c.day === getDayLabel(day).toUpperCase())) &&
                     (c.week === undefined ||
-                        c.week === semesterPlanning.getWeekAlternance(day) || isTypicalView)
+                        c.week === semesterPlanning.getWeekAlternance(day) ||
+                        isTypicalView)
             )
             return filtered.map((unit: Class, index) => {
                 const dayLabel = getDayLabel(day).toUpperCase()
@@ -292,14 +325,16 @@ const Calendar = (props: CalendarProps) => {
         if (week) {
             const mondayOfWeek = getMonday(selectedDate)
 
-            return `Semaine du ${mondayOfWeek.getDate()} ${mondayOfWeek.toLocaleDateString('fr-FR', {
-                month: 'long',
-            })}`
+            return `Semaine du ${mondayOfWeek.getDate()} ${mondayOfWeek.toLocaleDateString(
+                'fr-FR',
+                {
+                    month: 'long',
+                }
+            )}`
         }
         const stringDayName = getDayLabel(selectedDate)
         return `${stringDayName} ${selectedDate.getDate()} ${stringMonthName}`
     }
-
 
     // Mobile swipes management
     const [touchStart, setTouchStart] = useState(0)
@@ -315,39 +350,47 @@ const Calendar = (props: CalendarProps) => {
     }
 
     function handleTouchEnd() {
-        if (touchStart - touchEnd > 100)
-            handlerMoveDate(1)
-        if (touchStart - touchEnd < -100) 
-            handlerMoveDate(-1)
+        if (touchStart - touchEnd > 100) handlerMoveDate(1)
+        if (touchStart - touchEnd < -100) handlerMoveDate(-1)
     }
 
     return (
-        <div className="calendar-fragment"
-            onTouchStart={touchStartEvent => handleTouchStart(touchStartEvent)}
-            onTouchMove={touchMoveEvent =>  handleTouchMove(touchMoveEvent)}
+        <div
+            className="calendar-fragment"
+            onTouchStart={(touchStartEvent) =>
+                handleTouchStart(touchStartEvent)
+            }
+            onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
             onTouchEnd={() => handleTouchEnd()}
-            >
+        >
             <div className="calendar-header">
                 <div className="calendar-current-date">
-                    {view !== 'typical' && (<>
-                    <div
-                        className="calendar-current-date-before"
-                        onClick={() => handlerMoveDate(-1)}
-                    >
-                        <BsCaretLeft />
-                    </div>
-                    <div className="calendar-current-date-label">
-                        {displaySelectedDate()}
-                    </div>
-                    <div
-                        className="calendar-current-date-after"
-                        onClick={() => handlerMoveDate(1)}
-                    >
-                        <BsCaretRight />
-                    </div></>)}
+                    {view !== 'typical' && (
+                        <>
+                            <div
+                                className="calendar-current-date-before"
+                                onClick={() => handlerMoveDate(-1)}
+                            >
+                                <BsCaretLeft />
+                            </div>
+                            <div className="calendar-current-date-label">
+                                {displaySelectedDate()}
+                            </div>
+                            <div
+                                className="calendar-current-date-after"
+                                onClick={() => handlerMoveDate(1)}
+                            >
+                                <BsCaretRight />
+                            </div>
+                        </>
+                    )}
                 </div>
                 <div className="calendar-mode">
-                    <select className="calendar-mode-selector" onChange={(e) => handlerSetView(e.target.value)} defaultValue={view}>
+                    <select
+                        className="calendar-mode-selector"
+                        onChange={(e) => handlerSetView(e.target.value)}
+                        defaultValue={view}
+                    >
                         <option value="day">Au jour</option>
                         <option value="compact">Semaine compacte</option>
                         <option value="complete">Semaine complète</option>

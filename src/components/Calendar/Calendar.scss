@@ -71,7 +71,7 @@ $max-rows: (21 - 7) * 4;
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 2000px rgb(255, 255, 255);
     background: inherit;
     z-index: 1;
 }
@@ -83,6 +83,11 @@ $max-rows: (21 - 7) * 4;
     }
     &.week-b {
         border-bottom: 4px solid rgb(0, 11, 218);
+    }
+
+    &.today {
+        color: rgb(107, 44, 254);
+        font-weight: 700;
     }
 }
 
@@ -112,7 +117,7 @@ $max-columns: 16;
     gap: 10px;
     justify-content: space-between;
     color: rgb(83, 83, 83);
-    
+
     & > div {
         display: flex;
         flex-direction: row;
@@ -140,7 +145,6 @@ $max-columns: 16;
     color: rgb(83, 83, 83);
     border: 0px solid rgba(255, 255, 255, 0.5);
 }
-
 
 .calendar-current-date div:hover {
     cursor: pointer;
@@ -210,7 +214,8 @@ $max-columns: 16;
         );
     }
 
-    &.Finaux, &.Médians {
+    &.Finaux,
+    &.Médians {
         background-color: rgba(217, 0, 87, 0.424);
     }
 }

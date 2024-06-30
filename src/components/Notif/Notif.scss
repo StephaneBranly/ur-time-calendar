@@ -19,6 +19,7 @@
     z-index: 100;
     border-radius: 10px 0 0 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fdfdfd;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -31,15 +32,15 @@
         display: none;
     }
     &.success {
-        background-color: #54ef5491;
+        color: #32a332;
     }
     &.error {
-        background-color: #e42525d1;
+        color: #ba1c1c;
     }
     &.warning {
-        background-color: #f9bb1fec;
+        color: #dca51a;
     }
     &.info {
-        background-color: #1f79d4d2;
+        color: #1f79d4;
     }
 }

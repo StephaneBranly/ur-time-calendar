@@ -15,7 +15,15 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Calendar, Notif, Settings } from 'components'
-import { Class, loadFromLocalStorage, parseCache, saveToCache, SemesterPlanning, Exam, parseClassesMail } from 'utils'
+import {
+    Class,
+    loadFromLocalStorage,
+    parseCache,
+    saveToCache,
+    SemesterPlanning,
+    Exam,
+    parseClassesMail,
+} from 'utils'
 import { notifType } from 'types/notifType'
 import getP24organization from 'data/getP24organization'
 
@@ -24,30 +32,30 @@ function App() {
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
         useState<SemesterPlanning>(getP24organization)
-    const [notif, setNotif] = useState<[string, notifType] | undefined>(undefined)
+    const [notif, setNotif] = useState<[string, notifType] | undefined>(
+        undefined
+    )
 
     const setOpen = (open: boolean) => {
-        if (!open)
-            setNotif(undefined)
+        if (!open) setNotif(undefined)
     }
 
     const handlerSetNotifs = (notif: [string, notifType]) => {
         setNotif(notif)
         setTimeout(() => {
             setNotif(undefined)
-        }
-        ,2000)
+        }, 4000)
     }
 
     useEffect(() => {
         const Classes = loadFromLocalStorage('classes')
         if (Classes) {
-            const result = parseCache(Classes, "Classes")
+            const result = parseCache(Classes, 'Classes')
             setClasses(result)
         }
         const Exams = loadFromLocalStorage('exams')
         if (Exams) {
-            const result = parseCache(Exams, "Exams")
+            const result = parseCache(Exams, 'Exams')
             setExams(result)
         }
 
@@ -55,31 +63,34 @@ function App() {
         if (oldClasses) {
             const result = parseClassesMail(oldClasses)
             setClasses(result)
-            const r = saveToCache(JSON.stringify(result), "classes")
-            if (r)
-                handlerSetNotifs(['Classes sauvegardées', 'success'])
+            const r = saveToCache(JSON.stringify(result), 'classes')
+            if (r) handlerSetNotifs(['Classes sauvegardées', 'success'])
             localStorage.removeItem('a22-schedule')
         }
     }, [])
 
     const handlerSetClasses = (classes: Class[]) => {
         const to_string = JSON.stringify(classes)
-        setClasses(parseCache(to_string, "Classes")) // only way found to force update when changing class name
-        const r = saveToCache(JSON.stringify(classes), "classes")
-        if (r)
-            handlerSetNotifs(['Classes sauvegardées', 'success'])
+        setClasses(parseCache(to_string, 'Classes')) // only way found to force update when changing class name
+        const r = saveToCache(JSON.stringify(classes), 'classes')
+        if (r) handlerSetNotifs(['Classes sauvegardées', 'success'])
         else
-            handlerSetNotifs(['Accepte la mise en cache pour sauvegarder', 'warning'])
+            handlerSetNotifs([
+                'Accepte la mise en cache pour sauvegarder',
+                'warning',
+            ])
     }
 
     const handlerSetExams = (exams: Exam[]) => {
         const to_string = JSON.stringify(exams)
-        setExams(parseCache(to_string, "Exams")) // only way found to force update when changing class name
-        const r = saveToCache(JSON.stringify(exams), "exams")
-        if (r)
-            handlerSetNotifs(['Examens sauvegardées', 'success'])
+        setExams(parseCache(to_string, 'Exams')) // only way found to force update when changing class name
+        const r = saveToCache(JSON.stringify(exams), 'exams')
+        if (r) handlerSetNotifs(['Examens sauvegardées', 'success'])
         else
-            handlerSetNotifs(['Accepte la mise en cache pour sauvegarder', 'warning'])
+            handlerSetNotifs([
+                'Accepte la mise en cache pour sauvegarder',
+                'warning',
+            ])
     }
 
     return (
@@ -92,14 +103,20 @@ function App() {
                 />
             </div>
             <Settings
-                defaultOpenValue={loadFromLocalStorage('classes') ? false : true}
+                defaultOpenValue={
+                    loadFromLocalStorage('classes') ? false : true
+                }
                 setClasses={handlerSetClasses}
                 classes={classes}
                 setExams={handlerSetExams}
                 exams={exams}
                 semesterPlanning={semesterOrganization}
-                />
-            <Notif isOpen={notif?true:false} notif={notif} setOpen={setOpen}/>
+            />
+            <Notif
+                isOpen={notif ? true : false}
+                notif={notif}
+                setOpen={setOpen}
+            />
         </div>
     )
 }
