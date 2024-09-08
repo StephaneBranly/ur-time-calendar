@@ -145,6 +145,10 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
                 semestres à venir ;) Cela est rapide !
             </section>
             <section className="settings-section">
+                Merci à <a href="https://github.com/wklover14">wklover14</a>{' '}
+                pour la mise à jour du semetre A24.
+            </section>
+            <section className="settings-section">
                 <h2 className="settings-subtitle">
                     Semestre {semesterPlanning.semesterName}
                 </h2>
