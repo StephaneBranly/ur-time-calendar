@@ -108,11 +108,7 @@ const Calendar = (props: CalendarProps) => {
             const replaceDay = isTypicalView
                 ? undefined
                 : semesterPlanning.becomesA(day)
-            console.log(
-                day.toDateString(),
-                new Date().toDateString(),
-                day.toDateString() === new Date().toDateString()
-            )
+
             const isToday = isTypicalView
                 ? false
                 : day.toDateString() === new Date().toDateString()

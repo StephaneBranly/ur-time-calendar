@@ -23,10 +23,7 @@ const parseClassesMail = (content: string): Exam[] => {
         if (result) {
             exams.push(result)
         }
-        
     })
-
-    console.log(exams)
 
     return exams
 }
