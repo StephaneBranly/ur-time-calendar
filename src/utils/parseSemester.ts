@@ -19,7 +19,7 @@ const parseSemester = (organisation: string, semesterName: string) => {
     const lines = organisation.split('\n')
     lines.forEach((line) => {
         const match = line.match(
-            /([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([A|B])-([E|C|H|F|M|x])-(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|x)/
+            /([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([0-9]{4})\/([0-9]{2})\/([0-9]{2})-([A|B|x])-([E|C|H|F|M|x])-(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|x)/
         )
         if (match?.length) {
             const [_, startYear, startMonth, startDay, endYear, endMonth, endDay, weekAlternance, type, becomesA] = match
