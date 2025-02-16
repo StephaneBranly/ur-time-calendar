@@ -146,11 +146,11 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
             </section>
             <section className="settings-section">
                 Merci à <a href="https://github.com/S-cript-kiddie02">S-cript-kiddie02 </a>{' '}
-                pour la mise à jour du semetre P25.
+                pour la mise à jour du semestre P25.
             </section>
             <section className="settings-section">
                 Merci à <a href="https://github.com/wklover14">wklover14</a>{' '}
-                pour la mise à jour du semetre A24.
+                pour la mise à jour du semestre A24.
             </section>
             <section className="settings-section">
                 <h2 className="settings-subtitle">
