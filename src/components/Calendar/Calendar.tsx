@@ -266,7 +266,7 @@ const Calendar = (props: CalendarProps) => {
                     (c.week === undefined ||
                         c.week === semesterPlanning.getWeekAlternance(day) ||
                         isTypicalView) &&
-                    (!semesterPlanning.isExam(day) || c.classType === 'TP')
+                    (!semesterPlanning.isExam(day) || c.classType === 'T')
             )
             return filtered.map((unit: Class, index) => {
                 const dayLabel = getDayLabel(day).toUpperCase()
