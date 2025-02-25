@@ -250,8 +250,7 @@ const Calendar = (props: CalendarProps) => {
 
         return getDaysDatesToRender().map((day) => {
             if (
-                (semesterPlanning.isExam(day) ||
-                    semesterPlanning.isFerie(day) ||
+                (semesterPlanning.isFerie(day) ||
                     semesterPlanning.isHoliday(day)) &&
                 !isTypicalView
             )
@@ -266,7 +265,8 @@ const Calendar = (props: CalendarProps) => {
                             c.day === getDayLabel(day).toUpperCase())) &&
                     (c.week === undefined ||
                         c.week === semesterPlanning.getWeekAlternance(day) ||
-                        isTypicalView)
+                        isTypicalView) &&
+                    (!semesterPlanning.isExam(day) || c.classType === 'TP')
             )
             return filtered.map((unit: Class, index) => {
                 const dayLabel = getDayLabel(day).toUpperCase()
