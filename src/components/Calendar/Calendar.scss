@@ -73,7 +73,7 @@ $max-rows: (21 - 7) * 4;
     bottom: 0;
     box-shadow: inset 0 0 2000px rgb(255, 255, 255);
     background: inherit;
-    z-index: 1;
+    z-index: 0;
 }
 .calendar-legend-day {
     border-bottom: 4px solid rgba(255, 255, 255, 0.5);
@@ -154,11 +154,11 @@ $max-columns: 16;
     grid-column: 1 / -1;
     text-align: left;
     &.solid {
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-top: 1px solid rgba(227, 227, 227, 0.5);
     }
 
     &.dashed {
-        border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        border-top: 1px dashed rgba(227, 227, 227, 0.3);
     }
     &.important {
         border-color: rgba(0, 0, 0, 0.2);
