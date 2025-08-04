@@ -120,8 +120,8 @@ $max-columns: 16;
 
     & > div {
         display: flex;
+        gap: 5px;
         flex-direction: row;
-        gap: 10px;
         justify-content: space-between;
     }
 }
@@ -135,6 +135,11 @@ $max-columns: 16;
     align-items: center;
     align-content: center;
     justify-content: center;
+}
+
+.calendar-current-date-label {
+    margin-left: 10px;
+    background-color: transparent !important;
 }
 
 .calendar-mode-selector {

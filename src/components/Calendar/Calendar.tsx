@@ -369,14 +369,20 @@ const Calendar = (props: CalendarProps) => {
                             >
                                 <BsCaretLeft />
                             </div>
-                            <div className="calendar-current-date-label">
-                                {displaySelectedDate()}
+                            <div
+                                className="calendar-current-date-today"
+                                onClick={() => setSelectedDate(new Date())}
+                            >
+                                Aujourd'hui
                             </div>
                             <div
                                 className="calendar-current-date-after"
                                 onClick={() => handlerMoveDate(1)}
                             >
                                 <BsCaretRight />
+                            </div>
+                            <div className="calendar-current-date-label">
+                                {displaySelectedDate()}
                             </div>
                         </>
                     )}
