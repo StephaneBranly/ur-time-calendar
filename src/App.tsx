@@ -25,13 +25,13 @@ import {
     parseClassesMail,
 } from 'utils'
 import { notifType } from 'types/notifType'
-import getP25organisation from 'data/getP25organization'
+import getA25organisation from 'data/getA25organization'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getP25organisation)
+        useState<SemesterPlanning>(getA25organisation)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(
         undefined
     )
@@ -57,15 +57,6 @@ function App() {
         if (Exams) {
             const result = parseCache(Exams, 'Exams')
             setExams(result)
-        }
-
-        const oldClasses = loadFromLocalStorage('a22-schedule')
-        if (oldClasses) {
-            const result = parseClassesMail(oldClasses)
-            setClasses(result)
-            const r = saveToCache(JSON.stringify(result), 'classes')
-            if (r) handlerSetNotifs(['Classes sauvegardées', 'success'])
-            localStorage.removeItem('a22-schedule')
         }
     }, [])
 
