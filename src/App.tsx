@@ -24,13 +24,13 @@ import {
     Exam,
 } from 'utils'
 import { notifType } from 'types/notifType'
-import getP26organisation from 'data/getP26organization'
+import getA26organisation from 'data/getA26organization'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getP26organisation)
+        useState<SemesterPlanning>(getA26organisation)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(
         undefined
     )
