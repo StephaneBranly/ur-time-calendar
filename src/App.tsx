@@ -25,13 +25,13 @@ import {
     parseClassesMail,
 } from 'utils'
 import { notifType } from 'types/notifType'
-import getA25organisation from 'data/getA25organization'
+import getA26organisation from 'data/getA26organisation'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getA25organisation)
+        useState<SemesterPlanning>(getA26organisation)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(
         undefined
     )
