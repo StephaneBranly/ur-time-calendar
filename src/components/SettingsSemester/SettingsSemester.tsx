@@ -145,7 +145,18 @@ const SettingsSemester = (props: SettingsSemesterProps) => {
                 semestres à venir ;) Cela est rapide !
             </section>
             <section className="settings-section">
-                Merci à <a href="https://github.com/S-cript-kiddie02">S-cript-kiddie02 </a>{' '}
+                Merci à <a href="https://github.com/Majentas">Majentas</a>,{' '}
+                <a href="https://github.com/loudiernT">loudiernT</a> et{' '}
+                <a href="https://github.com/alexisledigarcher-hub">
+                    alexisledigarcher-hub
+                </a>{' '}
+                pour la mise à jour du semestre A26.
+            </section>
+            <section className="settings-section">
+                Merci à{' '}
+                <a href="https://github.com/S-cript-kiddie02">
+                    S-cript-kiddie02{' '}
+                </a>{' '}
                 pour la mise à jour du semestre P25.
             </section>
             <section className="settings-section">
