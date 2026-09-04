@@ -22,16 +22,15 @@ import {
     saveToCache,
     SemesterPlanning,
     Exam,
-    parseClassesMail,
 } from 'utils'
 import { notifType } from 'types/notifType'
-import getA25organisation from 'data/getA25organization'
+import getP26organisation from 'data/getP26organization'
 
 function App() {
     const [classes, setClasses] = useState<Class[]>([])
     const [exams, setExams] = useState<Exam[]>([])
     const [semesterOrganization, setSemesterOrganization] =
-        useState<SemesterPlanning>(getA25organisation)
+        useState<SemesterPlanning>(getP26organisation)
     const [notif, setNotif] = useState<[string, notifType] | undefined>(
         undefined
     )
