@@ -22,7 +22,6 @@ import {
     saveToCache,
     SemesterPlanning,
     Exam,
-    parseClassesMail,
 } from 'utils'
 import { notifType } from 'types/notifType'
 import getA26organisation from 'data/getA26organization'
